@@ -18,5 +18,5 @@ description: "A short book about data science written by a student for students.
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
-knitr::opts_chunk$set(echo = F)
+knitr::opts_chunk$set(echo = F, message=F, warning = F)
 ```

@@ -1,0 +1,319 @@
+# Model selection {#mod-sel}
+
+```{r}
+# Generate data: ----
+source("R/sinusoidal.R")
+n <- 25
+p <- 24
+a <- 0
+b <- 1
+x <- seq(a,b,length.out = n)
+y <- sinusoidal(x)
+sigma <- 0.3
+```
+
+The goal of this exercise is to investigate ways to deal with situations where
+
+- $p>>n$
+
+or
+
+- $n>>p$
+
+In the former case, we will seek to reduce the dimensionality $p$ while in the latter we will look at sub-sampling. As our data generating process for $y$ we will consider the sinusoidal function $f(x)=\sin(2\pi x)$ as in @bishop2006pattern. Before delving into the two problems we will quickly reproduce the bias-variance decomposition as in @bishop2006pattern. Figure \@ref(fig:p_sim) shows $y$ as well as random draws $y^*_k$.
+
+```{r p_sim, fig.cap="Sinusoidal function and random draws."}
+# True data: ----
+library(ggplot2)
+library(data.table)
+dt_true <- data.table(y,x)
+pl <- ggplot(data=dt_true, aes(x=x, y=y)) +
+  geom_line()
+# Simulate data: ----
+source("R/sim_sinusoidal.R")
+n_draws <- 3
+dt_star <- rbindlist(
+  lapply(
+    1:n_draws,
+    function(x) {
+      simulated <- sim_sinusoidal(n=n, sigma = sigma)
+      data.table(y=simulated$y_star, x=simulated$x_star, n=1:n, draw=x)
+    }
+  )
+)
+pl +
+  geom_point(
+    data = dt_star,
+    aes(x=x, y=y, colour=factor(draw))
+  ) +
+  scale_colour_discrete(
+    name="Draw:"
+  )
+```
+
+```{r param-setup}
+lambda <- c(
+  exp(2.6),
+  exp(-0.31),
+  exp(-2.4)
+)
+s <- 0.1
+n_draws <- 100
+mu <- seq(a,b,length.out = p)
+```
+
+As in @bishop2006pattern we will use Gaussian kernels $\exp(- \frac{(x_k-\mu_p)^{2}}{2s^2})$ to estimate $\hat{y}_k$ from our data $(y_k,x_k)$. We fixed the number of kernels $p=`r p`$ (and hence the number of features $M=p+1=`r p+1`$) as well as the spatial scale $s=`r s`$. Instead, to change the complexity of the model we use regularized least-squares and let the regularization parameter $lambda$ vary
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \hat\beta&=(\lambda I + \Phi^T \Phi)^{-1}\Phi^Ty \\
+\end{aligned}
+(\#eq:reg-ls)
+\end{equation}
+$$
+where high values of $\lambda$ in \@ref(eq:reg-ls) shrink parameter values towards zero. (Note that a choice $\lambda=0$ corresponds to the OLS estimator.)
+
+As in @bishop2006pattern we proceed as follows for each choice of $\lambda$ and each sample draw:
+
+1. Draw $N=`r n`$ time from $u \sim \text{unif}(`r a`,`r b`)$. 
+2. Let $x_k^*=u+\varepsilon$ with $\varepsilon \sim \mathcal{N}(0, `r sigma`)$.
+3. Compute $y_k^*=\sin(2\pi x^*_k)$.
+4. Extract features $\Phi_k$ from $x_k^*$ and estimate the parameter vector $\beta_k^*(\Phi_k,y_k,\lambda)$ through regularized least-squares. 
+5. Predict $\hat{y}_k^*=\Phi \beta_k^*$.
+
+```{r}
+source("R/gauss_kernel.R")
+source("R/regularized_ls.R")
+Phi <- cbind(
+  rep(1,n),
+  sapply(
+    1:length(mu),
+    function(p) {
+      mu_p <- mu[p]
+      gauss_kernel(x=x, mu=mu_p, s = s)
+    }
+  )
+)
+dt <- rbindlist(
+  lapply( # loop - draw K times
+    1:n_draws,
+    function(k) {
+      # Draw:
+      simulated <- sim_sinusoidal(n=n, sigma = sigma)
+      y_k <- simulated$y_star
+      x_k <- simulated$x_star
+      rbindlist(
+        lapply( # loop over regularization parameter
+          1:length(lambda),
+          function(t) {
+            # Regularization parameter:
+            lambda_t <- lambda[t]
+            # Extract features:
+            Phi_k <- cbind(
+              rep(1,n),
+              sapply(
+                1:length(mu),
+                function(p) {
+                  mu_p <- mu[p]
+                  gauss_kernel(x=x_k, mu=mu_p, s = s)
+                }
+              )
+            )
+            beta_hat <- regularized_ls(Phi_k,y_k,lambda_t) # fit model on (y,x)
+            y_hat <- c(Phi %*% beta_hat) # predict from model
+            dt <- data.table(value=y_hat,draw=k,lambda=lambda_t,n=1:n,x=x)
+            return(dt)
+          }
+        )
+      )
+    }
+  )
+)
+dt[,facet_group:="single"]
+dt[,colour_group:="estimates"]
+# Expected values:
+dt_exp = dt[,.(value=mean(value)),by=.(lambda,n,x)]
+dt_exp[,facet_group:="aggregate"]
+dt_exp[,colour_group:="estimates"]
+dt_exp[,draw:=1] # just for aesthetics
+# True values:
+library(reshape)
+dt_true = data.table(expand.grid.df(data.frame(value=y,x=x),data.frame(lambda=lambda)))
+dt_true[,facet_group:="aggregate"]
+dt_true[,colour_group:="true"]
+dt_true[,draw:=2] # just for aesthetics
+# Plot data:
+dt_plot = rbind(
+  dt,
+  dt_exp,
+  dt_true,
+  fill=T
+)
+```
+
+This leads to the familiar picture that demonstrates the bias-variance trade-off:
+
+```{r plot}
+dt_plot[,log_lambda := log(lambda)]
+ggplot(data=dt_plot[draw<=25], aes(y=value, x=x, colour=colour_group, group=draw)) +
+  geom_line() +
+  facet_grid(
+    rows = vars(log_lambda),
+    cols = vars(facet_group)
+  )
+```
+
+## Dimensionality reduction
+
+Let us first consider the case for dimensionality reduction: $p>>n$
+
+...
+
+## Sub-sampling
+
+```{r}
+n <- 1000
+m <- 30
+p <- 25
+a <- 0
+b <- 1
+x <- seq(a,b,length.out = n)
+y <- sinusoidal(x)
+sigma <- 0.3
+mu <- seq(a,b,length.out = p)
+Phi <- cbind(
+  rep(1,n),
+  sapply(
+    1:length(mu),
+    function(p) {
+      mu_p <- mu[p]
+      gauss_kernel(x=x, mu=mu_p, s = s)
+    }
+  )
+)
+```
+
+
+Let us now consider the case for sub-sampling: $n >> p$. We continue with the sinusoidal function from above but now look at the case where the number of observations is $n=`r n`$ and the number of features is $p=`r p`$. Suppose we are interested in estimating $\hat\beta_m$ instead of $\hat\beta_m$ where $p<m=`r m`<<n$. Perhaps we want to avoid high computational costs associated with large $n$. Or perhaps we are in a sequential setting where we only learn $m$ observations at a time. The question is how do we choose $X_m=x^{(1)},...,x^{(m)}$? A better idea than just randomly selecting $X_m$ might be to choose observations with high influence.
+
+### Leverage
+
+Perhaps the most straight-forward way to identify observations with high influence is to compute their leverage. The leverage of observation $i$ is just element $H_{i,i}$ on the diagonal of the orthogonal projection matrix:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{H}&=\Phi (\Phi^T \Phi)^{-1}\Phi^T \\
+\end{aligned}
+(\#eq:orth-proj)
+\end{equation}
+$$
+
+Clearly to get $H_{i,i}$ we first need to compute $\mathbb{H}$ which in terms of computational costs is of order $\mathcal{O}(np^2)=\max(\mathcal{O}(np^2),\mathcal{O}(p^3))$. For now let us ignore that complication and just go ahead and compute $\mathbb{H}$ anyway to see how well we can approximate $y$ by just using only $m=`r m`$ observations. Figure \@ref(fig:plot-leverage) shows the leverage corresponding to every observation of $x$. Evidently highest leverage is observed for small and large values of $x$. Ordering the diagonal elements of $\mathbb{H}$ in decreasing order, storing their indices $i$ and then choosing the first $m=`r m`$ elements gives us the indices of the most influential observations.
+
+```{r plot-leverage, fig.cap="Leverage of observations."}
+H = Phi %*% solve(crossprod(Phi),tol=1e-30) %*% t(Phi)
+indices = which(diag(H) %in% sort(diag(H),decreasing = T)[1:m])
+plot(x=x,diag(H),t="l")
+Phi_m <- Phi[indices,]
+y_m <- y[indices]
+beta_hat_lev <- solve(crossprod(Phi_m),crossprod(Phi_m,y_m), tol=1e-30)
+y_hat_lev <- c(Phi %*% beta_hat_lev)
+```
+
+### PCA on transpose of $\Phi$  
+
+```{r}
+Sigma = cov(t(Phi))
+eigen_decomp = eigen(Sigma)
+lambda = eigen_decomp$values
+V = eigen_decomp$vectors
+```
+
+An alternative approach would be to apply ideas from dimensionality reduction to subsampling. Instead of running PCA on the covariance matrix of $\Phi$ to identify important features, how about trying to use a spectral decomposition of $\Phi\Phi^T$ instead. This will give us $n=`r n`$ eigenvalues and corresponding eigenvectors. Squared elements of the $i^{th}$ resulting eigenvector then represent how much individual observation $i$ contributes to the the $i^{th}$ principal component. An idea could then be to look at the first $j$ principal components and for each of them pick the first $l$ observations ranked in descending order in terms of their respective contribution to principal component $j$ such that $j \times l=m$. To choose $j$ we can use the fact that $\lambda_i/ \sum_{s=1}^{n} \lambda_s$ represents the share of the overall variance explained by the $i^{th}$ principal component. Defining some threshold level $\tau$ we can choose $j$ such that $\sum_{i=1}^{j}\lambda_i/ \sum_{s=1}^{n} \lambda_s \ge \tau$. 
+
+```{r}
+tau = .95
+j = 1
+explained_variance = sum(lambda[1:j]/sum(lambda))
+while(explained_variance<tau) {
+  j = j + 1
+  explained_variance = sum(lambda[1:j]/sum(lambda))
+}
+l = ceiling(m/j)
+modulus = m%%l
+```
+
+For example, in this particular example with $n=`r n`$ and $p=`r p`$ setting $\tau=`r tau`$ yields $j^*=`r j`$. Given $m=`r m`$ and based on the proposed procedure we could choose $l=`r l`$ from the first $`r j-1`$ eigenvectors. That leaves `r modulus` observations to choose from the $`r j`^{th}$ vectors to arrive at $m=`r m`$.
+
+```{r}
+choose_m = function(m,tau=.99,V) {
+  indices = rep(0,floor(m*tau)) # pre-allocate memory
+  # Choose j, l:
+  j = 1
+  total_explained_variance = sum(lambda[1:j]/sum(lambda))
+  while(total_explained_variance<tau) {
+    j = j + 1
+    explained_variance = lambda[1:j]/sum(lambda)
+    total_explained_variance = sum(lambda[1:j]/sum(lambda))
+  }
+  l = round(explained_variance * m)
+  # Find indices of vectors:
+  m_remaining = m
+  j = 1
+  while (m_remaining>(m-floor(m*tau))) {
+    l_temp = l[j]
+    idx =  (m - m_remaining + 1):(m - m_remaining+l_temp)
+    indices[idx] = which(V[,j]**2 %in% sort(V[,j]**2, decreasing = T)[1:l_temp])
+    m_remaining = m_remaining - l_temp
+    j=j+1
+  }
+  indices <- sort(unique(indices))
+  return(indices)
+}
+indices <- choose_m(m,tau,V)
+Phi_m <- Phi[indices,]
+y_m <- y[indices]
+beta_hat_pca <- solve(crossprod(Phi_m),crossprod(Phi_m,y_m), tol=1e-30)
+y_hat_pca <- c(Phi %*% beta_hat_pca)
+```
+
+
+### Random
+
+Finally for the sake of comparison let us also choose $m$ observations at random.
+
+```{r}
+indices <- sample(1:n, size=m)
+Phi_m <- Phi[indices,]
+y_m <- y[indices]
+beta_hat_random <- solve(crossprod(Phi_m),crossprod(Phi_m,y_m), tol=1e-30)
+y_hat_random <- c(Phi %*% beta_hat_random)
+```
+
+### Comparison
+
+Let's see how well the parameter vectors obtained from the different procedures approximate $y$ when pre-multiplied by the $\Phi$. 
+
+```{r, fig.height=3, fig.width=8}
+dt_plot = rbind(
+  data.table(
+    x=rep(x,2), value=c(y_hat_lev,y), type="leverage", colour=c(rep("Estimate",n),rep("True",n))
+  ),
+  data.table(
+    x=rep(x,2), value=c(y_hat_pca,y), type="pca", colour=c(rep("Estimate",n),rep("True",n))
+  ),
+  data.table(
+    x=rep(x,2), value=c(y_hat_random,y), type="random", colour=c(rep("Estimate",n),rep("True",n))
+  )
+)
+ggplot(
+  data = dt_plot,
+  aes(x=x, y=value, colour=colour)
+) +
+  geom_line() +
+  facet_wrap(~type, scales="free")
+```
+
+
