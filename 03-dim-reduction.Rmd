@@ -1,0 +1,95 @@
+# Subsampling {#subsample}
+
+```{r}
+# Generate data: ----
+n = 100
+p = 20
+a = -1
+b = -a
+x = seq(a,b,length.out = n)
+mu = seq(a,b,length.out = p)
+gamma = 5/length(x)
+Phi = sapply(
+  1:length(mu),
+  function(m) {
+    (-1)^m * exp(-(x-mu[m])^2/gamma)
+  }
+)
+y = rowSums(Phi)
+```
+
+First consider some true DGP using $p=`r p`$ Gaussian kernels with their means $\mu_p$ evenly spaced out across the input space.
+
+```{r p_sim}
+# Plot data: ----
+library(ggplot2)
+Z = cbind.data.frame(y,x)
+ggplot(data=Z, aes(x=x, y=y)) +
+  geom_line()
+```
+
+We can fit the model on random draws each of size $n=`r n`$ from $x \sim \text{unif}(-1,1)$ by computing $\hat{f}_n(x)$ as $\Phi(x) (\Phi(x)^T \Phi(x))^{-1}\Phi(x)^Ty$. For simplicity we shall assume that the smoothing parameter $\gamma$ is known and so is the fact that $\mu_p$ are evenly spaced out. First let us consider the usual bias-variance trade-off by varying the number of features.
+
+```{r}
+library(data.table)
+p_hat = c(round(0.5*p),p,round(1.25*p)) # number of features
+n_draws = 30 # number of draws
+dt = rbindlist(
+  lapply( # loop over number of features
+    1:length(p_hat),
+    function(i) {
+      rbindlist(
+        lapply( # loop of samples
+          1:n_draws,
+          function(draw) {
+            x = runif(n,a,b)
+            mu = seq(a,b,length.out = p_hat[i])
+            Phi = sapply(
+              1:length(mu),
+              function(m) {
+                (-1)^m * exp(-(x-mu[m])^2/gamma)
+              }
+            )
+            beta_hat = solve(crossprod(Phi),crossprod(Phi,y))
+            y_hat = c(Phi %*% beta_hat)
+            dt = data.table(y=y_hat,draw=draw,p=p_hat[i])
+            return(dt)
+          }
+        )
+      )
+    }
+  )
+)
+
+```
+
+## PCA
+
+Let us suppose we know $Phi$. Then let us eigen-decompose the its covariance matrix $V \Lambda V^T$
+
+```{r}
+Sigma = cov(Phi)
+eigen_decomp = eigen(Sigma)
+lambda = eigen_decomp$values
+V = eigen_decomp$vectors
+```
+
+The principal components of $Phi$ can then be computed as $P=V \Phi$
+
+```{r}
+princ_comp = Phi %*% V
+```
+
+For the first 
+
+## PCA on transpose   
+
+```{r}
+Sigma = cov(t(Phi))
+eigen_decomp = eigen(Sigma)
+lambda = eigen_decomp$values
+V = eigen_decomp$vectors
+princ_comp = t(Phi) %*% V
+```
+
+## Leverage

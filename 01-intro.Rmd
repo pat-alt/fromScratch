@@ -1,1 +1,3 @@
 # Introduction {#intro}
+
+In this book I'm collecting ideas, notes, exercises and code I am being exposed to or come up with during my masters in Data Science at Barcelona GSE. 

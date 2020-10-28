@@ -132,11 +132,15 @@ X_star_dt = rbindlist(
 The below shows how the two algorithms converge to
 
 ```{r, fig.cap="Good initial guess."}
-knitr::include_graphics("www/p1.gif")
+if (knitr:::is_html_output()) {
+  knitr::include_graphics("www/p1.gif")
+}
 ```
 
 ```{r, fig.cap="Poor initial guess."}
-knitr::include_graphics("www/p2.gif")
+if (knitr:::is_html_output()) {
+  knitr::include_graphics("www/p2.gif")
+}
 ```
 
 

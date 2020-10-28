@@ -1,5 +1,6 @@
 --- 
 title: "From Scratch"
+subtitle: "Data Science from a student's perspective"
 author: "Patrick Altmeyer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -9,7 +10,7 @@ bibliography: [bib.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: https://github.com/pat-alt/fromScratch.git
-description: "The book gives a flavour of various topics from statistics and data science and teaches the reader how to build seemingly complex algorithms from scratch."
+description: "A short book about data science written by a student for students."
 ---
 
 ```{r include=FALSE}
