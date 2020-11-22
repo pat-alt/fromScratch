@@ -10,7 +10,7 @@ bibliography: [bib.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: https://github.com/pat-alt/fromScratch.git
-description: "A short book about data science written by a student for students."
+description: "A short book about data science written by students for students."
 ---
 
 ```{r include=FALSE}

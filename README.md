@@ -1,3 +1,16 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "[Get Started](https://bookdown.org/yihui/bookdown/get-started.html)" at https://bookdown.org/yihui/bookdown/ for how to compile this example into HTML. You may generate a copy of the book in `bookdown::pdf_book` format by calling `bookdown::render_book('index.Rmd', 'bookdown::pdf_book')`. More detailed instructions are available here https://bookdown.org/yihui/bookdown/build-the-book.html.
+# fromScratchR
 
-You can find the preview of this example at https://bookdown.org/yihui/bookdown-demo/.
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+This book is a collection of ideas, notes, exercises and code that students of the MSc in Data Science at Barcelona GSE were exposed and/or came up with during their studies. 
+
+## R package
+
+The book uses a complementary R package [fromScratchR](https://github.com/pat-alt/fromScratchR) which collects the R code used throughout the book. The book can be read without using the package, but in case you want to play with the code you can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("pat-alt/fromScratchR")
+```
