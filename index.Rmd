@@ -24,7 +24,7 @@ output:
         facebook: yes
         github: no
         twitter: yes
-        linkedin: no
+        linkedin: yes
         weibo: no
         instapaper: no
         vk: no
@@ -50,3 +50,13 @@ knitr::write_bib(c(
 ), 'packages.bib')
 knitr::opts_chunk$set(echo = F, message=F, warning = F)
 ```
+
+# Content
+
+This book is a collection of ideas, notes, exercises and code covering a broad range of topics in Data Science. It is written by students for students. The structure is inherently somewhat loose and this is very much a work in progress. Feedback and comments are therefore more than welcome, although time and resources to act on them is scarce.
+
+
+
+
+
+
