@@ -1,0 +1,1142 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={From Scratch},
+  pdfauthor={Patrick Altmeyer},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\title{From Scratch}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Data Science from a student's perspective}
+\author{Patrick Altmeyer}
+\date{2021-02-01}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
+
+This book is a collection of ideas, notes, exercises and code covering a broad range of topics in Data Science. It is written by students for students. The structure is inherently somewhat loose and this is very much a work in progress. Feedback and comments are therefore more than welcome, although time and resources to act on them is scarce.
+
+\hypertarget{r-package}{%
+\section{R package}\label{r-package}}
+
+The book uses a complementary R package \href{https://github.com/pat-alt/fromScratchR}{fromScratchR} which collects the R code used throughout the book. The book can be read without using the package, but in case you want to play with the code you can install the development version from \href{https://github.com/}{GitHub} with:
+
+Then import the package through \texttt{library(fromScratchR)}
+
+\hypertarget{python-code}{%
+\section{Python code}\label{python-code}}
+
+As for Python, modules are currently part of the Git repository that contains the book.
+
+\hypertarget{code-folding}{%
+\section{Code folding}\label{code-folding}}
+
+Code is presented in many places to illustrate how concepts and algorithms can actually be implemented.
+
+\hypertarget{det-opt}{%
+\chapter{Optimization}\label{det-opt}}
+
+\hypertarget{line-search}{%
+\section{Line search}\label{line-search}}
+
+\hypertarget{methodology}{%
+\subsection{Methodology}\label{methodology}}
+
+The goal of Exercise 3.1 in \protect\hyperlink{ref-nw2006numerical}{Nocedal and Wright} (\protect\hyperlink{ref-nw2006numerical}{2006}) is to minimize the bivariate Rosenbrock function (Equation \eqref{eq:rosenbrock}) using \emph{steepest descent} and \emph{Newton's method}. The Rosenbrock function - also known as \emph{Rosenbrock's banana function} - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see \href{https://en.wikipedia.org/wiki/Rosenbrock_function}{here}).
+
+\[
+\begin{equation}
+  f(\mathbb{x})=100(x_2-x_1^2)^2+(1-x_1)^2 
+  \label{eq:rosenbrock}
+\end{equation}
+\]
+We can implement Equation \eqref{eq:rosenbrock} in R as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Rosenbrock:}
+\NormalTok{f }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(X) \{}
+  \DecValTok{100} \SpecialCharTok{*}\NormalTok{ (X[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X[}\DecValTok{1}\NormalTok{])}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Figure \ref{fig:rosenbrock} shows the output of the function over \(x_1,x_2 \in [-1.5, 1.5]\) along with its minimum indicated as a red asterisk and the two starting points: (1) \(X_0=(1.2,1.2)\) and (2) \(X_0=(-1.2,1)\).
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/rosenbrock-1.pdf}
+\caption{\label{fig:rosenbrock}Output of the Rosenbrock function and minimizer in red.}
+\end{figure}
+
+The gradient and Hessian of \(f\) can be computed as
+
+\[
+\begin{equation}
+\nabla f(\mathbb{x})= \begin{pmatrix}
+\frac{ \partial f}{\partial x_1} \\
+\frac{ \partial f}{\partial x_2}
+\end{pmatrix} 
+\label{eq:d-rosenbrock}
+\end{equation}
+\]
+
+and
+
+\[
+\begin{equation}
+\nabla^2 f(\mathbb{x})= \begin{pmatrix}
+\frac{ \partial^2 f}{\partial x_1^2} & \frac{ \partial^2 f}{\partial x_1 \partial x_2} \\
+\frac{ \partial^2 f}{\partial x_2\partial x_1} & \frac{ \partial^2 f}{\partial x_2^2}
+\end{pmatrix}
+\label{eq:dd-rosenbrock}
+\end{equation}
+\]
+
+which in R can be encoded as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gradient:}
+\NormalTok{df }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(X) \{}
+\NormalTok{  df }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{length}\NormalTok{(X))}
+\NormalTok{  df[}\DecValTok{1}\NormalTok{] }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{400} \SpecialCharTok{*}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (X[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X[}\DecValTok{1}\NormalTok{]) }\CommentTok{\# partial with respect to x\_1}
+\NormalTok{  df[}\DecValTok{2}\NormalTok{] }\OtherTok{=} \DecValTok{200} \SpecialCharTok{*}\NormalTok{ (X[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(df)}
+\NormalTok{\}}
+
+\CommentTok{\# Hessian:}
+\NormalTok{ddf }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(X) \{}
+\NormalTok{  ddf }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \FunctionTok{length}\NormalTok{(X), }\AttributeTok{ncol=}\FunctionTok{length}\NormalTok{(X))}
+\NormalTok{  ddf[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OtherTok{=} \DecValTok{1200} \SpecialCharTok{*}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{400} \SpecialCharTok{*}\NormalTok{ X[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \DecValTok{2} \CommentTok{\# partial with respect to x\_1}
+\NormalTok{  ddf[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OtherTok{=}\NormalTok{ ddf[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{400} \SpecialCharTok{*}\NormalTok{ X[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  ddf[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OtherTok{=} \DecValTok{200}
+  \FunctionTok{return}\NormalTok{(ddf)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+For both methods I will use the \emph{Arminjo condition} with backtracking. The \texttt{gradient\_desc} function (below) can implement both \emph{steepest descent} and \emph{Newton's method}. The code for the function can be inspected below. There's also a small description of the different arguments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (f, df, X0, }\AttributeTok{step\_size0 =} \DecValTok{1}\NormalTok{, }\AttributeTok{ddf =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{method =} \StringTok{"newton"}\NormalTok{, }\AttributeTok{c =} \FloatTok{1e{-}04}\NormalTok{, }\AttributeTok{remember =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{tau =} \FloatTok{1e{-}05}\NormalTok{, }\AttributeTok{backtrack\_cond =} \StringTok{"arminjo"}\NormalTok{, }\AttributeTok{max\_iter =} \DecValTok{10000}\NormalTok{) }
+\NormalTok{\{}
+\NormalTok{    X\_latest }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(X0)}
+    \ControlFlowTok{if}\NormalTok{ (remember) \{}
+\NormalTok{        X }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(X0, }\AttributeTok{ncol =} \FunctionTok{length}\NormalTok{(X0))}
+\NormalTok{        steps }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{ncol =} \FunctionTok{length}\NormalTok{(X0))}
+\NormalTok{    \}}
+\NormalTok{    iter }\OtherTok{=} \DecValTok{0}
+    \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"steepest"}\NormalTok{) \{}
+\NormalTok{        B }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(X) \{}
+            \FunctionTok{diag}\NormalTok{(}\FunctionTok{length}\NormalTok{(X))}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (method }\SpecialCharTok{==} \StringTok{"newton"}\NormalTok{) \{}
+\NormalTok{        B }\OtherTok{=} \FunctionTok{tryCatch}\NormalTok{(ddf, }\AttributeTok{error =} \ControlFlowTok{function}\NormalTok{(e) \{}
+            \FunctionTok{stop}\NormalTok{(}\StringTok{"Hessian needs to be supplied for Newton\textquotesingle{}s method."}\NormalTok{)}
+\NormalTok{        \})}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (backtrack\_cond }\SpecialCharTok{==} \StringTok{"arminjo"}\NormalTok{) \{}
+\NormalTok{        sufficient\_decrease }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(alpha) \{}
+            \FunctionTok{return}\NormalTok{(}\FunctionTok{f}\NormalTok{(X\_k }\SpecialCharTok{+}\NormalTok{ alpha }\SpecialCharTok{*}\NormalTok{ p\_k) }\SpecialCharTok{\textless{}=} \FunctionTok{f}\NormalTok{(X\_k) }\SpecialCharTok{+}\NormalTok{ c }\SpecialCharTok{*}\NormalTok{ alpha }\SpecialCharTok{*} \FunctionTok{t}\NormalTok{(df\_k) }\SpecialCharTok{\%*\%}\NormalTok{ p\_k)}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.na}\NormalTok{(backtrack\_cond)) \{}
+\NormalTok{        sufficient\_decrease }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(alpha) \{}
+            \FunctionTok{return}\NormalTok{(}\FunctionTok{f}\NormalTok{(X\_k }\SpecialCharTok{+}\NormalTok{ alpha }\SpecialCharTok{*}\NormalTok{ p\_k) }\SpecialCharTok{\textless{}=} \FunctionTok{f}\NormalTok{(X\_k))}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{while}\NormalTok{ (}\FunctionTok{any}\NormalTok{(}\FunctionTok{abs}\NormalTok{(}\FunctionTok{df}\NormalTok{(X\_latest) }\SpecialCharTok{{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{length}\NormalTok{(X\_latest))) }\SpecialCharTok{\textgreater{}}\NormalTok{ tau) }\SpecialCharTok{\&}\NormalTok{ iter }\SpecialCharTok{\textless{}}\NormalTok{ max\_iter) \{}
+\NormalTok{        X\_k }\OtherTok{=}\NormalTok{ X\_latest}
+\NormalTok{        alpha }\OtherTok{=}\NormalTok{ step\_size0}
+\NormalTok{        df\_k }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{df}\NormalTok{(X\_latest))}
+\NormalTok{        B\_k }\OtherTok{=} \FunctionTok{B}\NormalTok{(X\_latest)}
+\NormalTok{        p\_k }\OtherTok{=} \FunctionTok{qr.solve}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{B\_k, df\_k)}
+        \ControlFlowTok{while}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{sufficient\_decrease}\NormalTok{(alpha)) \{}
+\NormalTok{            alpha }\OtherTok{=}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}
+\NormalTok{        \}}
+\NormalTok{        X\_latest }\OtherTok{=}\NormalTok{ X\_latest }\SpecialCharTok{+}\NormalTok{ alpha }\SpecialCharTok{*}\NormalTok{ p\_k}
+\NormalTok{        iter }\OtherTok{=}\NormalTok{ iter }\SpecialCharTok{+} \DecValTok{1}
+        \ControlFlowTok{if}\NormalTok{ (remember) \{}
+\NormalTok{            X }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(X, }\FunctionTok{t}\NormalTok{(X\_latest))}
+\NormalTok{            steps }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(steps, }\FunctionTok{t}\NormalTok{(alpha }\SpecialCharTok{*}\NormalTok{ p\_k))}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (iter }\SpecialCharTok{\textgreater{}=}\NormalTok{ max\_iter) }
+        \FunctionTok{warning}\NormalTok{(}\StringTok{"Reached maximum number of iterations without convergence."}\NormalTok{)}
+\NormalTok{    output }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{optimal =}\NormalTok{ X\_latest, }\AttributeTok{visited =} \FunctionTok{tryCatch}\NormalTok{(X, }\AttributeTok{error =} \ControlFlowTok{function}\NormalTok{(e) }\ConstantTok{NULL}\NormalTok{), }\AttributeTok{steps =} \FunctionTok{tryCatch}\NormalTok{(steps, }\AttributeTok{error =} \ControlFlowTok{function}\NormalTok{(e) }\ConstantTok{NULL}\NormalTok{), }\AttributeTok{X0 =}\NormalTok{ X0, }\AttributeTok{method =}\NormalTok{ method)}
+    \FunctionTok{return}\NormalTok{(output)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Similarly you can take a look at how the \texttt{gradient\_desc} is applied in the underlying problem by unhiding the next code chunk.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fromScratchR)}
+\NormalTok{init\_guesses }\OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(X0)}
+\NormalTok{algos }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"steepest"}\NormalTok{,}\StringTok{"newton"}\NormalTok{)}
+\NormalTok{grid }\OtherTok{=} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{guess=}\NormalTok{init\_guesses,}\AttributeTok{algo=}\NormalTok{algos)}
+\NormalTok{X\_star }\OtherTok{=} \FunctionTok{lapply}\NormalTok{(}
+  \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(grid),}
+  \ControlFlowTok{function}\NormalTok{(i) \{}
+    \FunctionTok{gradient\_desc}\NormalTok{(}
+      \AttributeTok{f=}\NormalTok{f,}\AttributeTok{df=}\NormalTok{df,}
+      \AttributeTok{X0=}\NormalTok{X0[grid[i,}\StringTok{"guess"}\NormalTok{],}\FunctionTok{c}\NormalTok{(x1,x2)],}
+      \AttributeTok{method =}\NormalTok{ grid[i,}\StringTok{"algo"}\NormalTok{]}
+\NormalTok{    )}
+\NormalTok{  \}}
+\NormalTok{)}
+\CommentTok{\# Tidy up}
+\NormalTok{X\_star\_dt }\OtherTok{=} \FunctionTok{rbindlist}\NormalTok{(}
+  \FunctionTok{lapply}\NormalTok{(}
+    \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(X\_star), }
+    \ControlFlowTok{function}\NormalTok{(i) \{}
+\NormalTok{      dt }\OtherTok{=} \FunctionTok{data.table}\NormalTok{(X\_star[[i]]}\SpecialCharTok{$}\NormalTok{visited)}
+\NormalTok{      dt[,method}\SpecialCharTok{:}\ErrorTok{=}\NormalTok{X\_star[[i]]}\SpecialCharTok{$}\NormalTok{method]}
+\NormalTok{      dt[,(}\FunctionTok{c}\NormalTok{(}\StringTok{"x0\_1"}\NormalTok{,}\StringTok{"x0\_2"}\NormalTok{))}\SpecialCharTok{:}\ErrorTok{=}\NormalTok{.(X\_star[[i]]}\SpecialCharTok{$}\NormalTok{X0[}\DecValTok{1}\NormalTok{],X\_star[[i]]}\SpecialCharTok{$}\NormalTok{X0[}\DecValTok{2}\NormalTok{])]}
+\NormalTok{      dt[,iteration}\SpecialCharTok{:}\ErrorTok{=}\NormalTok{.I}\DecValTok{{-}1}\NormalTok{]}
+\NormalTok{      dt[,y}\SpecialCharTok{:}\ErrorTok{=}\FunctionTok{f}\NormalTok{(}\FunctionTok{c}\NormalTok{(V1,V2)),by}\OtherTok{=}\NormalTok{.(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(dt))]}
+\NormalTok{    \}}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+The below shows how the two algorithms converge to
+
+\hypertarget{optimal-subsampling}{%
+\chapter{Optimal subsampling}\label{optimal-subsampling}}
+
+This note investigates if and how systematic subsampling can be applied to imbalanced learning. The structure is as follows: to set the stage for the remainder of the analysis the first \protect\hyperlink{bias}{section} briefly introduces the bias-variance trade-off. The following \protect\hyperlink{subsampling}{section} then introduces various subsampling methods. Section \ref{lin-reg} illustrates the improvements associated with non-uniform subsampling. The final two sections apply the developed ideas to binary classification problems with imbalanced training data. Section \ref{concl} concludes.
+
+\hypertarget{bias}{%
+\section{Bias-variance tradeoff}\label{bias}}
+
+To set the stage for the remainder of this note we will briefly revisit the bias-variance trade-off in this section. In particular we will illustrate the effect of varying the sample size \(n\). Readers familiar with this topic may choose to skip this section.
+
+As as in \protect\hyperlink{ref-bishop2006pattern}{Bishop} (\protect\hyperlink{ref-bishop2006pattern}{2006}) we consider synthetic data generated by the sinusoidal function \(f(x)=\sin(2\pi x)\). To simulate random samples of \(\mathbf{y}\) we sample \(n\) input values from \(\mathbf{X} \sim \text{unif}(0,1)\) and introduce a random noise component \(\varepsilon \sim \mathcal{N}(0,0.3)\). Figure \ref{fig:p-sim} shows \(\mathbf{y}\) along with random draws \(\mathbf{y}^*_n\).
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/p-sim-1.pdf}
+\caption{\label{fig:p-sim}Sinusoidal function and random draws.}
+\end{figure}
+
+Following \protect\hyperlink{ref-bishop2006pattern}{Bishop} (\protect\hyperlink{ref-bishop2006pattern}{2006}) we will use a Gaussian linear model with Gaussian kernels \(\exp(-\frac{(x_k-\mu_p)^{2}}{2s^2})\) as
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbf{y}|\mathbf{X}& =f(x) \sim \mathcal{N} \left( \sum_{j=0}^{p-1} \phi_j(x)\beta_j, v \mathbb{I}_p \right) \\
+\end{aligned}
+\label{eq:model}
+\end{equation}
+\]
+
+with \(v=0.3\) to estimate \(\hat{\mathbf{y}}_k\) from random draws \(\mathbf{X}_k\). We fix the number of kernels \(p=24\) (and hence the number of features \(M=p+1=25\)) as well as the spatial scale \(s=0.1\). To vary the complexity of the model we use a form of regularized least-squares (\emph{Ridge regression}) and let the regularization parameter \(\lambda\) vary
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \hat\beta&=(\lambda I + \Phi^T \Phi)^{-1}\Phi^Ty \\
+\end{aligned}
+\label{eq:reg-ls}
+\end{equation}
+\]
+
+where high values of \(\lambda\) in \eqref{eq:reg-ls} shrink parameter values towards zero. (Note that a choice \(\lambda=0\) corresponds to the OLS estimator which is defined as long as \(p \le n\).)
+
+As in \protect\hyperlink{ref-bishop2006pattern}{Bishop} (\protect\hyperlink{ref-bishop2006pattern}{2006}) we proceed as follows for each choice of \(\lambda\) and each sample draw to illustrate the bias-variance trade-off:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Draw \(N=25\) time from \(\mathbf{u}_k \sim \text{unif}(0,1)\).
+\item
+  Let \(\mathbf{X}_k^*=\mathbf{u}_k+\varepsilon_k\) with \(\varepsilon \sim \mathcal{N}(0, 0.3)\).
+\item
+  Compute \(\mathbf{y}_k^*=\sin(2\pi \mathbf{X}^*_k)\).
+\item
+  Extract features \(\Phi_k\) from \(\mathbf{X}_k^*\) and estimate the parameter vector \(\beta_k^*(\Phi_k,\mathbf{y}^*_k,\lambda)\) through regularized least-squares.
+\item
+  Predict \(\hat{\mathbf{y}}_k^*=\Phi \beta_k^*\).
+\end{enumerate}
+
+Applying the above procedure we can construct the familiar picture that demonstrates how increased model complexity increases variance while reducing bias (Figure \ref{fig:plot-bias-var}). Recall that for the mean-squared error (MSE) we have
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E} \left( (\hat{f}_n(x)-f(x))^2 \right)
+&= \text{var} (\hat{f}_n(x)) + \left( \mathbb{E} \left( \hat{f}_n(x) \right) - f(x) \right)^2 \\
+\end{aligned}
+\label{eq:mse}
+\end{equation}
+\]
+
+where the first term on the right-hand side corresponds to the variance of our prediction and the second term to its (squared) bias. In Figure \ref{fig:plot-bias-var} as model complexity increases the variance component of the MSE increases, while the bias term diminishes. A similar pattern would have been observed if instead of using regularization we had used OLS and let the number of Gaussian kernels (and hence the number of features \(p\)) vary where higher values of \(p\) correspond to increased model complexity.
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/plot-bias-var-1.pdf}
+\caption{\label{fig:plot-bias-var}Bias-variance trade-off}
+\end{figure}
+
+The focus of this note is instead on varying the sample size \(n\). It should not be surprising that both the variance and bias component of the MSE decrease as the sample size \(n\) increases (Figure \ref{fig:plot-bias-var-n}). But in today's world \(n\) can potentially be very large, so much so that even computing simple linear models can be hard. Suppose for example you wanted to use patient data that is generated in real-time as a global pandemic unfolds to predict the trajectory of said pandemic. Or consider the vast quantities of potentially useful user-generated data that online service providers have access to. In the remainder of this note we will investigate how systematic subsampling can help improve model accuracy in these situations.
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/plot-bias-var-n-1.pdf}
+\caption{\label{fig:plot-bias-var-n}Bias-variance trade-off}
+\end{figure}
+
+\hypertarget{subsampling}{%
+\section{Subsampling methods}\label{subsampling}}
+
+The case for subsampling generally involves \(n >> p\), so very large values of \(n\). In such cases we may be interested in estimating \(\hat\beta_m\) instead of \(\hat\beta_n\) where \(p\le m<<n\) with \(m\) freely chosen by us. In practice we may want to do this to avoid high computational costs associated with large \(n\) as discussed above. The basic algorithm for estimating \(\hat\beta_m\) is simple:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Subsample with replacement from the data with some sampling probability \(\{\pi_i\}^n_{i=1}\).
+\item
+  Estimate least-squares estimator \(\hat\beta_m\) using the subsample.
+\end{enumerate}
+
+But there are at least two questions about this algorithm: firstly, how do we choose \(\mathbf{X}_m=({\mathbf{X}^{(1)}}^T,...,{\mathbf{X}^{(m)}}^T)^T\)? Secondly, how should we construct \(\hat\beta_m\)? With respect to the former, a better idea than just randomly selecting \(\mathbf{X}_m\) might be to choose observations with high influence. We will look at a few of the different subsampling methods investigated and proposed in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}), which differ primarily in their choice of subsampling probabilities \(\{\pi_i\}^n_{i=1}\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Uniform subsampling (UNIF): \(\{\pi_i\}^n_{i=1}=1/n\).
+\item
+  Basic leveraging (BLEV): \(\{\pi_i\}^n_{i=1}=h_{ii}/ \text{tr}(\mathbf{H})=h_{ii}/p\) where \(\mathbf{H}\) is the \emph{hat matrix}.
+\item
+  Optimal (OPT) and predictor-length sampling (PL): involving \(||\mathbf{X}_i||/ \sum_{j=1}^{n}||\mathbf{X}_j||\) where \(||\mathbf{X}||\) denotes the \(L_2\) norm of \(\mathbf{X}\).
+\end{enumerate}
+
+Methods involving predictor-lengths are proposed by the authors with the former shown to be optimal (more on this below). PL subsampling is shown to scale very well and a good approximation of optimal subsampling conditional on leverage scores \(h_{ii}\) being fairly homogeneous.
+
+With respect to the second question \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) investigate both ordinary least-squares (OLS) and weighted least-squares (WLS), where weights simply correspond to subsampling probabilities \(\{\pi_i\}^n_{i=1}\). The authors present empirical evidence that OLS is more efficient than WLS in that the mean-squared error (MSE) for predicting \(\mathbf{X} \beta\) is lower for OLS. The authors also note though that subsampling using OLS is not consistent for non-uniform subsampling methods meaning that the bias cannot be controlled. Given Equation \eqref{eq:mse} the fact that OLS is nonetheless more efficient than WLS implies that the higher variance terms associated with WLS dominates the effect of relatively higher bias with OLS. In fact this is consistent with the theoretical results presented in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) (more on this below).
+
+Next we will briefly run through different estimation and subsampling methods in some more detail and see how they can be implemented in R. In the following \protect\hyperlink{lin-reg}{section} we will then look at how the different approaches perform empirically.
+
+\hypertarget{ols-and-wls}{%
+\subsection{OLS and WLS}\label{ols-and-wls}}
+
+Both OLS and WLS are implemented here using QR decomposition. As for OLS this is very easily done in R. Given some feature matrix \texttt{X} and a corresponding outcome variable \texttt{y} we can use \texttt{qr.solve(X,\ y)} to compute \(\hat\beta\). For WLS we need to first weigh observations by their corresponding subsampling probabilities. Following \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) we can construct a weighting matrix \(\Phi= \text{diag}\{\pi_i\}^m_{i=1}\) and compute the weighted least-squares estimator as: (see \protect\hyperlink{app-wls}{appendix} for derivation)
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \hat\beta_m^{WLS}&= \left( \mathbf{X}^T \Phi^{-1} \mathbf{X} \right)^{-1} \mathbf{X}^T\Phi^{-1}\mathbf{y}\\
+\end{aligned}
+\label{eq:wls}
+\end{equation}
+\]
+
+In R weighted least-squares can be implemented as follows
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, }\AttributeTok{weights =} \ConstantTok{NULL}\NormalTok{) }
+\NormalTok{\{}
+    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(weights)) \{}
+\NormalTok{        Phi }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(weights)}
+\NormalTok{        beta }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(}\FunctionTok{t}\NormalTok{(X) }\SpecialCharTok{\%*\%}\NormalTok{ Phi }\SpecialCharTok{\%*\%}\NormalTok{ X, }\FunctionTok{t}\NormalTok{(X) }\SpecialCharTok{\%*\%}\NormalTok{ Phi }\SpecialCharTok{\%*\%}\NormalTok{ y)}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        beta }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(X, y)}
+\NormalTok{    \}}
+    \FunctionTok{return}\NormalTok{(beta)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+where in order to implement the algorithm propose in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) the weights we need to supply as the function arguments are \(w=\{1/\pi_i\}^m_{i=1}\). This follows from the following property of diagonal matrices:
+
+\[
+\begin{aligned}
+&& \Phi^{-1}&= \begin{pmatrix}
+1\over\phi_{11} & 0 & 0 \\
+0 & ... & 0 \\
+0 & 0 & 1\over \phi_{nn}
+\end{pmatrix}
+ \\
+\end{aligned}
+\]
+
+\hypertarget{uniform-subsampling-unif}{%
+\subsection{Uniform subsampling (UNIF)}\label{uniform-subsampling-unif}}
+
+A simple function for uniform subsampling in R is shown in the code chunk below. Note that to streamline the comparison of the different methods in the following \protect\hyperlink{lin-reg}{section} the function takes an unused argument \texttt{weighted=F} which for the other subsampling methods can be used to determine whether OLS or WLS should be used. Of course, with uniform subsampling the weights are all identical and hence \(\hat\beta^{OLS}=\hat\beta^{WLS}\) so the argument is passed to but not evaluated in \texttt{sub\_UNIF}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, m, }\AttributeTok{weighted =}\NormalTok{ F, }\AttributeTok{rand\_state =} \ConstantTok{NULL}\NormalTok{) }
+\NormalTok{\{}
+    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(rand\_state)) \{}
+        \FunctionTok{set.seed}\NormalTok{(rand\_state)}
+\NormalTok{    \}}
+\NormalTok{    indices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\AttributeTok{size =}\NormalTok{ m)}
+\NormalTok{    X\_m }\OtherTok{\textless{}{-}}\NormalTok{ X[indices, ]}
+\NormalTok{    y\_m }\OtherTok{\textless{}{-}}\NormalTok{ y[indices]}
+\NormalTok{    beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(X\_m, y\_m)}
+\NormalTok{    y\_hat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_hat)}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{fitted =}\NormalTok{ y\_hat, }\AttributeTok{coeff =}\NormalTok{ beta\_hat))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{basic-leveraging-blev}{%
+\subsection{Basic leveraging (BLEV)}\label{basic-leveraging-blev}}
+
+The \texttt{sub\_UNIF} function can be extended easily to the case with basic leveraging (see code below). Note that in this case the \texttt{weighted} argument is evaluated.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, m, }\AttributeTok{weighted =}\NormalTok{ F, }\AttributeTok{rand\_state =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{plot\_wgts =}\NormalTok{ F, }\AttributeTok{prob\_only =}\NormalTok{ F) }
+\NormalTok{\{}
+\NormalTok{    svd\_X }\OtherTok{\textless{}{-}} \FunctionTok{svd}\NormalTok{(X)}
+\NormalTok{    U }\OtherTok{\textless{}{-}}\NormalTok{ svd\_X}\SpecialCharTok{$}\NormalTok{u}
+\NormalTok{    H }\OtherTok{\textless{}{-}} \FunctionTok{tcrossprod}\NormalTok{(U)}
+\NormalTok{    h }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(H)}
+\NormalTok{    prob }\OtherTok{\textless{}{-}}\NormalTok{ h}\SpecialCharTok{/}\FunctionTok{ncol}\NormalTok{(X)}
+    \ControlFlowTok{if}\NormalTok{ (plot\_wgts) \{}
+        \FunctionTok{plot}\NormalTok{(prob, }\AttributeTok{t =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sampling probability"}\NormalTok{)}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (prob\_only) \{}
+        \FunctionTok{return}\NormalTok{(prob)}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        indices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\AttributeTok{size =}\NormalTok{ m, }\AttributeTok{replace =}\NormalTok{ T, }\AttributeTok{prob =}\NormalTok{ prob)}
+\NormalTok{        X\_m }\OtherTok{\textless{}{-}}\NormalTok{ X[indices, ]}
+\NormalTok{        y\_m }\OtherTok{\textless{}{-}}\NormalTok{ y[indices]}
+\NormalTok{        weights }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{prob[indices]}
+        \ControlFlowTok{if}\NormalTok{ (weighted) \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{wls\_qr}\NormalTok{(X\_m, y\_m, weights)}
+\NormalTok{        \}}
+        \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(X\_m, y\_m)}
+\NormalTok{        \}}
+\NormalTok{        y\_hat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_hat)}
+        \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{fitted =}\NormalTok{ y\_hat, }\AttributeTok{coeff =}\NormalTok{ beta\_hat, }\AttributeTok{prob =}\NormalTok{ prob))}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-note-on-computing-leverage-scores}{%
+\subsubsection{A note on computing leverage scores}\label{a-note-on-computing-leverage-scores}}
+
+Recall that for the \emph{hat matrix} we have
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbf{H}&=\mathbf{X} (\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T \\
+\end{aligned}
+\label{eq:hat-mat}
+\end{equation}
+\]
+
+where the diagonal elements \(h_{ii}\) correspond to the leverage scores we're after. Following \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) we will use (compact) singular value decomposition to obtain \(\mathbf{H}\) rather than computing \eqref{eq:hat-mat} directly. This has the benefit that there exist exceptionally stable numerical algorithms to compute SVD. To see how and why we can use SVD to obtain \(\mathbf{H}\) see \protect\hyperlink{app-svd}{appendix}.
+
+Clearly to get \(h_{ii}\) we first need to compute \(\mathbf{H}\) which in terms of computational costs is of order \(\mathcal{O}(np^2)=\max(\mathcal{O}(np^2),\mathcal{O}(p^3))\). The fact that we use all \(n\) rows of \(\Phi\) to compute leverage scores even though we explicitly stated our goal was to only use \(m\) observations may rightly seem like a bit of a paradox. This is why fast algorithms that approximate leverage scores have been proposed. We will not look at them specifically here mainly because the PL method proposed by \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) does not depend on leverage scores and promises to be computationally even more efficient.
+
+\hypertarget{predictor-length-sampling-pl}{%
+\subsection{Predictor-length sampling (PL)}\label{predictor-length-sampling-pl}}
+
+The basic characteristic of PL subsampling - choosing \(\{\pi_i\}^n_{i=1}= ||\mathbf{X}_i||/ \sum_{j=1}^{n}||\mathbf{X}_j||\) - was already introduced above. Again it is very easy to modify the subsampling functions from above to this case:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, m, }\AttributeTok{weighted =}\NormalTok{ F, }\AttributeTok{rand\_state =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{plot\_wgts =}\NormalTok{ F, }\AttributeTok{prob\_only =}\NormalTok{ F) }
+\NormalTok{\{}
+\NormalTok{    predictor\_len }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(X}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\%*\%} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(X)))}
+\NormalTok{    prob }\OtherTok{\textless{}{-}}\NormalTok{ predictor\_len}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(predictor\_len)}
+    \ControlFlowTok{if}\NormalTok{ (plot\_wgts) \{}
+        \FunctionTok{plot}\NormalTok{(prob, }\AttributeTok{t =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sampling probability"}\NormalTok{)}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (prob\_only) \{}
+        \FunctionTok{return}\NormalTok{(prob)}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        indices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\AttributeTok{size =}\NormalTok{ m, }\AttributeTok{replace =}\NormalTok{ T, }\AttributeTok{prob =}\NormalTok{ prob)}
+\NormalTok{        X\_m }\OtherTok{\textless{}{-}}\NormalTok{ X[indices, ]}
+\NormalTok{        y\_m }\OtherTok{\textless{}{-}}\NormalTok{ y[indices]}
+\NormalTok{        weights }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{prob[indices]}
+        \ControlFlowTok{if}\NormalTok{ (weighted) \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{wls\_qr}\NormalTok{(X\_m, y\_m, weights)}
+\NormalTok{        \}}
+        \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(X\_m, y\_m)}
+\NormalTok{        \}}
+\NormalTok{        y\_hat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_hat)}
+        \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{fitted =}\NormalTok{ y\_hat, }\AttributeTok{coeff =}\NormalTok{ beta\_hat, }\AttributeTok{prob =}\NormalTok{ prob))}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-note-on-optimal-subsampling-opt}{%
+\subsubsection{A note on optimal subsampling (OPT)}\label{a-note-on-optimal-subsampling-opt}}
+
+In fact, PL subsampling is an approximate version of optimal subsampling (OPT). \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) show that asymptotically we have:
+
+\[
+\begin{equation} 
+\begin{aligned}
+&&\text{plim} \left( \text{var} (\hat{f}_n(x)) \right) > \text{plim} \left(\left( \mathbb{E} \left( \hat{f}_n(x) \right) - f(x) \right)^2 \right)  \\
+\end{aligned}
+\label{eq:plim}
+\end{equation}
+\]
+
+Given this result minimizing the MSE (Equation \eqref{eq:mse}) with respect to subsampling probabilities \(\{\pi_i\}^n_{i=1}\) corresponds to minimizing \(\text{var} (\hat{f}_n(x))\). They further show that this minimization problem has the following closed-form solution:
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \pi_i&= \frac{\sqrt{(1-h_{ii})}||\mathbf{X}_i||}{\sum_{j=1}^n\sqrt{(1-h_{jj})}||\mathbf{X}_j||}\\
+\end{aligned}
+\label{eq:opt}
+\end{equation}
+\]
+
+This still has computational costs of order \(\mathcal{O}(np^2)\). But it should now be clear why PL subsampling is optimal conditional on leverage scores being homogeneous (see \protect\hyperlink{app-pl}{appendix}). PL subsampling is associated with computational costs of order \(\mathcal{O}(np)\), so a potentially massive improvement. The code for optimal subsampling is shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, m, }\AttributeTok{weighted =}\NormalTok{ F, }\AttributeTok{rand\_state =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{plot\_wgts =}\NormalTok{ F, }\AttributeTok{prob\_only =}\NormalTok{ F) }
+\NormalTok{\{}
+\NormalTok{    n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(X)}
+\NormalTok{    svd\_X }\OtherTok{\textless{}{-}} \FunctionTok{svd}\NormalTok{(X)}
+\NormalTok{    U }\OtherTok{\textless{}{-}}\NormalTok{ svd\_X}\SpecialCharTok{$}\NormalTok{u}
+\NormalTok{    H }\OtherTok{\textless{}{-}} \FunctionTok{tcrossprod}\NormalTok{(U)}
+\NormalTok{    h }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(H)}
+\NormalTok{    predictor\_len }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(X}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\%*\%} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(X)))}
+\NormalTok{    prob }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ h) }\SpecialCharTok{*}\NormalTok{ predictor\_len)}\SpecialCharTok{/}\FunctionTok{crossprod}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ h), predictor\_len)[}\DecValTok{1}\NormalTok{]}
+    \ControlFlowTok{if}\NormalTok{ (plot\_wgts) \{}
+        \FunctionTok{plot}\NormalTok{(prob, }\AttributeTok{t =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sampling probability"}\NormalTok{)}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (prob\_only) \{}
+        \FunctionTok{return}\NormalTok{(prob)}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        indices }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\AttributeTok{size =}\NormalTok{ m, }\AttributeTok{replace =}\NormalTok{ T, }\AttributeTok{prob =}\NormalTok{ prob)}
+\NormalTok{        X\_m }\OtherTok{\textless{}{-}}\NormalTok{ X[indices, ]}
+\NormalTok{        y\_m }\OtherTok{\textless{}{-}}\NormalTok{ y[indices]}
+\NormalTok{        weights }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{prob[indices]}
+        \ControlFlowTok{if}\NormalTok{ (weighted) \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{wls\_qr}\NormalTok{(X\_m, y\_m, weights)}
+\NormalTok{        \}}
+        \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{            beta\_hat }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(X\_m, y\_m)}
+\NormalTok{        \}}
+\NormalTok{        y\_hat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_hat)}
+        \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{fitted =}\NormalTok{ y\_hat, }\AttributeTok{coeff =}\NormalTok{ beta\_hat, }\AttributeTok{prob =}\NormalTok{ prob))}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-note-on-computing-predictor-lengths}{%
+\subsubsection{A note on computing predictor lengths}\label{a-note-on-computing-predictor-lengths}}
+
+Computing the Euclidean norms \(||\mathbf{X}_i||\) in R can be done explicitly by looping over the rows of \(\mathbf{X}\) and computing the norm in each iteration. It turns out that this computationally very expensive. A much more efficient way of computing the vector of predictor lengths is as follows
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbf{pl}&=\sqrt{\mathbf{X}^2 \mathbf{1}} \\
+\end{aligned}
+\label{eq:norm}
+\end{equation}
+\]
+
+where \(\mathbf{X}^2\) indicates \emph{elements squared}, the square root is also taken \emph{element-wise} and \(\mathbf{1}\) is a \((p \times 1)\) vectors of ones. A performance benchmark of the two approaches is shown in Figure \ref{fig:mbm-norm} below.
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/mbm-norm-1.pdf}
+\caption{\label{fig:mbm-norm}Benchmark of Euclidean norm computations.}
+\end{figure}
+
+\hypertarget{comparison-of-methods}{%
+\subsection{Comparison of methods}\label{comparison-of-methods}}
+
+As discussed in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) both OPT and PL subsampling tend to inflate subsampling probabilities of observations with low leverage scores and shrink those of high-leverage observations relative to BLEV. They show explicitly that this always holds for orthogonal design matrices. As a quick sense-check of the functions introduced above we can generate a random orthogonal design matrix \(\mathbf{X}\) and plot subsampling probabilities with OPT and PL against those obtained with BLEV. Figure \ref{fig:comp-methods} illustrates this relationship nicely. The design matrix \(\mathbf{X}\) \((n \times p)\) with \(n=1000\) and \(p=100\) was generated using SVD:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list}\NormalTok{(}\ControlFlowTok{function}\NormalTok{ (n, p) }
+\NormalTok{\{}
+\NormalTok{    M }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(n }\SpecialCharTok{*}\NormalTok{ p), n, p)}
+\NormalTok{    X }\OtherTok{\textless{}{-}} \FunctionTok{svd}\NormalTok{(M)}\SpecialCharTok{$}\NormalTok{u}
+    \FunctionTok{return}\NormalTok{(X)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## function (n, p) 
+## {
+##     M <- matrix(rnorm(n * p), n, p)
+##     X <- svd(M)$u
+##     return(X)
+## }
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/comp-methods-1.pdf}
+\caption{\label{fig:comp-methods}Comparison of subsampling probabilities.}
+\end{figure}
+
+\hypertarget{lin-reg}{%
+\section{Linear regression model}\label{lin-reg}}
+
+\hypertarget{a-review-of-zhu2015optimal}{%
+\subsection{\texorpdfstring{A review of \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015})}{A review of Zhu et al. (2015)}}\label{a-review-of-zhu2015optimal}}
+
+To illustrate the improvements associated with the methods proposed in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}), we will briefly replicate their main empirical findings here. The evaluate the performance of the different methods we will proceed as follows:
+
+\textbf{Empirical exercise}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate synthetic data \(\mathbf{X}\) of dimension \((n \times m)\) with \(n>>m\).
+\item
+  Set some true model parameter \(\beta=(\mathbf{1}^T_{\overline{m*0.6}},\mathbf{1}^T_{\underline{m*0.4}})^T\).
+\item
+  Model the outcome variable as \(\mathbf{y}=\mathbf{X}\beta+\epsilon\) where \(\epsilon \sim \mathcal{N}(\mathbf{0},\sigma^2 \mathbf{I}_n)\) and \(\sigma=10\).
+\item
+  Estimate the full-sample OLS estimator \(\hat\beta_n\) (a benchmark estimator of sorts in this setting).
+\item
+  Use one of the subsampling methods to estimate iteratively \(\{\hat\beta^{(b)}_m\}^B_{b=1}\). Note that all subsampling methods are stochastic so \(\hat\beta_m\) varies across iterations.
+\item
+  Evaluate average model performance of \(\hat\beta_m\) under the mean-squared error criterium: \(MSE= \frac{1}{B} \sum_{b=1}^{B} MSE^{(b)}\) where \(MSE^{(b)}\) corresponds to the in-sample estimator of the mean-squared error of the \(b\)-th iteration.
+\end{enumerate}
+
+This exercise - and the once that follow - are computationally expensive. For them to be feasible we have to refrain from bias-correcting the in-sample estimator of the MSE (see \protect\hyperlink{app-session}{appendix} for session info). We will use a simple \href{R/sim_subsampling.R}{wrapper function} to implement the empirical exercise in R.
+
+As in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) we will generate the design matrix \(\mathbf{X}\) from 5 different distributions: 1) Gaussian (GA) with \(\mathcal{N}(\mathbf{0},\Sigma)\); 2) Mixed-Gaussian (MG) with \(0.5\mathcal{N}(\mathbf{0},\Sigma)+0.5\mathcal{N}(\mathbf{0},25\Sigma)\); 3) Log-Gaussian (LN) with \(\log\mathcal{N}(\mathbf{0},\Sigma)\); 4) T-distribution with 1 degree of freedom (T1) and \(\Sigma\); 5) T-distribution as in 4) but truncated at \([-p,p]\). All parameters are chosen in the same way as in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) with exception of \(n=1000\) and \(p=3\), which are significantly smaller choices in order to decrease the computational costs. The corresponding densities of the 5 data sets are shown in Figure \ref{fig:dens} in the \protect\hyperlink{app-dens}{appendix}.
+
+We will run the empirical exercise for each data set and each subsampling method introduced above. Figure \ref{fig:plot-smpl-prob} shows logarithms of the sampling probabilities corresponding to the different subsampling methods (UNIF not shown for obvious reasons). The plots look very similar to the one in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) and is shown here primarily to reassure ourselves that we have implemented their ideas correctly. One interesting observation is worth pointing out however: note how the distributions for OPT and PL have lower standard deviations compared to BLEV. This should not be altogether surprising since we already saw above that for orthogonal design matrices the former methods inflate small leverage scores while shrinking high scores. But it is interesting to see that the same appears to hold for design matrices that are explicitly not orthogonal given our choice of \(\Sigma\).
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/plot-smpl-prob-1.pdf}
+\caption{\label{fig:plot-smpl-prob}Sampling probabilities for different subsampling methods.}
+\end{figure}
+
+Figures \ref{fig:wls-zhu} and \ref{fig:ols-zhu} show the resulting MSE, squared bias and variance for the different subsampling methods and data sets using weighed least-squares and ordinary least-squares, respectively. The subsampling size increases along the horizontal axis. The figures are interactive to allow readers to zoom in etc.
+
+For the data sets that are also shown in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) we find the same overall pattern: PL and OPT outperform other methods when using weighted least-squares, while BLEV outperforms other methods when using unweighted/ordinary least-squares.
+
+For Gaussian data (GA) the differences between the methods are minimal since data points are homogeneous. A similar picture emerges when running the method comparison for the sinusoidal data introduced above (see \protect\hyperlink{app-sin}{appendix}). In fact, \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) recommend to just rely on uniform subsampling when data is Gaussian. Another interesting observation is that for t-distributed data (T1) the non-uniform subsampling methods significantly outperform uniform subsampling methods. This is despite the fact that in the case of T1 data the conditions used to establish asymptotic consistency of the non-uniform subsampling methods in \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) are not fulfilled: in particular the fourth moment is not finite (in fact it is not defined).
+
+\hypertarget{htmlwidget-7094aa462993607da3c4}{}
+
+\label{fig:wls-zhu}MSE, squared bias and variance for different subsampling methods and data sets. Subsampling with weighted least-squares.
+
+\hypertarget{htmlwidget-dbec5bbd8b33875f58ac}{}
+
+\label{fig:ols-zhu}MSE, squared bias and variance for different subsampling methods and data sets. Subsampling with ordinary least-squares.
+
+\hypertarget{computational-performance}{%
+\subsection{Computational performance}\label{computational-performance}}
+
+We have already seen above that theoretically speaking both BLEV and OPT subsampling are computationally more expensive than PL subsampling (with UNIF subsampling the least expensive). It should be obvious that in light of their computational costs \(\mathcal{O}(np^2)\) the former two methods do not scale well in higher-dimensional problems (higher \(p\)). \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) demonstrate this through empirical exercises to an extent that is beyond the scope of this note. Instead we will just quickly benchmark the different functions for non-uniform subsampling introduced above: \texttt{sub\_BLEV}, \texttt{sub\_OPT}, \texttt{sub\_PL} for \(n=200\), \(p=100\). We are only interested in how long it takes to compute subsampling probabilities, and since for \texttt{sub\_UNIF} all subsampling probabilities are simply \(\pi_i=1/n\) we neglect this here. Figure \ref{fig:mbm-methods} benchmarks the three non-uniform subsampling methods. Evidently PL subsampling is computationally much less costly.
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/mbm-methods-1.pdf}
+\caption{\label{fig:mbm-methods}Benchmark of computational performance of different methods.}
+\end{figure}
+
+\hypertarget{classification-problems}{%
+\section{Classification problems}\label{classification-problems}}
+
+In binary classification problems we are often faced with the issue of imbalanced training data - one of the two classes is under-represented relative to the other. This generally makes classifiers less sensitive to the minority class which often is the class we want to predict ((\protect\hyperlink{ref-branco2015survey}{\textbf{branco2015survey?}})). Suppose for example we wanted to predict the probability of death for patients who suffer from COVID-19. The case-fatality rate for the virus is significantly lower than 10\% so any data we could obtain on patients would inevitably be imbalanced: the domain is skewed towards the class we are not interested in predicting.
+
+A common and straight-forward way to deal with this issue is to randomly over- or under-sample the training data. Let \(y_i\in{0,1}\) for all \(i=1,...,n\). We are interested in modelling \(p_i=P(y_i=1|x_i)\) but our data is imbalanced: \(n_{y=0}>>n_{y=1}\) where \(n=n_{y=0}+n_{y=1}\). Then random over- and under-sampling works as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Random oversampling}: draw \(y_i\) from minority class \(\mathbf{y}_{n_{y=1}}\) with probability \(\{\pi_i\}^{n_{y=1}}_{i=1}=1/n_{y=1}\) and append \(\mathbf{y}_{n_{y=1}}\) by \(y_i\) so that \(n_{y=1} \leftarrow n_{y=1}+1\) until \(n_{y=0}=n_{y=1}\).
+\item
+  \emph{Random undersampling}: draw \(y_i\) from majority class \(\mathbf{y}_{n_{y=0}}\) with probability \(\{\pi_i\}^{n_{y=0}}_{i=0}=1/n_{y=0}\) and remove \(y_i\) from \(\mathbf{y}_{n_{y=0}}\) so that \(n_{y=0} \leftarrow n_{y=0}-1\) until \(n_{y=0}=n_{y=1}\).
+\end{enumerate}
+
+In a way both these methods correspond to uniform subsampling (UNIF) discussed above. Random oversampling may lead to overfitting. Conversely, random undersampling may come at the cost of eliminating observations with valuable information. With respect to the latter, we have already shown that more systematic subsampling approaches generally outperform uniform subsampling in linear regression problems. It would be interesting to see if we can apply similar ideas to classification with imbalanced data. How exactly we can go about doing this should be straight-forward to see:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \emph{Systematic undersampling}: draw \(n_{y=1}\) times from from majority class \(\mathbf{y}_{n_{y=0}}\) with probability \(\{\pi_i\}^{n_{y=0}}_{i=0}\) defined by optimal subsampling methods and throw out the remainder.
+\end{enumerate}
+
+To remain in the subsampling framework we will focus on undersampling here. It should be noted that many systematic approaches to undersampling already exist. In their extensive survey (\protect\hyperlink{ref-branco2015survey}{\textbf{branco2015survey?}}) mention undersampling methods based on distance-criteria, condensed nearest neighbours as well as active learning methods. Optimal subsampling is not mentioned in the survey.
+
+\hypertarget{optimal-subsampling-for-classification-problems}{%
+\subsection{Optimal subsampling for classification problems}\label{optimal-subsampling-for-classification-problems}}
+
+We cannot apply the methods used for subsampling with linear regression directly to classification problems, although we will see that certain ideas still apply. (\protect\hyperlink{ref-wang2018optimal}{\textbf{wang2018optimal?}}) explore optimal subsampling for large sample logistic regression - a paper that is very much related to \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}). We will not cover the details here as much as we did for \protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015}) and instead jump straight to one of the main results. (\protect\hyperlink{ref-wang2018optimal}{\textbf{wang2018optimal?}}) and propose a two-step algorithm that in the first step estimates logistic regression with uniform subsampling using \(m_0\) observations. In the second step the estimated coefficient \(\beta^{(UNIF)}_{m_0}\) from the first step is used to compute subsampling probabilities as follows:
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \pi_i&= \frac{|y_i-p_i(\beta^{(UNIF)}_{m_0})|||\mathbf{X}_i||}{\sum_{j=1}^n|y_i-p_i(\beta^{(UNIF)}_{m_0})|||\mathbf{X}_j||}\\
+\end{aligned}
+(\#eq:subs_mVc)
+\end{equation}
+\]
+
+The probabilities are then used to subsample \(m\) observations again. Finally, \(\hat\beta_{m_0+m}\) is estimated from the combdined subsamples with weighted logistic regression where weights once again correspond to inverse sampling probabilities. The authors refer to the method corresponding to @ref\{eq:subs\_mVc\} as \emph{mVc} since it corresponds to optimal subsampling with variance targeting. They also propose a method which targets the MSE directly, but this one is of higher computational costs \(\mathcal{O}(np^2)\) vs.~\(\mathcal{O}(np)\) for \emph{mVc}. The similarities to the case for linear regression should be obvious. We will only consider \emph{mVc} here and see if it can be applied to undersampling. The code that implements this can be found \href{R/undersampling.R}{here} - it uses object-oriented program so could be interesting for some readers. (\protect\hyperlink{ref-wang2018optimal}{\textbf{wang2018optimal?}}) never run the model with ordinary as opposed to weighted logit, possibly because ordinary logit is not sensible in this context. But for the sake of completeness we'll once again consider both cases here.
+
+\hypertarget{class-syn}{%
+\subsection{Synthetic data}\label{class-syn}}
+
+In this section we will use the same synthetic data sets as above for our design matrix \(\mathbf{X}\). But while above we sampled \(y_i |x_i\sim \mathcal{N}(\beta^T x_i,\sigma)\), here we will simulate a single draw from \(\mathbf{y} |\mathbf{X} \sim \text{Bernoulli}(p)\), where in order to create imbalance we let \(p<0.5\) vary. To model the probability of \(y=1\) we will use logistic regression:
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbf{p}&= \frac{ \exp( \mathbf{X} \beta )}{1 + \exp(\mathbf{X} \beta)}
+\end{aligned}
+\label{eq:log-reg}
+\end{equation}
+\]
+
+Equation \eqref{eq:log-reg} is not estimated directly but rather derived from linear predictions
+
+\[
+\begin{equation} 
+\begin{aligned}
+\log \left( \frac{\mathbf{p}}{1-\mathbf{p}} \right)&= \mathbf{X} \beta \\
+\end{aligned}
+\label{eq:lin-pred}
+\end{equation}
+\]
+
+where \(\beta\) can be estimated through iterative re-weighted least-squares (IRLS) which is a simple implementation of Newton's method (see for example \protect\hyperlink{ref-wasserman2013all}{Wasserman} (\protect\hyperlink{ref-wasserman2013all}{2013}); a complete derivation can also be found in the \protect\hyperlink{irls}{appendix}):
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \beta_{s+1}&= \left( \mathbf{X}^T \mathbf{W} \mathbf{X} \right) \mathbf{X}^T \mathbf{W}z\\
+\text{where}&& z&= \mathbf{X}\beta_{s} + \mathbf{W}^{-1} (\mathbf{y}-\mathbf{p}) \\
+&& \mathbf{W}&= \text{diag}\{p_i(\beta_{s})(1-p_i(\beta_{s}))\}_{i=1}^n \\ 
+\end{aligned}
+\label{eq:irls}
+\end{equation}
+\]
+
+In R this can be implemented from scratch as below. For the empirical exercises we will rely on \texttt{glm({[}formula{]},\ family="binomial")} which scales much better to higher dimensional problems than my custom function and also implements weighted logit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{ (X, y, }\AttributeTok{beta\_0 =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{tau =} \FloatTok{1e{-}09}\NormalTok{, }\AttributeTok{max\_iter =} \DecValTok{10000}\NormalTok{) }
+\NormalTok{\{}
+    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{all}\NormalTok{(X[, }\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)) \{}
+\NormalTok{        X }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, X)}
+\NormalTok{    \}}
+\NormalTok{    p }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(X)}
+\NormalTok{    n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(X)}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.null}\NormalTok{(beta\_0)) \{}
+\NormalTok{        beta\_latest }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, p))}
+\NormalTok{    \}}
+\NormalTok{    W }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(n)}
+\NormalTok{    can\_still\_improve }\OtherTok{\textless{}{-}}\NormalTok{ T}
+\NormalTok{    iter }\OtherTok{\textless{}{-}} \DecValTok{1}
+    \ControlFlowTok{while}\NormalTok{ (can\_still\_improve }\SpecialCharTok{\&}\NormalTok{ iter }\SpecialCharTok{\textless{}}\NormalTok{ max\_iter) \{}
+\NormalTok{        y\_hat }\OtherTok{\textless{}{-}}\NormalTok{ X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_latest}
+\NormalTok{        p\_y }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(y\_hat)}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(y\_hat))}
+\NormalTok{        df\_latest }\OtherTok{\textless{}{-}} \FunctionTok{crossprod}\NormalTok{(X, y }\SpecialCharTok{{-}}\NormalTok{ p\_y)}
+        \FunctionTok{diag}\NormalTok{(W) }\OtherTok{\textless{}{-}}\NormalTok{ p\_y }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p\_y)}
+\NormalTok{        Z }\OtherTok{\textless{}{-}}\NormalTok{ X }\SpecialCharTok{\%*\%}\NormalTok{ beta\_latest }\SpecialCharTok{+} \FunctionTok{qr.solve}\NormalTok{(W) }\SpecialCharTok{\%*\%}\NormalTok{ (y }\SpecialCharTok{{-}}\NormalTok{ p\_y)}
+\NormalTok{        beta\_latest }\OtherTok{\textless{}{-}} \FunctionTok{qr.solve}\NormalTok{(}\FunctionTok{crossprod}\NormalTok{(X, W }\SpecialCharTok{\%*\%}\NormalTok{ X), }\FunctionTok{crossprod}\NormalTok{(X, W }\SpecialCharTok{\%*\%}\NormalTok{ Z))}
+\NormalTok{        can\_still\_improve }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{abs}\NormalTok{(df\_latest)) }\SpecialCharTok{\textgreater{}}\NormalTok{ tau}
+\NormalTok{        iter }\OtherTok{\textless{}{-}}\NormalTok{ iter }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{    \}}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{fitted =}\NormalTok{ p\_y, }\AttributeTok{coeff =}\NormalTok{ beta\_latest))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+When thinking about repeating the empirical exercise from Section \ref{lin-reg} above, we are faced with the question of how to compute the MSE and its bias-variance decomposition. One idea could be to compare the linear predictions in \eqref{eq:lin-pred} in the same way as we did before, since after all these are fitted values from a linear model. The problem with that idea is that rebalancing the data through undersampling affects the intercept term \(\beta_0\) (potentially quite a bit if the data was originally very imbalanced). This is not surprising since \(\beta_0\) measures the log odds of \(y_i\) given all predictors \(\mathbf{X}_i=0\) are zero. Hence comparing linear predictors \(\mathbf{X}\beta_n\) and \(\mathbf{X}\beta_m\) is not a good idea in this setting (perhaps ever?). Fortunately though we can just work with the predicted probabilities in \eqref{eq:log-reg} directly and decompose the MSE in the same way as before (see (\protect\hyperlink{ref-manning2008introduction}{\textbf{manning2008introduction?}}), pp.~310):
+
+\[
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E} \left( (\hat{\mathbf{p}}-\mathbf{p})^2 \right)
+&= \text{var} (\hat{\mathbf{p}}) + \left( \mathbb{E} \left( \hat{\mathbf{p}} \right) - \mathbf{p} \right)^2 \\
+\end{aligned}
+\label{eq:mse-prob}
+\end{equation}
+\]
+
+Hence the empirical exercise in this section is very similar to the one above and can be summarized as follows:
+
+\textbf{Empirical exercise}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate synthetic data \(\mathbf{X}\) of dimension \((n \times m)\) with \(n>>m\).
+\item
+  Randomly generate the binary outcome variable as \(\mathbf{y} | \mathbf{X} \sim \text{Bernoulli}(p=m/n)\).
+\item
+  Estimate the full-sample logit estimator \(\hat\beta_n\).
+\item
+  Use one of the undersampling methods to estimate recursively \(\{\hat\beta^{(b)}_m\}^B_{b=1}\).
+\item
+  Evaluate average model performance of \(\hat\beta_m\) under the mean-squared error criterium: \(MSE= \frac{1}{B} \sum_{b=1}^{B} MSE^{(b)}\) where \(MSE^{(b)}\) corresponds to the in-sample estimator of the mean-squared error of the \(b\)-th iteration.
+\end{enumerate}
+
+There is a decisive difference between this exercise and the one we ran for linear regression models above: here we are mechanically reducing the number of observations of the majority class and with non-uniform subsampling we are selective about what observations we keep. This is very different to simply subsampling without imposing a structure on the subsample. Intuitively it may well be that in this context non-uniform subsampling is prone to produce estimates of \(\hat\beta_m\) that are very different from \(\hat\beta_n\). This effect could be expected to appear in the squared bias term of the MSE.
+
+The resulting mean-squared error decompositions are shown in Figures \ref{fig:wls-logit} and \ref{fig:ols-logit} for weighted and ordinary logit. A first interesting and reassuring observation is that both for weighted and ordinary logit the variance component is generally reduced more with \emph{mVc} subsampling (certainly less true for weighted logit). A second observation is that the squared bias term can evidently not be controlled with \emph{mVc} which leads to the overall mean-squared errors generally being higher than with random undersampling. This could be evidence that selective subsampling in fact introduces bias as speculated above, but this is not clear and would have to be explored more thoroughly.
+
+\emph{It could also very well be that the algorithm in (\protect\hyperlink{ref-wang2018optimal}{\textbf{wang2018optimal?}}) was not implemented correctly here and the results are therefore incorrect. Unfortunately I have not had time to try and completely replicate that second paper also.}
+
+\hypertarget{htmlwidget-0246f228df2813ded3c2}{}
+
+\label{fig:wls-logit}MSE, squared bias and variance for different subsampling methods and data sets. Subsampling with weighted logistic regression. MSE and its components correspond to linear predictions of logistic regression.
+
+\hypertarget{htmlwidget-cdc8bfd7b217477475d2}{}
+
+\label{fig:ols-logit}MSE, squared bias and variance for different subsampling methods and data sets. Subsampling with ordinary logistic regression. MSE and its components correspond to linear predictions of logistic regression.
+
+\hypertarget{real-data-example}{%
+\subsection{Real data example}\label{real-data-example}}
+
+Until now we have merely looked at approximations of \(\hat\beta_n\) for logistic regression with imbalanced data. But ultimately the goal in classification problems is to accurately predict \(\mathbf{y}\) from test data. To investigate this point we will next turn to real data.
+
+A number of interesting data sets related to COVID-19 have been made publicly available for research. An interesting data set for our purposes that contains information about individual patients is being maintained for the \href{https://github.com/beoutbreakprepared/nCoV2019}{Open COVID-19 Data Working Group}. The methodology for building the data set was originally developed by was developed by (\protect\hyperlink{ref-xu2020Epidemiological}{\textbf{xu2020Epidemiological?}}). Information about how the data is being maintained and updated can be found in (\protect\hyperlink{ref-kraemer2020epidemiological}{\textbf{kraemer2020epidemiological?}}).
+The complete data set is vast, but for our purposes we are only interested in the subset of data that contains information about the patient's outcome state. The subset of the data we will use for our prediction exercise here is shown below. It contains the patient outcome variable \(y\in \{0=\text{survived}, 1=\text{deceased}\}\) which we are interested in predicting from a set of features: age, gender and geographical location. The model is kept intentionally simple, as our goal here continues to be the evaluation of subsampling methods, rather than building an accurate prediction.
+
+\hypertarget{htmlwidget-1b87aa3c9c5871345311}{}
+
+The outcome variable is defined as \(y\in\{0=\text{survived},1=\text{deceased}\}\) and is highly imbalanced as expected: deaths make up about 4 percent of all outcomes. Note also that we are now looking at a significantly higher value for \(n\) than in the synthetic examples above. Computing leverage scores in this setting is extremely costly for reasons we have already elaborated on above and hence basic leveraging (BL) and optimal subsampling (OPT) are both omitted from the remainder of the analysis. To compare the two remaining approaches - uniform (UNIF) and prediction-length (PL) subsampling - we will proceed as follows:
+
+To score our probabilistic predictions we will once again use the mean-squared error, although technically in this setting we would speak of the \emph{Brier score} (see \href{https://en.wikipedia.org/wiki/Brier_score}{here}):
+
+\[
+\begin{equation}
+\begin{aligned}
+&& BS&= \frac{1}{n} \sum_{i=1}^{n} (p_i-\hat{p}_i)^2 \\
+\end{aligned}
+\label{eq:brier}
+\end{equation}
+\]
+
+Of course other scoring functions are commonly considered for classification problems (for a discussion see for example \href{https://stats.stackexchange.com/questions/172945/rmse-root-mean-squared-error-for-logistic-models}{here}). But using the \emph{Brier score} naturally continues the discussion \protect\hyperlink{subsampling}{above}.
+
+\textbf{Empirical exercise}
+
+Cross-validate with \(k=5\) folds and for each fold repeat \(B=100\) times:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Undersample the training data through one of the methods: \((\mathbf{X}_{\text{train}},\mathbf{y}_{\text{train}})\).
+\item
+  Fit the model on the undersampled training data.
+\item
+  Using the fitted model predict \(\hat{\mathbf{y}}_{\text{train}}\) using the test data \(\mathbf{X}_{\text{test}}\).
+\item
+  Compute the Brier score for \(\mathbf{y}_{\text{test}}\) and \(\hat{\mathbf{y}}_{\text{train}}\).
+\end{enumerate}
+
+Figure \ref{fig:brier} shows the distribution of Brier scores resulting from our pseudo-out-of-sample predictions. Undersampling is performed both randomly and with \emph{mVc} subsampling. The logit classifier is fitted separately with and without subsampling probabilities as weights. In the case of ordinary logit \emph{mVc} seems to lead to slightly better predictions on average, but the improvement is not very significant. When the model is fitted with weights something interesting happens. The majority of the estimated Brier scores are lower than those obtained with random undersampling, but there is much higher variance and in some cases \emph{mVc} performs very poorly. This could imply that using optimal subsampling for undersampling with weighted regression is risky: it performs well most of the time, but sometimes things go very wrong. Of course, this is a just a single example and the findings shown here are not sufficient to draw any conclusions.
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/brier-1.pdf}
+\caption{\label{fig:brier}Distribution of Brier scores from pseudo-out-of-sample predictions for random and prediction-length undersampling.}
+\end{figure}
+
+\hypertarget{concl}{%
+\section{Conclusion}\label{concl}}
+
+In this short note we have looked at various systematic subsampling methods and how they can be applied to imbalanced learning. The fact that non-uniform subsampling can improve performance of linear regression models has been well established (\protect\hyperlink{ref-zhu2015optimal}{Zhu et al.} (\protect\hyperlink{ref-zhu2015optimal}{2015})). We reviewed these findings here and then applied the developed idea to a binary classification problem with imbalanced data. The findings are mixed: it does appear that optimal subsampling methods can be successfully applied to undersampling in the sense that they can improve modely accuracy. While these findings are potentially interesting they are not conclusive. To establish general results theory would need to be developed. It is also far from clear whether the undersampling approaches presented here can compete with existing methodologies that involve distance-criteria, condensed nearest neighbours and active learning methods.
+
+\hypertarget{appendix}{%
+\section*{Appendix}\label{appendix}}
+\addcontentsline{toc}{section}{Appendix}
+
+\hypertarget{app-wls}{%
+\subsection*{Weighted least-squares}\label{app-wls}}
+\addcontentsline{toc}{subsection}{Weighted least-squares}
+
+\begin{figure}
+\centering
+\includegraphics{www/wls.png}
+\caption{Weighted least-squares}
+\end{figure}
+
+\hypertarget{app-svd}{%
+\subsection*{From SVD to leverage scores}\label{app-svd}}
+\addcontentsline{toc}{subsection}{From SVD to leverage scores}
+
+\begin{figure}
+\centering
+\includegraphics{www/svd_leverage.png}
+\caption{From SVD to leverage}
+\end{figure}
+
+\hypertarget{app-pl}{%
+\subsection*{From optimal to prediction-length subsampling}\label{app-pl}}
+\addcontentsline{toc}{subsection}{From optimal to prediction-length subsampling}
+
+\begin{figure}
+\centering
+\includegraphics{www/PL.png}
+\caption{From OPT to PL}
+\end{figure}
+
+\hypertarget{app-dens}{%
+\subsection*{Synthetic data}\label{app-dens}}
+\addcontentsline{toc}{subsection}{Synthetic data}
+
+\begin{figure}
+\centering
+\includegraphics{fromScratch_files/figure-latex/dens-1.pdf}
+\caption{\label{fig:dens}Densities of synthetic design matrices.}
+\end{figure}
+
+\hypertarget{app-sin}{%
+\subsection*{Subsampling applied to sinusoidal function}\label{app-sin}}
+\addcontentsline{toc}{subsection}{Subsampling applied to sinusoidal function}
+
+\includegraphics{fromScratch_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\hypertarget{irls}{%
+\subsection*{Iterative reweighted least-squares}\label{irls}}
+\addcontentsline{toc}{subsection}{Iterative reweighted least-squares}
+
+\begin{figure}
+\centering
+\includegraphics{www/irls.png}
+\caption{Iterative reweighted least-squares}
+\end{figure}
+
+\hypertarget{app-session}{%
+\subsection*{Session info}\label{app-session}}
+\addcontentsline{toc}{subsection}{Session info}
+
+\begin{verbatim}
+## R version 4.0.3 (2020-10-10)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS High Sierra 10.13.6
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] DT_0.16              plotly_4.9.2.1       expm_0.999-5        
+## [4] Matrix_1.2-18        microbenchmark_1.4-7 reshape_0.8.8       
+## [7] ggplot2_3.3.2        data.table_1.13.2    fromScratchR_0.1.0  
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_1.0.5        plyr_1.8.6        highr_0.8         pillar_1.4.7     
+##  [5] compiler_4.0.3    tools_4.0.3       digest_0.6.27     jsonlite_1.7.1   
+##  [9] lattice_0.20-41   evaluate_0.14     lifecycle_0.2.0   tibble_3.0.4     
+## [13] gtable_0.3.0      viridisLite_0.3.0 pkgconfig_2.0.3   rlang_0.4.9      
+## [17] rstudioapi_0.13   crosstalk_1.1.0.1 yaml_2.2.1        xfun_0.19        
+## [21] httr_1.4.2        withr_2.3.0       stringr_1.4.0     dplyr_1.0.2      
+## [25] knitr_1.30        htmlwidgets_1.5.2 generics_0.1.0    vctrs_0.3.5      
+## [29] webshot_0.5.2     isoband_0.2.3     grid_4.0.3        tidyselect_1.1.0 
+## [33] glue_1.4.2        R6_2.5.0          rmarkdown_2.5     bookdown_0.20    
+## [37] tidyr_1.1.2       purrr_0.3.4       farver_2.0.3      magrittr_2.0.1   
+## [41] scales_1.1.1      ellipsis_0.3.1    htmltools_0.5.0   colorspace_2.0-0 
+## [45] labeling_0.4.2    stringi_1.5.3     lazyeval_0.2.2    munsell_0.5.0    
+## [49] crayon_1.3.4
+\end{verbatim}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-bishop2006pattern}{}%
+Bishop, Christopher M. 2006. \emph{Pattern Recognition and Machine Learning}. springer.
+
+\leavevmode\hypertarget{ref-nw2006numerical}{}%
+Nocedal, Jorge, and Stephen Wright. 2006. \emph{Numerical Optimization}. Springer Science \& Business Media.
+
+\leavevmode\hypertarget{ref-wasserman2013all}{}%
+Wasserman, Larry. 2013. \emph{All of Statistics: A Concise Course in Statistical Inference}. Springer Science \& Business Media.
+
+\leavevmode\hypertarget{ref-zhu2015optimal}{}%
+Zhu, Rong, Ping Ma, Michael W Mahoney, and Bin Yu. 2015. {``Optimal Subsampling Approaches for Large Sample Linear Regression.''} \emph{arXiv}, arXiv--1509.
+
+\end{CSLReferences}
+
+\end{document}
