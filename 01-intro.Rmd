@@ -1,12 +1,22 @@
 # Introduction {#intro}
 
-This book is a collection of ideas, notes, exercises and code that students of the MSc in Data Science at Barcelona GSE were exposed and/or came up with during their studies. 
+This book is a collection of ideas, notes, exercises and code covering a broad range of topics in Data Science. It is written by students for students. The structure is inherently somewhat loose and this is very much a work in progress. Feedback and comments are therefore more than welcome, although time and resources to act on them is scarce.
 
 ## R package
 
 The book uses a complementary R package [fromScratchR](https://github.com/pat-alt/fromScratchR) which collects the R code used throughout the book. The book can be read without using the package, but in case you want to play with the code you can install the development version from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
+```{r, eval=FALSE}
+install.packages("devtools")
 devtools::install_github("pat-alt/fromScratchR")
 ```
+
+Then import the package through `library(fromScratchR)`
+
+## Python code
+
+As for Python, modules are currently part of the Git repository that contains the book.
+
+## Code folding
+
+Code is presented in many places to illustrate how concepts and algorithms can actually be implemented. 

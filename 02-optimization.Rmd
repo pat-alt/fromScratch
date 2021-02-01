@@ -1,4 +1,4 @@
-# Deterministic optimization {#det-opt}
+# Optimization {#det-opt}
 
 ## Line search 
 
@@ -22,7 +22,7 @@ $$
 $$
 We can implement Equation \@ref(eq:rosenbrock) in R as follows:
 
-```{r}
+```{r, echo=TRUE}
 # Rosenbrock:
 f = function(X) {
   100 * (X[2] - X[1]^2)^2 + (1 - X[1])^2
@@ -71,7 +71,7 @@ $$
 
 which in R can be encoded as follows:
 
-```{r}
+```{r, echo=TRUE}
 # Gradient:
 df = function(X) {
   df = rep(0, length(X))
@@ -90,15 +90,15 @@ ddf = function(X) {
 }
 ```
 
-For both methods I will use the *Arminjo condition* with backtracking. The `gradient_desc` function (below) can implement both *steepest descent* and *Newton's method*. The code for the function can be inspected below (you can reveal it by simply clicking on the *Code* button on the right). There's also a small description of the different arguments.
+For both methods I will use the *Arminjo condition* with backtracking. The `gradient_desc` function (below) can implement both *steepest descent* and *Newton's method*. The code for the function can be inspected below. There's also a small description of the different arguments.
 
-```{r code=readLines("R/gradient_desc.R"), eval=F}
+```{r code=fromScratchR::gradient_desc, eval=F, echo=TRUE}
 ```
 
 Similarly you can take a look at how the `gradient_desc` is applied in the underlying problem by unhiding the next code chunk.
 
-```{r, eval=F}
-source("R/gradient_desc.R")
+```{r, eval=F, echo=TRUE}
+library(fromScratchR)
 init_guesses = 1:nrow(X0)
 algos = c("steepest","newton")
 grid = expand.grid(guess=init_guesses,algo=algos)
@@ -142,7 +142,6 @@ if (knitr:::is_html_output()) {
   knitr::include_graphics("www/p2.gif")
 }
 ```
-
 
 ```{r p1, eval=F}
 library(gganimate)
@@ -222,7 +221,7 @@ p = ggplot() +
 anim_save("www/p1.gif",p, width = 800, height = 400)
 ```
 
-```{r p2, echo=F, eval=F}
+```{r p2, eval=F}
 chart_dt = X_star_dt[x0_1==X0[2,x1] & x0_2==X0[2,x2]]
 # Data for descent path:
 desc_dt = chart_dt[,keep:=iteration%in%iteration[unique(floor(seq(1, .N, length.out = 10)))],by=.(method)][keep==T][,keep:=NULL]

@@ -5,10 +5,7 @@ This note investigates if and how systematic subsampling can be applied to imbal
 ## Bias-variance tradeoff {#bias}
 
 ```{r}
-source("R/gauss_kernel.R")
-source("R/sinusoidal.R")
-source("R/sim_sinusoidal.R")
-source("R/regularized_ls.R")
+library(fromScratchR)
 # Generate data: ----
 n <- 25
 p <- 24
@@ -130,7 +127,7 @@ dt <- rbindlist(
                 }
               )
             )
-            beta_hat <- regularized_ls(Phi_k,y_k,lambda_t) # fit model on (y,x)
+            beta_hat <- ridge(Phi_k,y_k,lambda_t) # fit model on (y,x)
             y_hat <- c(Phi %*% beta_hat) # predict from model
             dt <- data.table(value=y_hat,draw=k,lambda=lambda_t,n=1:n,x=x)
             return(dt)
@@ -232,7 +229,7 @@ dt <- rbindlist(
                 }
               )
             )
-            beta_hat <- regularized_ls(Phi_k,y_k,lambda) # fit model on (y,x)
+            beta_hat <- ridge(Phi_k,y_k,lambda) # fit model on (y,x)
             y_hat <- c(Phi %*% beta_hat) # predict from model
             dt <- data.table(value=y_hat,draw=k,sample_size=n_sample,n=1:n,x=x)
             return(dt)
@@ -327,7 +324,7 @@ $$
 
 In R weighted least-squares can be implemented as follows
 
-```{r class.source = "fold-show", code=readLines("R/wls_qr.R"), echo=T}
+```{r class.source = "fold-show", code=fromScratchR::ols, echo=T, eval=F}
 ```
 
 where in order to implement the algorithm propose in @zhu2015optimal the weights we need to supply as the function arguments are $w=\{1/\pi_i\}^m_{i=1}$. This follows from the following property of diagonal matrices:
@@ -345,16 +342,16 @@ $$
 
 ### Uniform subsampling (UNIF)
 
-A simple function for uniform subsampling in R is shown in the code chunk below. Note that to streamline the comparison of the different methods in the following [section](#lin-reg) the function takes an unused argument `weighted=F` which for the other subsampling methods can be used to determine whether OLS or WLS should be used. Of course, with uniform subsampling the weights are all identical and hence $\hat\beta^{OLS}=\hat\beta^{WLS}$ so the argument is passed to but not evaluated in `UNIF`.
+A simple function for uniform subsampling in R is shown in the code chunk below. Note that to streamline the comparison of the different methods in the following [section](#lin-reg) the function takes an unused argument `weighted=F` which for the other subsampling methods can be used to determine whether OLS or WLS should be used. Of course, with uniform subsampling the weights are all identical and hence $\hat\beta^{OLS}=\hat\beta^{WLS}$ so the argument is passed to but not evaluated in `sub_UNIF`.
 
-```{r class.source = "fold-show", code=readLines("R/UNIF.R"), echo=T}
+```{r class.source = "fold-show", code=fromScratchR::sub_UNIF, echo=T, eval=FALSE}
 ```
 
 ### Basic leveraging (BLEV)
 
-The `UNIF` function can be extended easily to the case with basic leveraging (see code below). Note that in this case the `weighted` argument is evaluated. 
+The `sub_UNIF` function can be extended easily to the case with basic leveraging (see code below). Note that in this case the `weighted` argument is evaluated. 
 
-```{r class.source = "fold-show", code=readLines("R/BLEV.R"), echo=T}
+```{r class.source = "fold-show", code=fromScratchR::sub_BLEV, echo=T, eval=FALSE}
 ```
 
 #### A note on computing leverage scores
@@ -378,7 +375,7 @@ Clearly to get $h_{ii}$ we first need to compute $\mathbf{H}$ which in terms of 
 
 The basic characteristic of PL subsampling - choosing $\{\pi_i\}^n_{i=1}= ||\mathbf{X}_i||/ \sum_{j=1}^{n}||\mathbf{X}_j||$ - was already introduced above. Again it is very easy to modify the subsampling functions from above to this case:
 
-```{r class.source = "fold-show", code=readLines("R/PL.R")}
+```{r code=fromScratchR::sub_PL, echo=T, eval=F}
 ```
 
 #### A note on optimal subsampling (OPT)
@@ -407,7 +404,7 @@ $$
 
 This still has computational costs of order $\mathcal{O}(np^2)$. But it should now be clear why PL subsampling is optimal conditional on leverage scores being homogeneous (see [appendix](#app-pl)). PL subsampling is associated with computational costs of order $\mathcal{O}(np)$, so a potentially massive improvement. The code for optimal subsampling is shown below:
 
-```{r class.source = "fold-show", code=readLines("R/OPT.R")}
+```{r code=fromScratchR::sub_OPT, echo=TRUE, eval=FALSE}
 ```
 
 #### A note on computing predictor lengths
@@ -452,17 +449,17 @@ p <- 100
 
 As discussed in @zhu2015optimal both OPT and PL subsampling tend to inflate subsampling probabilities of observations with low leverage scores and shrink those of high-leverage observations relative to BLEV. They show explicitly that this always holds for orthogonal design matrices. As a quick sense-check of the functions introduced above we can generate a random orthogonal design matrix $\mathbf{X}$ and plot subsampling probabilities with OPT and PL against those obtained with BLEV. Figure \@ref(fig:comp-methods) illustrates this relationship nicely. The design matrix $\mathbf{X}$ $(n \times p)$ with $n=`r n`$ and $p=`r p`$ was generated using SVD:
 
-```{r class.source = "fold-show", code=readLines("R/rorthogonal.R")}
+```{r class.source = "fold-show", code=fromScratchR::rorthogonal, echo=TRUE, eval=TRUE}
 ```
 
 ```{r comp-methods, fig.cap="Comparison of subsampling probabilities.", fig.height=3, fig.width=6}
 X <- rorthogonal(n,p)
 # Subsampling methods:
 methods <- list(
-  "UNIF" = UNIF,
-  "BLEV" = BLEV,
-  "OPT" = OPT,
-  "PL" = PL
+  "UNIF" = sub_UNIF,
+  "BLEV" = sub_BLEV,
+  "OPT" = sub_OPT,
+  "PL" = sub_PL
 )
 smpl_probs <- rbindlist(
   lapply(
@@ -571,7 +568,6 @@ data_sets <- lapply(
     list(X=X, y=y)
   }
 )
-saveRDS(data_sets, "data/synthetic_data.rds")
 ```
 
 ```{r smpl-prob, eval=F, include=F}
@@ -589,11 +585,11 @@ smpl_probs <- rbindlist(
     }
   )
 )
-saveRDS(smpl_probs, "outputs/smpl_probs.rds")
+saveRDS(smpl_probs, "data/smpl_probs.rds")
 ```
 
 ```{r, eval=F, fig.width=10, fig.height=4, fig.cap="Logarithm of sampling probabilities."}
-smpl_probs <- readRDS("outputs/smpl_probs.rds")
+smpl_probs <- readRDS("data/smpl_probs.rds")
 pgrid <- expand.grid(method = names(methods)[3:4], data=names(data_sets))
 dt_plot <- rbindlist(
   lapply(
@@ -622,7 +618,7 @@ ggplot(dt_plot, aes(x=x, y=y)) +
 ```
 
 ```{r plot-smpl-prob, fig.height=3.5, fig.width=10, fig.cap="Sampling probabilities for different subsampling methods."}
-smpl_probs <- readRDS("outputs/smpl_probs.rds")
+smpl_probs <- readRDS("data/smpl_probs.rds")
 ggplot(
   data = smpl_probs,
   aes(x=data, y=log(prob)) 
@@ -678,11 +674,11 @@ grid_search <- rbindlist(
 grid_search[,weighted:=factor(weighted)]
 levels(grid_search$weighted) <- c("OLS","WLS")
 grid_search[,log_value:=log(value)]
-saveRDS(grid_search, file="outputs/grid_search_zhu.rds")
+saveRDS(grid_search, file="data/grid_search_zhu.rds")
 ```
 
 ```{r}
-grid_search <- readRDS("outputs/grid_search_zhu.rds")
+grid_search <- readRDS("data/grid_search_zhu.rds")
 p_list <- lapply(
   1:2,
   function(i) {
@@ -743,16 +739,16 @@ n <- 200
 p <- 100
 ```
 
-We have already seen above that theoretically speaking both BLEV and OPT subsampling are computationally more expensive than PL subsampling (with UNIF subsampling the least expensive). It should be obvious that in light of their computational costs $\mathcal{O}(np^2)$ the former two methods do not scale well in higher-dimensional problems (higher $p$). @zhu2015optimal demonstrate this through empirical exercises to an extent that is beyond the scope of this note. Instead we will just quickly benchmark the different functions for non-uniform subsampling introduced above: `BLEV`, `OPT`, `PL` for $n=`r n`$, $p=`r p`$. We are only interested in how long it takes to compute subsampling probabilities, and since for `UNIF` all subsampling probabilities are simply $\pi_i=1/n$ we neglect this here. Figure \@ref(fig:mbm-methods) benchmarks the three non-uniform subsampling methods. Evidently PL subsampling is computationally much less costly.
+We have already seen above that theoretically speaking both BLEV and OPT subsampling are computationally more expensive than PL subsampling (with UNIF subsampling the least expensive). It should be obvious that in light of their computational costs $\mathcal{O}(np^2)$ the former two methods do not scale well in higher-dimensional problems (higher $p$). @zhu2015optimal demonstrate this through empirical exercises to an extent that is beyond the scope of this note. Instead we will just quickly benchmark the different functions for non-uniform subsampling introduced above: `sub_BLEV`, `sub_OPT`, `sub_PL` for $n=`r n`$, $p=`r p`$. We are only interested in how long it takes to compute subsampling probabilities, and since for `sub_UNIF` all subsampling probabilities are simply $\pi_i=1/n$ we neglect this here. Figure \@ref(fig:mbm-methods) benchmarks the three non-uniform subsampling methods. Evidently PL subsampling is computationally much less costly.
 
 ```{r mbm-methods, fig.cap="Benchmark of computational performance of different methods."}
 library(microbenchmark)
 X <- matrix(rnorm(n*p),nrow=n)
 y <- rnorm(n)
 mb <- microbenchmark(
-  "BLEV" = {BLEV(X,y,prob_only = T)}, 
-  "OPT" = {OPT(X,y,prob_only = T)},
-  "PL" = {PL(X,y,prob_only = T)}
+  "BLEV" = {sub_BLEV(X,y,prob_only = T)}, 
+  "OPT" = {sub_OPT(X,y,prob_only = T)},
+  "PL" = {sub_PL(X,y,prob_only = T)}
 )
 autoplot(mb)
 ```
@@ -837,7 +833,7 @@ $$
 
 In R this can be implemented from scratch as below. For the empirical exercises we will rely on `glm([formula], family="binomial")` which scales much better to higher dimensional problems than my custom function and also implements weighted logit.
 
-```{r class.source = "fold-show", code=readLines("R/logit_irls.R")}
+```{r class.source = "fold-show", code=fromScratchR::logit_irls, echo=TRUE, eval=FALSE}
 ```
 
 When thinking about repeating the empirical exercise from Section \@ref(lin-reg) above, we are faced with the question of how to compute the MSE and its bias-variance decomposition. One idea could be to compare the linear predictions in \@ref(eq:lin-pred) in the same way as we did before, since after all these are fitted values from a linear model. The problem with that idea is that rebalancing the data through undersampling affects the intercept term $\beta_0$ (potentially quite a bit if the data was originally very imbalanced). This is not surprising since $\beta_0$ measures the log odds of $y_i$ given all predictors $\mathbf{X}_i=0$ are zero. Hence comparing linear predictors $\mathbf{X}\beta_n$ and  $\mathbf{X}\beta_m$ is not a good idea in this setting (perhaps ever?). Fortunately though we can just work with the predicted probabilities in \@ref(eq:log-reg) directly and decompose the MSE in the same way as before (see @manning2008introduction, pp. 310): 
@@ -870,12 +866,6 @@ The resulting mean-squared error decompositions are shown in Figures \@ref(fig:w
 
 ```{r}
 # Simulation parameters:
-data_sets <- tryCatch(
-  data_sets,
-  error = function(e) {
-    readRDS("data/synthetic_data.rds")
-  }
-)
 n <- 1000
 m <- 2^(3:7)*1e-3
 weighted <- c(T,F)
@@ -918,11 +908,11 @@ grid_search <- rbindlist(
 grid_search[,weighted:=factor(weighted)]
 levels(grid_search$weighted) <- c("Logit","Weighted Logit")
 grid_search[,log_value:=log(value)]
-saveRDS(grid_search, file="outputs/grid_search_logit.rds")
+saveRDS(grid_search, file="data/grid_search_logit.rds")
 ```
 
 ```{r}
-grid_search <- readRDS("outputs/grid_search_logit.rds")
+grid_search <- readRDS("data/grid_search_logit.rds")
 p_list <- lapply(
   1:2,
   function(i) {
@@ -1114,13 +1104,13 @@ grid_search <- rbindlist(
 grid_search[,brier:=mean((y_hat-y)^2,na.rm=T),by=.(method, weighted, b, fold)]
 grid_search[,weighted:=factor(weighted)]
 levels(grid_search$weighted) <- c("Logit","Weighted Logit")
-saveRDS(grid_search, file="outputs/grid_search_covid_adj.rds")
+saveRDS(grid_search, file="data/grid_search_covid_adj.rds")
 ```
 
 Figure \@ref(fig:brier) shows the distribution of Brier scores resulting from our pseudo-out-of-sample predictions. Undersampling is performed both randomly and with *mVc* subsampling. The logit classifier is fitted separately with and without subsampling probabilities as weights. In the case of ordinary logit *mVc* seems to lead to slightly better predictions on average, but the improvement is not very significant. When the model is fitted with weights something interesting happens. The majority of the estimated Brier scores are lower than those obtained with random undersampling, but there is much higher variance and in some cases *mVc* performs very poorly. This could imply that using optimal subsampling for undersampling with weighted regression is risky: it performs well most of the time, but sometimes things go very wrong. Of course, this is a just a single example and the findings shown here are not sufficient to draw any conclusions.
 
 ```{r brier, fig.height=3, fig.width=6, fig.cap="Distribution of Brier scores from pseudo-out-of-sample predictions for random and prediction-length undersampling."}
-grid_search <- readRDS("outputs/grid_search_covid_adj.rds")
+grid_search <- readRDS("data/grid_search_covid_adj.rds")
 dt_plot <- unique(grid_search[,.(method, brier, weighted)])
 ggplot(
   data=dt_plot,
@@ -1238,11 +1228,11 @@ grid_search[,weighted:=factor(weighted)]
 levels(grid_search$weighted) <- c("OLS","WLS")
 grid_search[,log_value:=log(value)]
 grid_search[,method := factor(method, levels=c("UNIF", "BLEV", "OPT", "PL"))]
-saveRDS(grid_search, file="outputs/grid_search_sinus.rds")
+saveRDS(grid_search, file="data/grid_search_sinus.rds")
 ```
 
 ```{r}
-grid_search <- readRDS("outputs/grid_search_sinus.rds")
+grid_search <- readRDS("data/grid_search_sinus.rds")
 ggplot(
   data=grid_search, 
   aes(x=m/n, y=log_value, colour=method)
@@ -1271,3 +1261,4 @@ ggplot(
 ```{r}
 utils::sessionInfo()
 ```
+
