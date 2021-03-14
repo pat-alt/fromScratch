@@ -16,4 +16,4 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 BuildType: Website
-WebsitePath: ~/Documents/Studium/bgse_data_science/other/fromScratch
+WebsitePath: ~/Documents/university/bgse_data_science/other/fromScratch

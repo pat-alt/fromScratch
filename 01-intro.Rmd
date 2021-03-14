@@ -13,8 +13,5 @@ Then import the package through `library(fromScratchR)`
 
 ## Python code
 
-As for Python, modules are currently part of the Git repository that contains the book.
+As for Python code, modules are currently part of the Git repository that contains the book.
 
-## Code folding
-
-Code is presented in many places to illustrate how concepts and algorithms can actually be implemented. 

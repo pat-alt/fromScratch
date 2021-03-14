@@ -1,6 +1,6 @@
 --- 
 title: "From Scratch"
-subtitle: "Data Science from a student's perspective"
+subtitle: "A bottom-up approach to data science."
 author: "Patrick Altmeyer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -28,16 +28,16 @@ output:
         weibo: no
         instapaper: no
         vk: no
-        all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+        all: ['facebook', 'twitter', 'linkedin']
       info: yes
       download:
         - ["book.epub", "EPUB"]
 documentclass: book
-bibliography: [bib.bib, packages.bib]
+bibliography: [bib/bib.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: https://github.com/pat-alt/fromScratch.git
-description: "A short book about data science written by students for students."
+description: "A collection of ideas, notes, exercises and code."
 always_allow_html: true
 ---
 
@@ -51,10 +51,15 @@ knitr::write_bib(c(
 knitr::opts_chunk$set(echo = F, message=F, warning = F)
 ```
 
-# Content
+# Preface {-}
 
-This book is a collection of ideas, notes, exercises and code covering a broad range of topics in Data Science. It is written by students for students. The structure is inherently somewhat loose and this is very much a work in progress. Feedback and comments are therefore more than welcome, although time and resources to act on them is scarce.
+This book is a collection of ideas, notes, exercises and code covering a broad range of topics from statistics, machine learning, deep learning, econometrics. The focus is on approaching problems from scratch: instead of using existing packages and libraries, we look at how exactly different methodologies can be implemented in code. This is not to undermine the value of existing packages or provide an alternative. But the bottom-up approach is educationally very rewarding: if you can write an algorithm from scratch, you have truly understood how it works. 
 
+**Working on it**
+
+Please note that this is very much still a work-in-progress. The structure is inherently somewhat loose. Feedback and comments are therefore more than welcome, although time and resources to act on them is scarce at this point.
+
+<span style="display:block;text-align:center">![](www/working_on_it.gif)
 
 
 

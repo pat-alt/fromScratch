@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Optimization | From Scratch</title>
-  <meta name="description" content="A short book about data science written by students for students." />
+  <title>Chapter 2 Optimization | From Scratch</title>
+  <meta name="description" content="A collection of ideas, notes, exercises and code." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Optimization | From Scratch" />
+  <meta property="og:title" content="Chapter 2 Optimization | From Scratch" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="A short book about data science written by students for students." />
+  <meta property="og:description" content="A collection of ideas, notes, exercises and code." />
   <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Optimization | From Scratch" />
+  <meta name="twitter:title" content="Chapter 2 Optimization | From Scratch" />
   
-  <meta name="twitter:description" content="A short book about data science written by students for students." />
+  <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
   
 
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-02-01" />
+<meta name="date" content="2021-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="optimal-subsampling.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,6 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -148,44 +146,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Content</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Resources</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Resources</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#r-package"><i class="fa fa-check"></i><b>2.1</b> R package</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#python-code"><i class="fa fa-check"></i><b>2.2</b> Python code</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#code-folding"><i class="fa fa-check"></i><b>2.3</b> Code folding</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-package"><i class="fa fa-check"></i><b>1.1</b> R package</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python code</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>3</b> Optimization</a>
+<li class="chapter" data-level="2" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>2</b> Optimization</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>3.1</b> Line search</a>
+<li class="chapter" data-level="2.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>2.1</b> Line search</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>3.1.1</b> Methodology</a></li>
-<li class="chapter" data-level="3.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>3.1.2</b> Results</a></li>
+<li class="chapter" data-level="2.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>2.1.1</b> Methodology</a></li>
+<li class="chapter" data-level="2.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>2.1.2</b> Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html"><i class="fa fa-check"></i><b>4</b> Optimal subsampling</a>
+<li class="chapter" data-level="3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html"><i class="fa fa-check"></i><b>3</b> Optimal subsampling</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#bias"><i class="fa fa-check"></i><b>4.1</b> Bias-variance tradeoff</a></li>
-<li class="chapter" data-level="4.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#subsampling"><i class="fa fa-check"></i><b>4.2</b> Subsampling methods</a>
+<li class="chapter" data-level="3.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias-variance tradeoff</a></li>
+<li class="chapter" data-level="3.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#subsampling"><i class="fa fa-check"></i><b>3.2</b> Subsampling methods</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#ols-and-wls"><i class="fa fa-check"></i><b>4.2.1</b> OLS and WLS</a></li>
-<li class="chapter" data-level="4.2.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>4.2.2</b> Uniform subsampling (UNIF)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>4.2.3</b> Basic leveraging (BLEV)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>4.2.4</b> Predictor-length sampling (PL)</a></li>
-<li class="chapter" data-level="4.2.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#comparison-of-methods"><i class="fa fa-check"></i><b>4.2.5</b> Comparison of methods</a></li>
+<li class="chapter" data-level="3.2.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#ols-and-wls"><i class="fa fa-check"></i><b>3.2.1</b> OLS and WLS</a></li>
+<li class="chapter" data-level="3.2.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>3.2.2</b> Uniform subsampling (UNIF)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>3.2.3</b> Basic leveraging (BLEV)</a></li>
+<li class="chapter" data-level="3.2.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>3.2.4</b> Predictor-length sampling (PL)</a></li>
+<li class="chapter" data-level="3.2.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#comparison-of-methods"><i class="fa fa-check"></i><b>3.2.5</b> Comparison of methods</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#lin-reg"><i class="fa fa-check"></i><b>4.3</b> Linear regression model</a>
+<li class="chapter" data-level="3.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#lin-reg"><i class="fa fa-check"></i><b>3.3</b> Linear regression model</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>4.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
-<li class="chapter" data-level="4.3.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#computational-performance"><i class="fa fa-check"></i><b>4.3.2</b> Computational performance</a></li>
+<li class="chapter" data-level="3.3.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>3.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#computational-performance"><i class="fa fa-check"></i><b>3.3.2</b> Computational performance</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#classification-problems"><i class="fa fa-check"></i><b>4.4</b> Classification problems</a>
+<li class="chapter" data-level="3.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#classification-problems"><i class="fa fa-check"></i><b>3.4</b> Classification problems</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>4.4.1</b> Optimal subsampling for classification problems</a></li>
-<li class="chapter" data-level="4.4.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#class-syn"><i class="fa fa-check"></i><b>4.4.2</b> Synthetic data</a></li>
-<li class="chapter" data-level="4.4.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#real-data-example"><i class="fa fa-check"></i><b>4.4.3</b> Real data example</a></li>
+<li class="chapter" data-level="3.4.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>3.4.1</b> Optimal subsampling for classification problems</a></li>
+<li class="chapter" data-level="3.4.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#class-syn"><i class="fa fa-check"></i><b>3.4.2</b> Synthetic data</a></li>
+<li class="chapter" data-level="3.4.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#real-data-example"><i class="fa fa-check"></i><b>3.4.3</b> Real data example</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#concl"><i class="fa fa-check"></i><b>4.5</b> Conclusion</a></li>
+<li class="chapter" data-level="3.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#concl"><i class="fa fa-check"></i><b>3.5</b> Conclusion</a></li>
 <li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
 <li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-wls"><i class="fa fa-check"></i>Weighted least-squares</a></li>
@@ -215,29 +212,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="det-opt" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Optimization</h1>
-<div id="line-search" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Line search</h2>
-<div id="methodology" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Methodology</h3>
-<p>The goal of Exercise 3.1 in <span class="citation"><a href="references.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="references.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(3.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
+<div id="det-opt" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Optimization</h1>
+<div id="line-search" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Line search</h2>
+<div id="methodology" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Methodology</h3>
+<p>The goal of Exercise 3.1 in <span class="citation"><a href="references.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="references.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
 <p><span class="math display" id="eq:rosenbrock">\[
 \begin{equation}
   f(\mathbb{x})=100(x_2-x_1^2)^2+(1-x_1)^2 
-  \tag{3.1}
+  \tag{2.1}
 \end{equation}
 \]</span>
-We can implement Equation <a href="det-opt.html#eq:rosenbrock">(3.1)</a> in R as follows:</p>
+We can implement Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a> in R as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="det-opt.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rosenbrock:</span></span>
 <span id="cb1-2"><a href="det-opt.html#cb1-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
 <span id="cb1-3"><a href="det-opt.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> X[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb1-4"><a href="det-opt.html#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Figure <a href="det-opt.html#fig:rosenbrock">3.1</a> shows the output of the function over <span class="math inline">\(x_1,x_2 \in [-1.5, 1.5]\)</span> along with its minimum indicated as a red asterisk and the two starting points: (1) <span class="math inline">\(X_0=(1.2,1.2)\)</span> and (2) <span class="math inline">\(X_0=(-1.2,1)\)</span>.</p>
+<p>Figure <a href="det-opt.html#fig:rosenbrock">2.1</a> shows the output of the function over <span class="math inline">\(x_1,x_2 \in [-1.5, 1.5]\)</span> along with its minimum indicated as a red asterisk and the two starting points: (1) <span class="math inline">\(X_0=(1.2,1.2)\)</span> and (2) <span class="math inline">\(X_0=(-1.2,1)\)</span>.</p>
 <div class="figure"><span id="fig:rosenbrock"></span>
 <img src="fromScratch_files/figure-html/rosenbrock-1.png" alt="Output of the Rosenbrock function and minimizer in red." width="672" />
 <p class="caption">
-Figure 3.1: Output of the Rosenbrock function and minimizer in red.
+Figure 2.1: Output of the Rosenbrock function and minimizer in red.
 </p>
 </div>
 <p>The gradient and Hessian of <span class="math inline">\(f\)</span> can be computed as</p>
@@ -247,7 +244,7 @@ Figure 3.1: Output of the Rosenbrock function and minimizer in red.
 \frac{ \partial f}{\partial x_1} \\
 \frac{ \partial f}{\partial x_2}
 \end{pmatrix} 
-\tag{3.2}
+\tag{2.2}
 \end{equation}
 \]</span></p>
 <p>and</p>
@@ -257,7 +254,7 @@ Figure 3.1: Output of the Rosenbrock function and minimizer in red.
 \frac{ \partial^2 f}{\partial x_1^2} &amp; \frac{ \partial^2 f}{\partial x_1 \partial x_2} \\
 \frac{ \partial^2 f}{\partial x_2\partial x_1} &amp; \frac{ \partial^2 f}{\partial x_2^2}
 \end{pmatrix}
-\tag{3.3}
+\tag{2.3}
 \end{equation}
 \]</span></p>
 <p>which in R can be encoded as follows:</p>
@@ -356,19 +353,19 @@ Figure 3.1: Output of the Rosenbrock function and minimizer in red.
 <span id="cb4-26"><a href="det-opt.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-27"><a href="det-opt.html#cb4-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="results" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Results</h3>
+<div id="results" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Results</h3>
 <p>The below shows how the two algorithms converge to</p>
 <div class="figure"><span id="fig:unnamed-chunk-8"></span>
 <img src="www/p1.gif" alt="Good initial guess."  />
 <p class="caption">
-Figure 3.2: Good initial guess.
+Figure 2.2: Good initial guess.
 </p>
 </div>
 <div class="figure"><span id="fig:unnamed-chunk-9"></span>
 <img src="www/p2.gif" alt="Poor initial guess."  />
 <p class="caption">
-Figure 3.3: Poor initial guess.
+Figure 2.3: Poor initial guess.
 </p>
 </div>
 
@@ -404,7 +401,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin"]
 },
 "fontsettings": {
 "theme": "white",
