@@ -24,13 +24,13 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-14" />
+<meta name="date" content="2021-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="optimal-subsampling.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
@@ -147,6 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Resources</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-package"><i class="fa fa-check"></i><b>1.1</b> R package</a></li>
@@ -194,7 +195,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-session"><i class="fa fa-check"></i>Session info</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Line search</h2>
 <div id="methodology" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Methodology</h3>
-<p>The goal of Exercise 3.1 in <span class="citation"><a href="references.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="references.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
+<p>The goal of Exercise 3.1 in <span class="citation"><a href="optimal-subsampling.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="optimal-subsampling.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
 <p><span class="math display" id="eq:rosenbrock">\[
 \begin{equation}
   f(\mathbb{x})=100(x_2-x_1^2)^2+(1-x_1)^2 

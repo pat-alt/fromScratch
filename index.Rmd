@@ -39,6 +39,7 @@ link-citations: yes
 github-repo: https://github.com/pat-alt/fromScratch.git
 description: "A collection of ideas, notes, exercises and code."
 always_allow_html: true
+favicon: "www/icon.ico"
 ---
 
 ```{r include=FALSE}
