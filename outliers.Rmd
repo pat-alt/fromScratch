@@ -24,3 +24,50 @@ $$
 
 
 ## Median-of-means estimator {#outl-mom}
+
+Another idea involves repeatedly estimating the empirical means of subsets of the data and taking the median of those. In particular, divide the data into $k$ blocks of $l$ points each. For each block compute $m_n^{(j)}= \frac{1}{l}\sum_{j=1}^{l}x_i$. Then the median-of-means estimator is simply:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& m_n&=\text{median}(m_n^{(1)},...,m_n^{(k)}) \\
+\end{aligned}
+(\#eq:mom)
+\end{equation}
+$$
+
+```{theorem, mom, label="Median-of-means"}
+If $k=8\log \frac{1}{\delta}$, then the median-of-means estimator satisfies with probability $> 1- \delta$:
+
+$$
+|m_n-m|\le2\sigma \sqrt{ \frac{8\log \frac{1}{\delta}}{n}}
+$$
+
+This holds whenever the first moment exists and the variance is finite, even if $X$ is heavy-tailed.
+```
+
+```{proof}
+Let $t= \frac{2\sigma}{\sqrt{l}}$. Then by Chebyshev we have for $j=1,...,k$ that
+
+$$
+P(|m_n^{(j)}-m|\ge \frac{2\sigma}{\sqrt{l}}) \le \frac{ \text{var}(m_n^{(j)})}{ \left( \frac{2\sigma}{\sqrt{l}} \right)^2} = \frac{ \frac{\sigma^2}{l}}{ \frac{4\sigma^2}{l}}=\frac{1}{4}
+$$
+
+If for the median $|m_n-m|\ge \frac{2\sigma}{\sqrt{l}}$ then at least half of the block means $m_n^{(1)},...,m_n^{(k)}$ must also be $\frac{2\sigma}{\sqrt{l}}$ distance away from $m$. Since $m_n^{(1)},...,m_n^{(k)}$ are iid the number of blocks $B$ with $|m_n^{(j)}-m|\ge \frac{2\sigma}{\sqrt{l}}$ is binomial $\text{Bin}(k,p)$ where $p\le \frac{1}{4}$ and $\mathbb{E}B= \frac{k}{4}$. Hence,
+
+$$
+\begin{aligned}
+&& P(|m_n-m|\ge \frac{2\sigma}{\sqrt{l}}) &\le P(\text{Bin}(k, \frac{1}{4}) \ge \frac{k}{2}) \\
+&& &= P(\text{Bin}(k, \frac{1}{4}) - \frac{k}{4}   \ge \frac{k}{4})\\
+&& &\le e^{- \frac{2k^2}{k16}} = e^{- \frac{k}{8}} \\
+\end{aligned}
+$$
+
+where the second inequality follows from Hoeffding's Inequality. 
+
+So $P(|m_n-m|\ge \frac{2\sigma}{\sqrt{l}}) \le \delta$ if $k\ge8\log \frac{1}{\delta}$. Since $kl=n$, $l= \frac{n}{k}= \frac{n}{8\log \frac{1}{\delta}}$.
+```
+
+
+
+

@@ -290,12 +290,20 @@ $$P(m_n- m \ge t)\le e^{-2nt^2}$$
 Let $v= \sum_{i=1}^{n} \mathbb{E}x_i^2$. If $x_1,...,x_n$ are independent and $x_i\le b$ for some $b\ge0$, then for $t>0$: $P(\sum_{i=1}^{n} x_i - \sum_{i=1}^{n} \mathbb{E}x_i \ge t) \le e^{- \frac{t^2}{2v+2b \frac{t}{2}}}$.
 ```
 
+
 Finally, let us look at a common example, namely the binomial distribution. 
 
 ```{example}
-Let 
-```
+Let $x_1,...,x_n$ be independent random variable with $x_i \sim \text{Bern}(p)$ and hence $\text{var}(x_i)=p(1-p)$. Then $B=\sum_{i=1}^{n}x_i \sim \text{Bin}(n,p)$ with $\mathbb{E}B=np$. Then we have 
 
+$$
+\begin{aligned}
+&&P(B - np \ge t) &\le \begin{cases} \frac{np(1-p)}{t^2} && \text{(Chebychev)}\\
+e^{-\frac{2t^2}{n}} && \text{(Hoeffding)}\\
+e^{- \frac{t^2}{2p(1-p)+ \frac{2t}{3}}} && \text{(Bernstein)}\end{cases}
+\end{aligned}
+$$
+```
 
 ## Appendix
 

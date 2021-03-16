@@ -455,6 +455,18 @@ where <span class="math inline">\(\mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)}
 <div class="theorem">
 <span id="thm:unnamed-chunk-7" class="theorem"><strong>Theorem 2.6  </strong></span>Let <span class="math inline">\(v= \sum_{i=1}^{n} \mathbb{E}x_i^2\)</span>. If <span class="math inline">\(x_1,...,x_n\)</span> are independent and <span class="math inline">\(x_i\le b\)</span> for some <span class="math inline">\(b\ge0\)</span>, then for <span class="math inline">\(t&gt;0\)</span>: <span class="math inline">\(P(\sum_{i=1}^{n} x_i - \sum_{i=1}^{n} \mathbb{E}x_i \ge t) \le e^{- \frac{t^2}{2v+2b \frac{t}{2}}}\)</span>.
 </div>
+<p>Finally, let us look at a common example, namely the binomial distribution.</p>
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-8" class="example"><strong>Example 2.1  </strong></span>Let <span class="math inline">\(x_1,...,x_n\)</span> be independent random variable with <span class="math inline">\(x_i \sim \text{Bern}(p)\)</span> and hence <span class="math inline">\(\text{var}(x_i)=p(1-p)\)</span>. Then <span class="math inline">\(B=\sum_{i=1}^{n}x_i \sim \text{Bin}(n,p)\)</span> with <span class="math inline">\(\mathbb{E}B=np\)</span>. Then we have</p>
+<span class="math display">\[
+\begin{aligned}
+&amp;&amp;P(B - np \ge t) &amp;\le \begin{cases} \frac{np(1-p)}{t^2} &amp;&amp; \text{(Chebychev)}\\
+e^{-\frac{2t^2}{n}} &amp;&amp; \text{(Hoeffding)}\\
+e^{- \frac{t^2}{2p(1-p)+ \frac{2t}{3}}} &amp;&amp; \text{(Bernstein)}\end{cases}
+\end{aligned}
+\]</span>
+</div>
 </div>
 </div>
 <div id="appendix" class="section level2" number="2.5">
