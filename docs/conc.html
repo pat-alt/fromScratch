@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Concentration inequalities | From Scratch</title>
+  <meta name="description" content="A collection of ideas, notes, exercises and code." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Concentration inequalities | From Scratch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A collection of ideas, notes, exercises and code." />
+  <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Concentration inequalities | From Scratch" />
+  
+  <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
+  
+
+<meta name="author" content="Patrick Altmeyer" />
+
+
+<meta name="date" content="2021-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
+<link rel="prev" href="introductory-topics.html"/>
+<link rel="next" href="det-opt.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-package"><i class="fa fa-check"></i>R package</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-code"><i class="fa fa-check"></i>Python code</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session info</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="part"><span><b>I Part I</b></span></li>
+<li class="chapter" data-level="1" data-path="introductory-topics.html"><a href="introductory-topics.html"><i class="fa fa-check"></i><b>1</b> Introductory topics</a></li>
+<li class="chapter" data-level="2" data-path="conc.html"><a href="conc.html"><i class="fa fa-check"></i><b>2</b> Concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conc.html"><a href="conc.html#conc-mean"><i class="fa fa-check"></i><b>2.1</b> Empirical mean</a></li>
+<li class="chapter" data-level="2.2" data-path="conc.html"><a href="conc.html#simple-non-asymptotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.2</b> Simple non-asymptotic concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="conc.html"><a href="conc.html#conc-markov"><i class="fa fa-check"></i><b>2.2.1</b> Markov’s inequality</a></li>
+<li class="chapter" data-level="2.2.2" data-path="conc.html"><a href="conc.html#chebychevs-inequality"><i class="fa fa-check"></i><b>2.2.2</b> Chebychev’s inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="conc.html"><a href="conc.html#asympotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.3</b> Asympotic concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="conc.html"><a href="conc.html#central-limit-theorem"><i class="fa fa-check"></i><b>2.3.1</b> Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="conc.html"><a href="conc.html#exponential-non-asymptotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.4</b> Exponential non-asymptotic concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="conc.html"><a href="conc.html#chernoff-bounds"><i class="fa fa-check"></i><b>2.4.1</b> Chernoff bounds</a></li>
+<li class="chapter" data-level="2.4.2" data-path="conc.html"><a href="conc.html#hoeffdings-inequality"><i class="fa fa-check"></i><b>2.4.2</b> Hoeffding’s Inequality</a></li>
+<li class="chapter" data-level="2.4.3" data-path="conc.html"><a href="conc.html#bernsteins-inequality"><i class="fa fa-check"></i><b>2.4.3</b> Bernstein’s inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>2.5</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="conc.html"><a href="conc.html#example-of-a-moment-generating-function"><i class="fa fa-check"></i><b>2.5.1</b> Example of a moment generating function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>3</b> Optimization</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>3.1</b> Line search</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>3.1.1</b> Methodology</a></li>
+<li class="chapter" data-level="3.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>3.1.2</b> Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>4.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>4.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="4.3" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>4.3</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>4.3.1</b> Weighted least-squares</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>5</b> Classification</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="class.html"><a href="class.html#logisitic-regression"><i class="fa fa-check"></i><b>5.1</b> Logisitic regression</a></li>
+<li class="chapter" data-level="5.2" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>5.2</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>5.2.1</b> Iterative reweighted least-squares</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>6</b> Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>6.1</b> Bias-variance tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>7</b> Dimensionality reduction</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dim-red.html"><a href="dim-red.html#pca"><i class="fa fa-check"></i><b>7.1</b> PCA</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="dim-red.html"><a href="dim-red.html#the-maths-behind-pca"><i class="fa fa-check"></i><b>7.1.1</b> The maths behind PCA</a></li>
+<li class="chapter" data-level="7.1.2" data-path="dim-red.html"><a href="dim-red.html#an-intuitive-example"><i class="fa fa-check"></i><b>7.1.2</b> An intuitive example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="dim-red.html"><a href="dim-red.html#pca-for-feature-extraction"><i class="fa fa-check"></i><b>7.2</b> PCA for feature extraction</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="dim-red.html"><a href="dim-red.html#squared-elements-of-eigenvectors"><i class="fa fa-check"></i><b>7.2.1</b> Squared elements of eigenvectors</a></li>
+<li class="chapter" data-level="7.2.2" data-path="dim-red.html"><a href="dim-red.html#svd"><i class="fa fa-check"></i><b>7.2.2</b> SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="dim-red.html"><a href="dim-red.html#high-dimensional-data"><i class="fa fa-check"></i><b>7.3</b> High-dimensional data</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="dim-red.html"><a href="dim-red.html#regularized-svd"><i class="fa fa-check"></i><b>7.3.1</b> Regularized SVD</a></li>
+<li class="chapter" data-level="7.3.2" data-path="dim-red.html"><a href="dim-red.html#fast-partial-svd"><i class="fa fa-check"></i><b>7.3.2</b> Fast, partial SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="dim-red.html"><a href="dim-red.html#forward-search"><i class="fa fa-check"></i><b>7.4</b> Forward search</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="subsample.html"><a href="subsample.html"><i class="fa fa-check"></i><b>8</b> Subsampling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="subsample.html"><a href="subsample.html#subsample-motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="subsample.html"><a href="subsample.html#subsample-methods"><i class="fa fa-check"></i><b>8.2</b> Subsampling methods</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="subsample.html"><a href="subsample.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>8.2.1</b> Uniform subsampling (UNIF)</a></li>
+<li class="chapter" data-level="8.2.2" data-path="subsample.html"><a href="subsample.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>8.2.2</b> Basic leveraging (BLEV)</a></li>
+<li class="chapter" data-level="8.2.3" data-path="subsample.html"><a href="subsample.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>8.2.3</b> Predictor-length sampling (PL)</a></li>
+<li class="chapter" data-level="8.2.4" data-path="subsample.html"><a href="subsample.html#comparison-of-methods"><i class="fa fa-check"></i><b>8.2.4</b> Comparison of methods</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="subsample.html"><a href="subsample.html#subsample-lin-reg"><i class="fa fa-check"></i><b>8.3</b> Linear regression model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="subsample.html"><a href="subsample.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>8.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
+<li class="chapter" data-level="8.3.2" data-path="subsample.html"><a href="subsample.html#computational-performance"><i class="fa fa-check"></i><b>8.3.2</b> Computational performance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="subsample.html"><a href="subsample.html#classification-problems"><i class="fa fa-check"></i><b>8.4</b> Classification problems</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="subsample.html"><a href="subsample.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>8.4.1</b> Optimal subsampling for classification problems</a></li>
+<li class="chapter" data-level="8.4.2" data-path="subsample.html"><a href="subsample.html#class-syn"><i class="fa fa-check"></i><b>8.4.2</b> Synthetic data</a></li>
+<li class="chapter" data-level="8.4.3" data-path="subsample.html"><a href="subsample.html#real-data-example"><i class="fa fa-check"></i><b>8.4.3</b> Real data example</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="subsample.html"><a href="subsample.html#concl"><i class="fa fa-check"></i><b>8.5</b> Conclusion</a></li>
+<li class="chapter" data-level="8.6" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>8.6</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="subsample.html"><a href="subsample.html#app-svd"><i class="fa fa-check"></i><b>8.6.1</b> From SVD to leverage scores</a></li>
+<li class="chapter" data-level="8.6.2" data-path="subsample.html"><a href="subsample.html#app-pl"><i class="fa fa-check"></i><b>8.6.2</b> From optimal to prediction-length subsampling</a></li>
+<li class="chapter" data-level="8.6.3" data-path="subsample.html"><a href="subsample.html#app-dens"><i class="fa fa-check"></i><b>8.6.3</b> Synthetic data</a></li>
+<li class="chapter" data-level="8.6.4" data-path="subsample.html"><a href="subsample.html#app-sin"><i class="fa fa-check"></i><b>8.6.4</b> Subsampling applied to sinusoidal function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="outl.html"><a href="outl.html"><i class="fa fa-check"></i><b>9</b> Outliers</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="outl.html"><a href="outl.html#outl-trimmed"><i class="fa fa-check"></i><b>9.1</b> Trimmed mean estimator</a></li>
+<li class="chapter" data-level="9.2" data-path="outl.html"><a href="outl.html#outl-mom"><i class="fa fa-check"></i><b>9.2</b> Median-of-means estimator</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">From Scratch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conc" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Concentration inequalities</h1>
+<p>In order to measure the quality of an estimator we generally aim to minimize the expected value of a loss function <span class="math inline">\(\ell(x,y)\)</span>. Examples include:</p>
+<ol style="list-style-type: decimal">
+<li>Mean squared error (MSE)</li>
+</ol>
+<p><span class="math display" id="eq:mse">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \ell(x,y)=(x-y)^2 &amp;\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = \mathbb{E} (x-y)^2\\
+\end{aligned}
+\tag{2.1}
+\end{equation}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Mean absolute error (MAE)</li>
+</ol>
+<p><span class="math display" id="eq:mae">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \ell(x,y)=|x-y| &amp;\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = \mathbb{E} |x-y|\\
+\end{aligned}
+\tag{2.2}
+\end{equation}
+\]</span></p>
+<p>More generally it is often useful to write:</p>
+<p><span class="math display" id="eq:prob-error">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \ell(x,y)= \mathbb{1}_{|x-y|&gt;\varepsilon} &amp;\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = P(|x-y|&gt;\varepsilon)\\
+\end{aligned}
+\tag{2.3}
+\end{equation}
+\]</span></p>
+<div id="conc-mean" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Empirical mean</h2>
+<p>Let <span class="math inline">\(m\)</span> denote the true value we want to estimate and <span class="math inline">\(m_n\)</span> the corresponding estimator. An obvious choice for <span class="math inline">\(m_n\)</span> is the empirical mean</p>
+<p><span class="math display" id="eq:emp-mean">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; m_n&amp;= \frac{1}{n} \sum_{i=1}^{n} x_i\\
+\end{aligned}
+\tag{2.4}
+\end{equation}
+\]</span></p>
+<p>for which we have</p>
+<p><span class="math display" id="eq:emp-mean-unbiased">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \mathbb{E} \left[  m_n\right]&amp;= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i \right] = \frac{1}{n} \sum_{i=1}^{n} \mathbb{E} \left[x_i  \right]=m\\
+\end{aligned}
+\tag{2.5}
+\end{equation}
+\]</span></p>
+<p>where the last equality follows from the law of large numbers. For the MSE of the empirical mean we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbb{E} \left[ m_n-m \right]^2 &amp;= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i-m  \right]^2\\
+&amp;&amp; &amp;= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} (x_i-m)  \right]^2\\
+&amp;&amp; &amp;= \frac{1}{n^2}\mathbb{E} \left[  \sum_{i=1}^{n} x_i-m  \right]^2\\
+&amp;&amp; &amp;= \frac{1}{n^2} n\text{var}(x_i)\\
+\end{aligned}
+\]</span></p>
+<p>and hence:</p>
+<p><span class="math display" id="eq:emp-mean-mse">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \mathbb{E} \left[ m_n-m \right]^2&amp;= \frac{\sigma^2}{n}\\
+\end{aligned}
+\tag{2.6}
+\end{equation}
+\]</span></p>
+<p>In other words, the size of the error is typically on the order of <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span>: the error decreases at a rate of <span class="math inline">\(\sqrt{n}\)</span>. Note that for the expected value of the mean absolute error we have <span class="math inline">\(\mathbb{E} |m_n-m| \le \sqrt{\mathbb{E} \left[ m_n-m \right]^2} =\frac{\sigma}{\sqrt{n}}\)</span> by the Schwartz inequality.</p>
+<p>What about <span class="math inline">\(P(|x-y|&gt;\varepsilon)\)</span>, the third measure of expected loss we defined in <a href="conc.html#eq:prob-error">(2.3)</a>?</p>
+</div>
+<div id="simple-non-asymptotic-concentration-inequalities" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Simple non-asymptotic concentration inequalities</h2>
+<div id="conc-markov" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Markov’s inequality</h3>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-1" class="theorem"><strong>Theorem 2.1  </strong></span>If <span class="math inline">\(X\)</span> is a non-negative random variable, then <span class="math inline">\(P(X \ge t) \le \frac{ \mathbb{E} \left[ X \right]}{t}\)</span>
+</div>
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> <span class="math display">\[
+\begin{aligned}
+&amp;&amp; X&amp;\ge t \mathbb{1}_{X\ge t} \\
+&amp;&amp; \mathbb{E}X&amp;\ge t \mathbb{E} \left[  \mathbb{1}_{X\ge t} \right] \\
+&amp;&amp; \mathbb{E}X&amp;\ge t P(X \ge t) \\
+\end{aligned}
+\]</span>
+</div>
+</div>
+<div id="chebychevs-inequality" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Chebychev’s inequality</h3>
+
+<div class="theorem">
+<span id="thm:cheby" class="theorem"><strong>Theorem 2.2  </strong></span>For any random variable <span class="math inline">\(X\)</span>, <span class="math inline">\(t&gt;0\)</span>: <span class="math inline">\(P(|X- \mathbb{E}X| \ge t) \le \frac{ \text{var}(X)}{t^2}\)</span>.
+</div>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> <span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(|X- \mathbb{E}X| \ge t)&amp;=P(|X- \mathbb{E}X|^2 \ge t^2) \\
+\end{aligned}
+\]</span></p>
+<p>Then by Markov’s inequality:</p>
+<span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(|X- \mathbb{E}X|^2 \ge t^2)&amp;\le \frac{ \mathbb{E} \left[ X- \mathbb{E}X \right]^2}{t^2}= \frac{ \text{var}(X)}{t^2}\\
+\end{aligned}
+\]</span>
+</div>
+<p>Applying Chebychev to the empirical mean we can show:</p>
+
+<div class="theorem">
+<span id="thm:wll" class="theorem"><strong>Theorem 2.3  (Weak law of large numbers)  </strong></span>If <span class="math inline">\(x_1,...,x_n\)</span> are iid, then <span class="math inline">\(P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|&gt;\varepsilon)\le\frac{\sigma^2}{n\varepsilon^2}\)</span>.
+</div>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> <span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(|m_n-m|&gt;\varepsilon)&amp;=P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|&gt;\varepsilon) \\
+\end{aligned}
+\]</span></p>
+<p>and by Chebychev</p>
+<span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|&gt;\varepsilon)&amp;\le \frac{ \text{var}(\frac{1}{n} \sum_{i=1}^{n} x_i)}{\varepsilon^2} \\
+&amp;&amp; &amp;= \frac{ \text{var}( \sum_{i=1}^{n} x_i)}{n^2\varepsilon^2} \\
+&amp;&amp; &amp;= \frac{ \sum_{i=1}^{n}\text{var}( x_i)}{n^2\varepsilon^2} \\
+&amp;&amp; &amp;=\frac{\sigma^2}{n\varepsilon^2} \\
+\end{aligned}
+\]</span>
+</div>
+<p>By <a href="conc.html#thm:wll">2.3</a> we have that with probability <span class="math inline">\(1-\delta\)</span>: <span class="math inline">\(|m_n-m|\le \frac{\sigma}{\sqrt{n\delta}}\)</span>. This can be shown as follows: if we want to guarantee that</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(|m_n-m|&gt;\varepsilon)&amp;\le \delta\\
+\end{aligned}
+\]</span></p>
+<p>then by <a href="conc.html#thm:wll">2.3</a> it suffices that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \frac{\sigma^2}{n\varepsilon^2}&amp;\le \delta \\
+\end{aligned}
+\]</span>
+This holds if:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \frac{\sigma}{\sqrt{n\delta}}&amp;\le \varepsilon\\
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<div id="asympotic-concentration-inequalities" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Asympotic concentration inequalities</h2>
+<div id="central-limit-theorem" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Central Limit Theorem</h3>
+<p>By the Central Limit Theorem we have that</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P \left( \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^{n} x_i-m\right) \ge t \right)&amp; \rightarrow P(z \ge t) \le 2 \exp(- \frac{t^2}{2\sigma^2}) \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(z \sim \mathcal{N}(0,\sigma^2)\)</span>. Letting <span class="math inline">\(\varepsilon = \frac{t}{\sqrt{n}}\)</span> we have that asymptotically</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P \left( \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^{n} x_i-m\right) \ge \varepsilon \right)&amp; \le 2 \exp(- \frac{\varepsilon^2n}{2\sigma^2}) \\
+\end{aligned}
+\]</span></p>
+<p>which is a much tigher bound than for example Chebychev.</p>
+</div>
+</div>
+<div id="exponential-non-asymptotic-concentration-inequalities" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Exponential non-asymptotic concentration inequalities</h2>
+<p>The motivation for deriving tight non-asymptotic concentration inequalities is that often we have <span class="math inline">\(d &gt;&gt; n\)</span>. In those case we want to control the worst error across all estimators (here the <span class="math inline">\(1,...,d\)</span> empirical means). Hence our goal is to minimize</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P( \max_j|m_{n,j}-m|\ge \varepsilon) \\
+\end{aligned}
+\]</span></p>
+<p>By the union bound we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P( \max_j|m_{n,j}-m|\ge \varepsilon)&amp;\le \sum_{j=1}^{d} P( |m_{n,j}-m|\ge \varepsilon)\\
+\end{aligned}
+\]</span></p>
+<p>and by Chebychev (<a href="conc.html#thm:cheby">2.2</a>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \sum_{j=1}^{d} P( |m_{n,j}-m|\ge \varepsilon)&amp;\le d \frac{\sigma^2}{n\varepsilon^2}\\
+\end{aligned}
+\]</span></p>
+<p>Clearly, if <span class="math inline">\(d&gt;&gt;n\)</span> we are in trouble. Enter: Chernoff bounds.</p>
+<div id="chernoff-bounds" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Chernoff bounds</h3>
+
+<div class="theorem">
+<span id="thm:chernoff" class="theorem"><strong>Theorem 2.4  (Chernoff bound)  </strong></span>For any <span class="math inline">\(\lambda&gt;0\)</span>: <span class="math inline">\(P(X- \mathbb{E}X \ge t) \le \frac{ \mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]}{e^{\lambda t}}\)</span>
+</div>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> By Markov’s inequality we have that for any non-negative and increasing function <span class="math inline">\(\psi(.)\)</span> we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; P(\psi(X- \mathbb{E}X) \ge \psi(t)) &amp;\le \frac{ \mathbb{E} \left[ \psi(X- \mathbb{E}X) \right]}{\psi(t)} \\
+\end{aligned}
+\]</span></p>
+<p>With Chernoff bounds we simply choose <span class="math inline">\(\psi(X)=\exp(\lambda X)\)</span>, <span class="math inline">\(\lambda &gt;0\)</span>. Then</p>
+<p><span class="math display" id="eq:chernoff">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; P(X- \mathbb{E}X \ge t) &amp;\le \frac{ \mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]}{e^{\lambda t}} \\
+\end{aligned}
+\tag{2.7}
+\end{equation}
+\]</span></p>
+where <span class="math inline">\(\mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]\)</span> is the moment generating function of <span class="math inline">\(X- \mathbb{E}X\)</span>.
+</div>
+</div>
+<div id="hoeffdings-inequality" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Hoeffding’s Inequality</h3>
+
+<div class="lemma">
+<span id="lem:hoeff-lem" class="lemma"><strong>Lemma 2.1  (Hoeffding’s Lemma)  </strong></span>If <span class="math inline">\(X\)</span> is bounded by <span class="math inline">\([a,b]\)</span>, then <span class="math inline">\(\mathbb{E} \left[ e^{\lambda(X- \mathbb{E}X)} \right]\le e^{ \frac{\lambda^2(b-a)}{8}}\)</span>.
+</div>
+<p>Using Hoeffding’s Lemma (<a href="conc.html#lem:hoeff-lem">2.1</a>) and Chernoff’s bounds (<a href="conc.html#thm:chernoff">2.4</a>) we get Hoeffding’s inequality:</p>
+
+<div class="theorem">
+<span id="thm:hoeff" class="theorem"><strong>Theorem 2.5  (Hoeffding’s Inequality)  </strong></span>If <span class="math inline">\(X\)</span> is bounded by <span class="math inline">\([a,b]\)</span>, then <span class="math inline">\(P(|X- \mathbb{E}X| \ge t)\le 2e^{-\frac{2n^2t^2}{ \sum_{i=1}^{n}(b_i-a_i)^2}}\)</span>.
+</div>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Consider the case where <span class="math inline">\([a,b]=[0,1]\)</span>. Recall that <span class="math inline">\(m_n= \frac{1}{n} \sum_{i=1}^{n} x_i\)</span>. Then</p>
+<p><span class="math display">\[P(m_n- m \ge t)=P(\frac{1}{n} \sum_{i=1}^{n} (x_i-m) \ge t)=P( \sum_{i=1}^{n} (x_i-m) \ge nt)\]</span></p>
+<p>and by Chernoff</p>
+<p><span class="math display">\[P( \sum_{i=1}^{n} (x_i-m) \ge nt) \le \frac{ \prod_{i=1}^n \mathbb{E} \left[ e^{\lambda (x_i-m)} \right]}{e^{\lambda nt}}\]</span></p>
+<p>and finally by Hoeffding’s lemma:</p>
+<p><span class="math display">\[
+\frac{ \prod_{i=1}^n \mathbb{E} \left[ e^{\lambda (x_i-m)} \right]}{e^{\lambda nt}}\le \frac{ \prod_{i=1}^n e^{ \frac{\lambda^2}{8}}}{e^{\lambda nt}} = e^{n(\frac{\lambda^2}{8}-\lambda t)}
+\]</span></p>
+<p>This is minimized at <span class="math inline">\(\lambda^*=4t\)</span> and hence:</p>
+<span class="math display">\[P(m_n- m \ge t)\le e^{-2nt^2}\]</span>
+</div>
+</div>
+<div id="bernsteins-inequality" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Bernstein’s inequality</h3>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-7" class="theorem"><strong>Theorem 2.6  </strong></span>Let <span class="math inline">\(v= \sum_{i=1}^{n} \mathbb{E}x_i^2\)</span>. If <span class="math inline">\(x_1,...,x_n\)</span> are independent and <span class="math inline">\(x_i\le b\)</span> for some <span class="math inline">\(b\ge0\)</span>, then for <span class="math inline">\(t&gt;0\)</span>: <span class="math inline">\(P(\sum_{i=1}^{n} x_i - \sum_{i=1}^{n} \mathbb{E}x_i \ge t) \le e^{- \frac{t^2}{2v+2b \frac{t}{2}}}\)</span>.
+</div>
+</div>
+</div>
+<div id="appendix" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Appendix</h2>
+<div id="example-of-a-moment-generating-function" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Example of a moment generating function</h3>
+<p><img src="www/example_mgf.png" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introductory-topics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="det-opt.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["book.epub", "EPUB"]],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

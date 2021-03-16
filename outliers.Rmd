@@ -1,0 +1,26 @@
+# Outliers {#outl}
+
+The empirical mean is sensitive to outliers. 
+
+## Trimmed mean estimator {#outl-trimmed}
+
+One way of dealing with outliers is to simply remove them. With respect to empirical mean estimation this corresponding estimator is referred to as *trimmed mean estimator*, $m_n^{(k)}$. It simply ignores the top and bottom $k$ values. We have 
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E}m_n^{(k)}&= \mathbb{E} \frac{1}{n-2k} \sum_{i=1}^{n} \mathbb{1}_{x_i \notin \text{top/bottom}} x_i\\
+\end{aligned}
+(\#eq:trimmed-mean)
+\end{equation}
+$$
+One can show that if $k \approx \log( \frac{1}{\delta})$, then with probability
+
+$$
+\begin{aligned}
+&& |m_n-m|&=c \sqrt{ \frac{\delta^2 \log( \frac{1}{\delta})}{n}} \\
+\end{aligned}
+$$
+
+
+## Median-of-means estimator {#outl-mom}

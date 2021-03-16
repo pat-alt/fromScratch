@@ -8,10 +8,12 @@ rmd_files: [
   "index.Rmd",
   "about.Rmd",
   "intro.Rmd",
+  "concentration.Rmd",
   "optimization.Rmd",
   "regression.Rmd",
   "classification.Rmd",
   "regularization.Rmd",
   "dimensionality.Rmd",
-  "subsampling.Rmd"
+  "subsampling.Rmd",
+  "outliers.Rmd"
 ]
