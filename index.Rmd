@@ -62,7 +62,28 @@ Please note that this is very much still a work-in-progress. The structure is in
 
 <span style="display:block;text-align:center">![](www/working_on_it.gif)
 
+## Resources {-}
 
+### R package {-}
+
+The book uses a complementary R package [fromScratchR](https://github.com/pat-alt/fromScratchR) which collects the R code used throughout the book. The book can be read without using the package, but in case you want to play with the code you can install the development version from [GitHub](https://github.com/) with:
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("pat-alt/fromScratchR")
+```
+
+Then import the package through `library(fromScratchR)`
+
+### Python code {-}
+
+As for Python code, modules are currently part of the Git repository that contains the book.
+
+## Session info {-}
+
+```{r}
+utils::sessionInfo()
+```
 
 
 

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Dimensionality reduction | From Scratch</title>
+  <meta name="description" content="A collection of ideas, notes, exercises and code." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Dimensionality reduction | From Scratch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A collection of ideas, notes, exercises and code." />
+  <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Dimensionality reduction | From Scratch" />
+  
+  <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
+  
+
+<meta name="author" content="Patrick Altmeyer" />
+
+
+<meta name="date" content="2021-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
+<link rel="prev" href="regularization.html"/>
+<link rel="next" href="subsample.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.16/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-package"><i class="fa fa-check"></i>R package</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-code"><i class="fa fa-check"></i>Python code</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session info</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="1" data-path="introductory-topics.html"><a href="introductory-topics.html"><i class="fa fa-check"></i><b>1</b> Introductory topics</a></li>
+<li class="chapter" data-level="2" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>2</b> Optimization</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>2.1</b> Line search</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>2.1.1</b> Methodology</a></li>
+<li class="chapter" data-level="2.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>2.1.2</b> Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>3</b> Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>3.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="3.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>3.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="3.3" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>3.3</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>3.3.1</b> Weighted least-squares</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="class.html"><a href="class.html#logisitic-regression"><i class="fa fa-check"></i><b>4.1</b> Logisitic regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>4.2</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>4.2.1</b> Iterative reweighted least-squares</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>5</b> Regularization</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>5.1</b> Bias-variance tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>6</b> Dimensionality reduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dim-red.html"><a href="dim-red.html#pca"><i class="fa fa-check"></i><b>6.1</b> PCA</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dim-red.html"><a href="dim-red.html#the-maths-behind-pca"><i class="fa fa-check"></i><b>6.1.1</b> The maths behind PCA</a></li>
+<li class="chapter" data-level="6.1.2" data-path="dim-red.html"><a href="dim-red.html#an-intuitive-example"><i class="fa fa-check"></i><b>6.1.2</b> An intuitive example</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dim-red.html"><a href="dim-red.html#pca-for-feature-extraction"><i class="fa fa-check"></i><b>6.2</b> PCA for feature extraction</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dim-red.html"><a href="dim-red.html#squared-elements-of-eigenvectors"><i class="fa fa-check"></i><b>6.2.1</b> Squared elements of eigenvectors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dim-red.html"><a href="dim-red.html#svd"><i class="fa fa-check"></i><b>6.2.2</b> SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dim-red.html"><a href="dim-red.html#high-dimensional-data"><i class="fa fa-check"></i><b>6.3</b> High-dimensional data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="dim-red.html"><a href="dim-red.html#regularized-svd"><i class="fa fa-check"></i><b>6.3.1</b> Regularized SVD</a></li>
+<li class="chapter" data-level="6.3.2" data-path="dim-red.html"><a href="dim-red.html#fast-partial-svd"><i class="fa fa-check"></i><b>6.3.2</b> Fast, partial SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dim-red.html"><a href="dim-red.html#forward-search"><i class="fa fa-check"></i><b>6.4</b> Forward search</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="subsample.html"><a href="subsample.html"><i class="fa fa-check"></i><b>7</b> Subsampling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="subsample.html"><a href="subsample.html#subsample-motivation"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="subsample.html"><a href="subsample.html#subsample-methods"><i class="fa fa-check"></i><b>7.2</b> Subsampling methods</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="subsample.html"><a href="subsample.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>7.2.1</b> Uniform subsampling (UNIF)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="subsample.html"><a href="subsample.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>7.2.2</b> Basic leveraging (BLEV)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="subsample.html"><a href="subsample.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>7.2.3</b> Predictor-length sampling (PL)</a></li>
+<li class="chapter" data-level="7.2.4" data-path="subsample.html"><a href="subsample.html#comparison-of-methods"><i class="fa fa-check"></i><b>7.2.4</b> Comparison of methods</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="subsample.html"><a href="subsample.html#subsample-lin-reg"><i class="fa fa-check"></i><b>7.3</b> Linear regression model</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="subsample.html"><a href="subsample.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>7.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
+<li class="chapter" data-level="7.3.2" data-path="subsample.html"><a href="subsample.html#computational-performance"><i class="fa fa-check"></i><b>7.3.2</b> Computational performance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="subsample.html"><a href="subsample.html#classification-problems"><i class="fa fa-check"></i><b>7.4</b> Classification problems</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="subsample.html"><a href="subsample.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>7.4.1</b> Optimal subsampling for classification problems</a></li>
+<li class="chapter" data-level="7.4.2" data-path="subsample.html"><a href="subsample.html#class-syn"><i class="fa fa-check"></i><b>7.4.2</b> Synthetic data</a></li>
+<li class="chapter" data-level="7.4.3" data-path="subsample.html"><a href="subsample.html#real-data-example"><i class="fa fa-check"></i><b>7.4.3</b> Real data example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="subsample.html"><a href="subsample.html#concl"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+<li class="chapter" data-level="7.6" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>7.6</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="subsample.html"><a href="subsample.html#app-svd"><i class="fa fa-check"></i><b>7.6.1</b> From SVD to leverage scores</a></li>
+<li class="chapter" data-level="7.6.2" data-path="subsample.html"><a href="subsample.html#app-pl"><i class="fa fa-check"></i><b>7.6.2</b> From optimal to prediction-length subsampling</a></li>
+<li class="chapter" data-level="7.6.3" data-path="subsample.html"><a href="subsample.html#app-dens"><i class="fa fa-check"></i><b>7.6.3</b> Synthetic data</a></li>
+<li class="chapter" data-level="7.6.4" data-path="subsample.html"><a href="subsample.html#app-sin"><i class="fa fa-check"></i><b>7.6.4</b> Subsampling applied to sinusoidal function</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">From Scratch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dim-red" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Dimensionality reduction</h1>
+<div id="pca" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> PCA</h2>
+<p>One of the most straight-forward ways to reduce model dimensionality is principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix <span class="math inline">\(X\)</span> <span class="math inline">\((n \times p)\)</span> can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the <span class="math inline">\(p\)</span> different features in <span class="math inline">\(X\)</span> related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.</p>
+<div id="the-maths-behind-pca" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> The maths behind PCA</h3>
+<p>PCA projects <span class="math inline">\(X\)</span> into a <span class="math inline">\(q\)</span>-dimensional space where <span class="math inline">\(q \le p\)</span>, such that the covariance matrix of the <span class="math inline">\(q\)</span>-dimensional projection is maximised. Intuitively, we want to find the linear combination of points in <span class="math inline">\(X\)</span> which explains the largest part of the variance in <span class="math inline">\(X\)</span>. Formally (in a very stylised fashion) this amounts to</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \max_a&amp; \left( \Omega = P_1^TP_1 = v^TX^TXv = v^T \Sigma v \right) \\
+\text{s.t.} &amp;&amp; v^Tv&amp;= \mathbf{1} &amp;&amp; \text{(loading vector)} \\
+\text{where}&amp;&amp; P_1 &amp;= v^T X &amp;&amp; \text{(principal component)} \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(v\)</span> is given by the eigenvector corresponding to the largest eigenvalue of <span class="math inline">\(\Sigma\)</span> - the covariance matrix of <span class="math inline">\(X\)</span>. We can eigen-decompose <span class="math inline">\(\Sigma\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \Sigma&amp;= V \Lambda V^{-1} \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\Lambda\)</span> is a diagonal matrix of eigenvalues in decreasing order.</p>
+<p>Sometimes eigenvectors <span class="math inline">\(V\)</span> are referred to as rotation vectors: the first eigenvector - i.e. the one corresponding to the highest eigenvalue - rotates the data into the direction of the highest variation. Remembers this image from the brush-ups?</p>
+<div class="figure">
+<img src="www/eigen.png" alt="" />
+<p class="caption">Projecting into orthogonal subspace</p>
+</div>
+</div>
+<div id="an-intuitive-example" class="section level3" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> An intuitive example</h3>
+<p>PCA can be applied very well to highly correlated time series. Take for example US treasury yields of varying maturities over time: they are intrinsically linked to each other through the term-structure of interest rates. As we will see the first couple of principal components have a very intuitive interpretation when applied to yield curves.</p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Let’s perform PCA through spectral decomposition in R and look at the output.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">98.0788860</td>
+</tr>
+<tr class="even">
+<td align="right">1.6079986</td>
+</tr>
+<tr class="odd">
+<td align="right">0.3004019</td>
+</tr>
+<tr class="even">
+<td align="right">0.0064192</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0027590</td>
+</tr>
+<tr class="even">
+<td align="right">0.0014110</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s compute the first three principal components and plot them over time. How can we make sense of this? It is not obvious and in many applications interpreting the components at face value is a difficult task. In this particular example it turns out that we can actually make sense of them.</p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Let’s see what happens when we play with the components. (Shiny app not run in static HTML)</p>
+</div>
+</div>
+<div id="pca-for-feature-extraction" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> PCA for feature extraction</h2>
+<div id="squared-elements-of-eigenvectors" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Squared elements of eigenvectors</h3>
+<p>Consider again using the spectral decomposition of <span class="math inline">\(\Sigma=\mathbf{X}^T\mathbf{X}\)</span> to perform PCA:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \Sigma&amp;= V \Lambda V^{T} \\
+\end{aligned}
+\]</span></p>
+<p>A practical complication with PCA is that generally the principal components cannot be easily interpreted. If we are only interested in prediction, then this may not be a concern. But when doing inference, we are interested in the effect of specific features rather than the principal components that describe the variation in the design matrix <span class="math inline">\(\mathbf{X}\)</span>. It turns out that we can still use spectral decomposition to select features directly. The clue is to realize that the <span class="math inline">\(i\)</span>-th squared element <span class="math inline">\(v^2_{ji}\)</span> of the <span class="math inline">\(j\)</span>-th eigenvector can be though of as the percentage contribution of feature <span class="math inline">\(i\)</span> to the variation in the <span class="math inline">\(j\)</span>-th principal component. Having already established above that eigenvalues provide a measure of how much of the overall variation in <span class="math inline">\(X\)</span> is explained by the <span class="math inline">\(j\)</span>-th principal component, these two ideas can be combined to give us a straight-forward way to identify important features (for explaining variation in <span class="math inline">\(\mathbf{X}\)</span>). In particular, compute <span class="math inline">\(\mathbf{s}= \text{diag}\{\Lambda\}/ \text{tr} (\Lambda)\)</span> <span class="math inline">\((p \times 1)\)</span> where <span class="math inline">\(\Lambda\)</span> is diagonal matrix of eigenvalues and let <span class="math inline">\(\mathbf{V}^2\)</span> be the matrix of eigenvectors with each elements squared. Consider computing the following vector <span class="math inline">\(\mathbf{r} \in \mathbb{R}^p\)</span> which will use to rank our <span class="math inline">\(p\)</span> features:</p>
+<p><span class="math display" id="eq:ranking">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \mathbf{r}&amp;=\mathbf{V}^2 \mathbf{s} \\
+\end{aligned}
+\tag{6.1}
+\end{equation}
+\]</span></p>
+<p>By construction elements in <span class="math inline">\(\mathbf{r}\)</span> sum up to one so they can be thought of as percentages describing the overall importance of individual features <em>in terms of explaining the overall variation in the design matrix</em>. This last point is important: PCA never even looks at the outcome variable that we are interested in modelling. Even features identified as <em>not important</em> by PCA may in fact be very important for the model, so the ranking is merely a guideline of sorts.</p>
+<p>Then say we were interested in decreasing the number of features from <span class="math inline">\(p=12\)</span> to <span class="math inline">\(q=5\)</span>, then this approach suggests using the following features:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">feature</th>
+<th align="right">importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">30 YR</td>
+<td align="right">0.1328828</td>
+</tr>
+<tr class="even">
+<td align="left">20 YR</td>
+<td align="right">0.1146219</td>
+</tr>
+<tr class="odd">
+<td align="left">10 YR</td>
+<td align="right">0.0887639</td>
+</tr>
+<tr class="even">
+<td align="left">7 YR</td>
+<td align="right">0.0803942</td>
+</tr>
+<tr class="odd">
+<td align="left">6 MO</td>
+<td align="right">0.0751135</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="svd" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> SVD</h3>
+<p>Instead of using spectral decomposition we could use (compact) SVD for PCA. <em>Compact</em> SVD works decomposes any matrix <span class="math inline">\(X\)</span> <span class="math inline">\((n \times p)\)</span> as follows</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; X&amp;= U S V^{T} \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(S\)</span> is diagonal <span class="math inline">\((p\times p)\)</span>, <span class="math inline">\(U\)</span> is <span class="math inline">\((n \times r)\)</span> and <span class="math inline">\(V\)</span> is <span class="math inline">\((r \times p)\)</span> with <span class="math inline">\(r=\min(n,p)\)</span>. The diagonal elements of <span class="math inline">\(S\)</span> are referred to as singular values (<em>Note</em>: it turns out that they correspond to the square roots of the eigenvalues of <span class="math inline">\(X^TX\)</span>). It is then easy to see that <span class="math inline">\(V\)</span> is once again the matrix of eigenvectors of <span class="math inline">\(X^tX\)</span> as above</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \Sigma&amp;=X^TX=(V^TS^TU^T)US V \\
+&amp;&amp; &amp;= V(S^TS)V^T=V\Lambda V^T\\
+\end{aligned}
+\]</span>
+where <span class="math inline">\(U^TU=I\)</span> by the fact that <span class="math inline">\(U\)</span> is orthogonal and from the note above it should be clear why <span class="math inline">\(S^TS=\Lambda\)</span>.</p>
+<p>Unsurprisingly this gives us the equivalent ranking of features:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">feature</th>
+<th align="right">importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">30 YR</td>
+<td align="right">0.1491249</td>
+</tr>
+<tr class="even">
+<td align="left">20 YR</td>
+<td align="right">0.1188201</td>
+</tr>
+<tr class="odd">
+<td align="left">10 YR</td>
+<td align="right">0.0816704</td>
+</tr>
+<tr class="even">
+<td align="left">1 MO</td>
+<td align="right">0.0778362</td>
+</tr>
+<tr class="odd">
+<td align="left">2 MO</td>
+<td align="right">0.0750598</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="high-dimensional-data" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> High-dimensional data</h2>
+<p>Now that we have developed a good intuition of PCA, it is time to face its shortfalls. While PCA can be used as tool to reduce dimensionality it is actually inconsistent for cases where <span class="math inline">\(p&gt;&gt;n\)</span>. Enter: <strong>regularized SVD</strong>.</p>
+<div id="regularized-svd" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Regularized SVD</h3>
+<p><span class="citation"><a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose a regularized version of SVD where the <span class="math inline">\(L_1\)</span>-norm eigenvectors <span class="math inline">\(\mathbf{v}_k\)</span> is penalized. In particular the authors propose a modified version of the following optimization problem:</p>
+<p><span class="math display" id="eq:scotlass">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \max_a&amp; \left( \Omega = P_1^TP_1 = \mathbf{v}^TX^TX\mathbf{v} = \mathbf{v}^T \Sigma \mathbf{v} \right) \\
+\text{s.t.} &amp;&amp; \mathbf{v}^T\mathbf{v}&amp;= \mathbf{1}  \\
+&amp;&amp; |\mathbf{v}|&amp; \le c \\
+\end{aligned}
+\tag{6.2}
+\end{equation}
+\]</span></p>
+<p>Note that this essentially looks like spectral decomposition with an added LASSO penality: consequently depending on the regularization parameter <span class="math inline">\(c\)</span> some elements of <span class="math inline">\(\mathbf{v}_k\)</span> will be shrinked to exactly zero and hence this form of penalized SVD is said yield sparse principal components. The optimization problem in <a href="dim-red.html#eq:scotlass">(6.2)</a> - originally proposed <span class="citation"><a href="subsample.html#ref-jolliffe2003modified" role="doc-biblioref">Jolliffe, Trendafilov, and Uddin</a> (<a href="subsample.html#ref-jolliffe2003modified" role="doc-biblioref">2003</a>)</span> - is non-convex and hence computationally hard. <span class="citation"><a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose to instead solve the following optimization problem:</p>
+<p><span class="math display" id="eq:pmd">\[
+\begin{equation} 
+\begin{aligned}
+&amp;&amp; \max_a&amp; \left( \mathbf{u}^TX\mathbf{v} \right)\\
+\text{s.t.} &amp;&amp; \mathbf{v}^T\mathbf{v}&amp;= \mathbf{1}  \\
+&amp;&amp; \mathbf{u}^T\mathbf{u}&amp;= \mathbf{1}  \\
+&amp;&amp; |\mathbf{v}|&amp; \le c_2 \\
+\end{aligned}
+\tag{6.3}
+\end{equation}
+\]</span>
+This looks like singular-value decomposition with LASSO penality on <span class="math inline">\(\mathbf{v}\)</span>. Discussing the implementation of their proposed algorithm could be interesting, but is beyond the scope of this. Fortunately the authors have build an R package that conveniently implements their algorithm.</p>
+<p>Let’s generate a random matrix with <span class="math inline">\(n=50\)</span> and <span class="math inline">\(p=1000\)</span> and see if we can still apply the ideas developed above for feature extraction. It turns out we can proceed pretty much exactly as before. Once again we will pre-multiply  by <span class="math inline">\(\mathbf{V}^2\)</span> to obtain a ranking in terms of feature importance. Here it should be noted that we would not generally compute all <span class="math inline">\(p\)</span> principal components, but focus on say the first <span class="math inline">\(l\)</span>. Of course for <span class="math inline">\(l&lt;p\)</span> they will never not explain the total variation in <span class="math inline">\(X\)</span>. In that sense our ranking vector <span class="math inline">\(\mathbf{r}\)</span> now ranks features in terms of their contribution to the overall variation explained by the first <span class="math inline">\(l\)</span> <em>sparse</em> principal components. Of course for many features that contribution will be zero, since the LASSO penalty shrinks some elements in <span class="math inline">\(\mathbf{V}\)</span> to zero. Hence some selection is already done for use, but we can still proceed as before to select our final set of <span class="math inline">\(m\)</span> features.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">feature</th>
+<th align="right">importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">890</td>
+<td align="right">0.4607228</td>
+</tr>
+<tr class="even">
+<td align="right">536</td>
+<td align="right">0.0802372</td>
+</tr>
+<tr class="odd">
+<td align="right">636</td>
+<td align="right">0.0559802</td>
+</tr>
+<tr class="even">
+<td align="right">331</td>
+<td align="right">0.0526303</td>
+</tr>
+<tr class="odd">
+<td align="right">586</td>
+<td align="right">0.0465075</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="fast-partial-svd" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Fast, partial SVD</h3>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+</div>
+<div id="forward-search" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Forward search</h2>
+<p>An interesting idea could be combine the above methods with <em>forward search</em>:</p>
+<div class="figure">
+<img src="www/forward_search.png" alt="" />
+<p class="caption">Forward search</p>
+</div>
+<p>As per the image above, at the <span class="math inline">\(k\)</span>-th step forward search requires fitting the model <span class="math inline">\((p-k)\)</span> times to compare scores. A good idea might be to use the ranking of features obtained from PCA and only fit the model for the <span class="math inline">\(l&lt;(p-k)\)</span> most important features at each step. The below summarizes the idea:</p>
+<ol style="list-style-type: decimal">
+<li>Run PCA to rank features in terms of their contributions to the overall variation in the design matrix <span class="math inline">\(X\)</span>.</li>
+<li>Run a forward search:</li>
+</ol>
+<ul>
+<li>In the first step fit the model for the <span class="math inline">\(l\)</span> most important features (ranked by PCA). Choose the feature <span class="math inline">\(x_j\)</span> with highest score and remove it from the ranking.</li>
+<li>Proceed in the same way in the following step until convergence.</li>
+</ul>
+<p>Note that convergence is somewhat loosely defined here. In practice I would look at how much the model improves by including an additional features (e.g. how much the likelihood increases or the MSE decreases). For that we would need to define some threshold value <span class="math inline">\(\tau\)</span> which would correspond to the minimum improvement we would want to obtain for including another feature (but strictly speaking that is a hyperparameter, so if you wanted to avoid those altogether I would just rely on the ranking methods proposed above).</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regularization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="subsample.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["book.epub", "EPUB"]],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

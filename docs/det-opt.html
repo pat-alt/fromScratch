@@ -24,15 +24,15 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-15" />
+<meta name="date" content="2021-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="optimal-subsampling.html"/>
+<link rel="prev" href="introductory-topics.html"/>
+<link rel="next" href="regr.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -146,13 +146,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Resources</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-package"><i class="fa fa-check"></i><b>1.1</b> R package</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#python-code"><i class="fa fa-check"></i><b>1.2</b> Python code</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-package"><i class="fa fa-check"></i>R package</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-code"><i class="fa fa-check"></i>Python code</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session info</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="1" data-path="introductory-topics.html"><a href="introductory-topics.html"><i class="fa fa-check"></i><b>1</b> Introductory topics</a></li>
 <li class="chapter" data-level="2" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>2</b> Optimization</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>2.1</b> Line search</a>
@@ -161,38 +165,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>2.1.2</b> Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html"><i class="fa fa-check"></i><b>3</b> Optimal subsampling</a>
+<li class="chapter" data-level="3" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>3</b> Regression</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias-variance tradeoff</a></li>
-<li class="chapter" data-level="3.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#subsampling"><i class="fa fa-check"></i><b>3.2</b> Subsampling methods</a>
+<li class="chapter" data-level="3.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>3.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="3.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>3.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="3.3" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>3.3</b> Appendix</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#ols-and-wls"><i class="fa fa-check"></i><b>3.2.1</b> OLS and WLS</a></li>
-<li class="chapter" data-level="3.2.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>3.2.2</b> Uniform subsampling (UNIF)</a></li>
-<li class="chapter" data-level="3.2.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>3.2.3</b> Basic leveraging (BLEV)</a></li>
-<li class="chapter" data-level="3.2.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>3.2.4</b> Predictor-length sampling (PL)</a></li>
-<li class="chapter" data-level="3.2.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#comparison-of-methods"><i class="fa fa-check"></i><b>3.2.5</b> Comparison of methods</a></li>
+<li class="chapter" data-level="3.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>3.3.1</b> Weighted least-squares</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#lin-reg"><i class="fa fa-check"></i><b>3.3</b> Linear regression model</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>3.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
-<li class="chapter" data-level="3.3.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#computational-performance"><i class="fa fa-check"></i><b>3.3.2</b> Computational performance</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#classification-problems"><i class="fa fa-check"></i><b>3.4</b> Classification problems</a>
+<li class="chapter" data-level="4" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>3.4.1</b> Optimal subsampling for classification problems</a></li>
-<li class="chapter" data-level="3.4.2" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#class-syn"><i class="fa fa-check"></i><b>3.4.2</b> Synthetic data</a></li>
-<li class="chapter" data-level="3.4.3" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#real-data-example"><i class="fa fa-check"></i><b>3.4.3</b> Real data example</a></li>
+<li class="chapter" data-level="4.1" data-path="class.html"><a href="class.html#logisitic-regression"><i class="fa fa-check"></i><b>4.1</b> Logisitic regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>4.2</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>4.2.1</b> Iterative reweighted least-squares</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#concl"><i class="fa fa-check"></i><b>3.5</b> Conclusion</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#appendix"><i class="fa fa-check"></i>Appendix</a>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>5</b> Regularization</a>
 <ul>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-wls"><i class="fa fa-check"></i>Weighted least-squares</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-svd"><i class="fa fa-check"></i>From SVD to leverage scores</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-pl"><i class="fa fa-check"></i>From optimal to prediction-length subsampling</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-dens"><i class="fa fa-check"></i>Synthetic data</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-sin"><i class="fa fa-check"></i>Subsampling applied to sinusoidal function</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#irls"><i class="fa fa-check"></i>Iterative reweighted least-squares</a></li>
-<li class="chapter" data-level="" data-path="optimal-subsampling.html"><a href="optimal-subsampling.html#app-session"><i class="fa fa-check"></i>Session info</a></li>
+<li class="chapter" data-level="5.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>5.1</b> Bias-variance tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>6</b> Dimensionality reduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dim-red.html"><a href="dim-red.html#pca"><i class="fa fa-check"></i><b>6.1</b> PCA</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dim-red.html"><a href="dim-red.html#the-maths-behind-pca"><i class="fa fa-check"></i><b>6.1.1</b> The maths behind PCA</a></li>
+<li class="chapter" data-level="6.1.2" data-path="dim-red.html"><a href="dim-red.html#an-intuitive-example"><i class="fa fa-check"></i><b>6.1.2</b> An intuitive example</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dim-red.html"><a href="dim-red.html#pca-for-feature-extraction"><i class="fa fa-check"></i><b>6.2</b> PCA for feature extraction</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dim-red.html"><a href="dim-red.html#squared-elements-of-eigenvectors"><i class="fa fa-check"></i><b>6.2.1</b> Squared elements of eigenvectors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dim-red.html"><a href="dim-red.html#svd"><i class="fa fa-check"></i><b>6.2.2</b> SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="dim-red.html"><a href="dim-red.html#high-dimensional-data"><i class="fa fa-check"></i><b>6.3</b> High-dimensional data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="dim-red.html"><a href="dim-red.html#regularized-svd"><i class="fa fa-check"></i><b>6.3.1</b> Regularized SVD</a></li>
+<li class="chapter" data-level="6.3.2" data-path="dim-red.html"><a href="dim-red.html#fast-partial-svd"><i class="fa fa-check"></i><b>6.3.2</b> Fast, partial SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dim-red.html"><a href="dim-red.html#forward-search"><i class="fa fa-check"></i><b>6.4</b> Forward search</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="subsample.html"><a href="subsample.html"><i class="fa fa-check"></i><b>7</b> Subsampling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="subsample.html"><a href="subsample.html#subsample-motivation"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="subsample.html"><a href="subsample.html#subsample-methods"><i class="fa fa-check"></i><b>7.2</b> Subsampling methods</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="subsample.html"><a href="subsample.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>7.2.1</b> Uniform subsampling (UNIF)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="subsample.html"><a href="subsample.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>7.2.2</b> Basic leveraging (BLEV)</a></li>
+<li class="chapter" data-level="7.2.3" data-path="subsample.html"><a href="subsample.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>7.2.3</b> Predictor-length sampling (PL)</a></li>
+<li class="chapter" data-level="7.2.4" data-path="subsample.html"><a href="subsample.html#comparison-of-methods"><i class="fa fa-check"></i><b>7.2.4</b> Comparison of methods</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="subsample.html"><a href="subsample.html#subsample-lin-reg"><i class="fa fa-check"></i><b>7.3</b> Linear regression model</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="subsample.html"><a href="subsample.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>7.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
+<li class="chapter" data-level="7.3.2" data-path="subsample.html"><a href="subsample.html#computational-performance"><i class="fa fa-check"></i><b>7.3.2</b> Computational performance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="subsample.html"><a href="subsample.html#classification-problems"><i class="fa fa-check"></i><b>7.4</b> Classification problems</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="subsample.html"><a href="subsample.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>7.4.1</b> Optimal subsampling for classification problems</a></li>
+<li class="chapter" data-level="7.4.2" data-path="subsample.html"><a href="subsample.html#class-syn"><i class="fa fa-check"></i><b>7.4.2</b> Synthetic data</a></li>
+<li class="chapter" data-level="7.4.3" data-path="subsample.html"><a href="subsample.html#real-data-example"><i class="fa fa-check"></i><b>7.4.3</b> Real data example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="subsample.html"><a href="subsample.html#concl"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+<li class="chapter" data-level="7.6" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>7.6</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="subsample.html"><a href="subsample.html#app-svd"><i class="fa fa-check"></i><b>7.6.1</b> From SVD to leverage scores</a></li>
+<li class="chapter" data-level="7.6.2" data-path="subsample.html"><a href="subsample.html#app-pl"><i class="fa fa-check"></i><b>7.6.2</b> From optimal to prediction-length subsampling</a></li>
+<li class="chapter" data-level="7.6.3" data-path="subsample.html"><a href="subsample.html#app-dens"><i class="fa fa-check"></i><b>7.6.3</b> Synthetic data</a></li>
+<li class="chapter" data-level="7.6.4" data-path="subsample.html"><a href="subsample.html#app-sin"><i class="fa fa-check"></i><b>7.6.4</b> Subsampling applied to sinusoidal function</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -218,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Line search</h2>
 <div id="methodology" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Methodology</h3>
-<p>The goal of Exercise 3.1 in <span class="citation"><a href="optimal-subsampling.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="optimal-subsampling.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
+<p>The goal of Exercise 3.1 in <span class="citation"><a href="subsample.html#ref-nw2006numerical" role="doc-biblioref">Nocedal and Wright</a> (<a href="subsample.html#ref-nw2006numerical" role="doc-biblioref">2006</a>)</span> is to minimize the bivariate Rosenbrock function (Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a>) using <em>steepest descent</em> and <em>Newton’s method</em>. The Rosenbrock function - also known as <em>Rosenbrock’s banana function</em> - has a long, narrow, parabolic shaped flat valley and is often used for to test optimization algorithms for their performance (see <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">here</a>).</p>
 <p><span class="math display" id="eq:rosenbrock">\[
 \begin{equation}
   f(\mathbb{x})=100(x_2-x_1^2)^2+(1-x_1)^2 
@@ -226,10 +266,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{equation}
 \]</span>
 We can implement Equation <a href="det-opt.html#eq:rosenbrock">(2.1)</a> in R as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="det-opt.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rosenbrock:</span></span>
-<span id="cb1-2"><a href="det-opt.html#cb1-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
-<span id="cb1-3"><a href="det-opt.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> X[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb1-4"><a href="det-opt.html#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="det-opt.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rosenbrock:</span></span>
+<span id="cb2-2"><a href="det-opt.html#cb2-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
+<span id="cb2-3"><a href="det-opt.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> X[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb2-4"><a href="det-opt.html#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Figure <a href="det-opt.html#fig:rosenbrock">2.1</a> shows the output of the function over <span class="math inline">\(x_1,x_2 \in [-1.5, 1.5]\)</span> along with its minimum indicated as a red asterisk and the two starting points: (1) <span class="math inline">\(X_0=(1.2,1.2)\)</span> and (2) <span class="math inline">\(X_0=(-1.2,1)\)</span>.</p>
 <div class="figure"><span id="fig:rosenbrock"></span>
 <img src="fromScratch_files/figure-html/rosenbrock-1.png" alt="Output of the Rosenbrock function and minimizer in red." width="672" />
@@ -258,111 +298,111 @@ Figure 2.1: Output of the Rosenbrock function and minimizer in red.
 \end{equation}
 \]</span></p>
 <p>which in R can be encoded as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="det-opt.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gradient:</span></span>
-<span id="cb2-2"><a href="det-opt.html#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
-<span id="cb2-3"><a href="det-opt.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(X))</span>
-<span id="cb2-4"><a href="det-opt.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  df[<span class="dv">1</span>] <span class="ot">=</span> <span class="sc">-</span><span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> X[<span class="dv">1</span>]) <span class="co"># partial with respect to x_1</span></span>
-<span id="cb2-5"><a href="det-opt.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  df[<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">200</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb2-6"><a href="det-opt.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb2-7"><a href="det-opt.html#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-8"><a href="det-opt.html#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="det-opt.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hessian:</span></span>
-<span id="cb2-10"><a href="det-opt.html#cb2-10" aria-hidden="true" tabindex="-1"></a>ddf <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
-<span id="cb2-11"><a href="det-opt.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  ddf <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(X), <span class="at">ncol=</span><span class="fu">length</span>(X))</span>
-<span id="cb2-12"><a href="det-opt.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">1200</span> <span class="sc">*</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">2</span> <span class="co"># partial with respect to x_1</span></span>
-<span id="cb2-13"><a href="det-opt.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">=</span> ddf[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="sc">-</span><span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">1</span>]</span>
-<span id="cb2-14"><a href="det-opt.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">200</span></span>
-<span id="cb2-15"><a href="det-opt.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ddf)</span>
-<span id="cb2-16"><a href="det-opt.html#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="det-opt.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gradient:</span></span>
+<span id="cb3-2"><a href="det-opt.html#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
+<span id="cb3-3"><a href="det-opt.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(X))</span>
+<span id="cb3-4"><a href="det-opt.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  df[<span class="dv">1</span>] <span class="ot">=</span> <span class="sc">-</span><span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> X[<span class="dv">1</span>]) <span class="co"># partial with respect to x_1</span></span>
+<span id="cb3-5"><a href="det-opt.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  df[<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">200</span> <span class="sc">*</span> (X[<span class="dv">2</span>] <span class="sc">-</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="det-opt.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb3-7"><a href="det-opt.html#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-8"><a href="det-opt.html#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="det-opt.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hessian:</span></span>
+<span id="cb3-10"><a href="det-opt.html#cb3-10" aria-hidden="true" tabindex="-1"></a>ddf <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
+<span id="cb3-11"><a href="det-opt.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  ddf <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(X), <span class="at">ncol=</span><span class="fu">length</span>(X))</span>
+<span id="cb3-12"><a href="det-opt.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">1200</span> <span class="sc">*</span> X[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">2</span> <span class="co"># partial with respect to x_1</span></span>
+<span id="cb3-13"><a href="det-opt.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">=</span> ddf[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="sc">-</span><span class="dv">400</span> <span class="sc">*</span> X[<span class="dv">1</span>]</span>
+<span id="cb3-14"><a href="det-opt.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  ddf[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">200</span></span>
+<span id="cb3-15"><a href="det-opt.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ddf)</span>
+<span id="cb3-16"><a href="det-opt.html#cb3-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>For both methods I will use the <em>Arminjo condition</em> with backtracking. The <code>gradient_desc</code> function (below) can implement both <em>steepest descent</em> and <em>Newton’s method</em>. The code for the function can be inspected below. There’s also a small description of the different arguments.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="det-opt.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> (f, df, X0, <span class="at">step_size0 =</span> <span class="dv">1</span>, <span class="at">ddf =</span> <span class="cn">NULL</span>, <span class="at">method =</span> <span class="st">&quot;newton&quot;</span>, <span class="at">c =</span> <span class="fl">1e-04</span>, <span class="at">remember =</span> <span class="cn">TRUE</span>, <span class="at">tau =</span> <span class="fl">1e-05</span>, <span class="at">backtrack_cond =</span> <span class="st">&quot;arminjo&quot;</span>, <span class="at">max_iter =</span> <span class="dv">10000</span>) </span>
-<span id="cb3-2"><a href="det-opt.html#cb3-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-3"><a href="det-opt.html#cb3-3" aria-hidden="true" tabindex="-1"></a>    X_latest <span class="ot">=</span> <span class="fu">matrix</span>(X0)</span>
-<span id="cb3-4"><a href="det-opt.html#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (remember) {</span>
-<span id="cb3-5"><a href="det-opt.html#cb3-5" aria-hidden="true" tabindex="-1"></a>        X <span class="ot">=</span> <span class="fu">matrix</span>(X0, <span class="at">ncol =</span> <span class="fu">length</span>(X0))</span>
-<span id="cb3-6"><a href="det-opt.html#cb3-6" aria-hidden="true" tabindex="-1"></a>        steps <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="fu">length</span>(X0))</span>
-<span id="cb3-7"><a href="det-opt.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-8"><a href="det-opt.html#cb3-8" aria-hidden="true" tabindex="-1"></a>    iter <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb3-9"><a href="det-opt.html#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (method <span class="sc">==</span> <span class="st">&quot;steepest&quot;</span>) {</span>
-<span id="cb3-10"><a href="det-opt.html#cb3-10" aria-hidden="true" tabindex="-1"></a>        B <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
-<span id="cb3-11"><a href="det-opt.html#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">diag</span>(<span class="fu">length</span>(X))</span>
-<span id="cb3-12"><a href="det-opt.html#cb3-12" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-13"><a href="det-opt.html#cb3-13" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-14"><a href="det-opt.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (method <span class="sc">==</span> <span class="st">&quot;newton&quot;</span>) {</span>
-<span id="cb3-15"><a href="det-opt.html#cb3-15" aria-hidden="true" tabindex="-1"></a>        B <span class="ot">=</span> <span class="fu">tryCatch</span>(ddf, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb3-16"><a href="det-opt.html#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stop</span>(<span class="st">&quot;Hessian needs to be supplied for Newton&#39;s method.&quot;</span>)</span>
-<span id="cb3-17"><a href="det-opt.html#cb3-17" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb3-18"><a href="det-opt.html#cb3-18" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-19"><a href="det-opt.html#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (backtrack_cond <span class="sc">==</span> <span class="st">&quot;arminjo&quot;</span>) {</span>
-<span id="cb3-20"><a href="det-opt.html#cb3-20" aria-hidden="true" tabindex="-1"></a>        sufficient_decrease <span class="ot">=</span> <span class="cf">function</span>(alpha) {</span>
-<span id="cb3-21"><a href="det-opt.html#cb3-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(<span class="fu">f</span>(X_k <span class="sc">+</span> alpha <span class="sc">*</span> p_k) <span class="sc">&lt;=</span> <span class="fu">f</span>(X_k) <span class="sc">+</span> c <span class="sc">*</span> alpha <span class="sc">*</span> <span class="fu">t</span>(df_k) <span class="sc">%*%</span> p_k)</span>
-<span id="cb3-22"><a href="det-opt.html#cb3-22" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-23"><a href="det-opt.html#cb3-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-24"><a href="det-opt.html#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">is.na</span>(backtrack_cond)) {</span>
-<span id="cb3-25"><a href="det-opt.html#cb3-25" aria-hidden="true" tabindex="-1"></a>        sufficient_decrease <span class="ot">=</span> <span class="cf">function</span>(alpha) {</span>
-<span id="cb3-26"><a href="det-opt.html#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(<span class="fu">f</span>(X_k <span class="sc">+</span> alpha <span class="sc">*</span> p_k) <span class="sc">&lt;=</span> <span class="fu">f</span>(X_k))</span>
-<span id="cb3-27"><a href="det-opt.html#cb3-27" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-28"><a href="det-opt.html#cb3-28" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-29"><a href="det-opt.html#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="fu">any</span>(<span class="fu">abs</span>(<span class="fu">df</span>(X_latest) <span class="sc">-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(X_latest))) <span class="sc">&gt;</span> tau) <span class="sc">&amp;</span> iter <span class="sc">&lt;</span> max_iter) {</span>
-<span id="cb3-30"><a href="det-opt.html#cb3-30" aria-hidden="true" tabindex="-1"></a>        X_k <span class="ot">=</span> X_latest</span>
-<span id="cb3-31"><a href="det-opt.html#cb3-31" aria-hidden="true" tabindex="-1"></a>        alpha <span class="ot">=</span> step_size0</span>
-<span id="cb3-32"><a href="det-opt.html#cb3-32" aria-hidden="true" tabindex="-1"></a>        df_k <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">df</span>(X_latest))</span>
-<span id="cb3-33"><a href="det-opt.html#cb3-33" aria-hidden="true" tabindex="-1"></a>        B_k <span class="ot">=</span> <span class="fu">B</span>(X_latest)</span>
-<span id="cb3-34"><a href="det-opt.html#cb3-34" aria-hidden="true" tabindex="-1"></a>        p_k <span class="ot">=</span> <span class="fu">qr.solve</span>(<span class="sc">-</span>B_k, df_k)</span>
-<span id="cb3-35"><a href="det-opt.html#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> (<span class="sc">!</span><span class="fu">sufficient_decrease</span>(alpha)) {</span>
-<span id="cb3-36"><a href="det-opt.html#cb3-36" aria-hidden="true" tabindex="-1"></a>            alpha <span class="ot">=</span> alpha<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb3-37"><a href="det-opt.html#cb3-37" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-38"><a href="det-opt.html#cb3-38" aria-hidden="true" tabindex="-1"></a>        X_latest <span class="ot">=</span> X_latest <span class="sc">+</span> alpha <span class="sc">*</span> p_k</span>
-<span id="cb3-39"><a href="det-opt.html#cb3-39" aria-hidden="true" tabindex="-1"></a>        iter <span class="ot">=</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb3-40"><a href="det-opt.html#cb3-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (remember) {</span>
-<span id="cb3-41"><a href="det-opt.html#cb3-41" aria-hidden="true" tabindex="-1"></a>            X <span class="ot">=</span> <span class="fu">rbind</span>(X, <span class="fu">t</span>(X_latest))</span>
-<span id="cb3-42"><a href="det-opt.html#cb3-42" aria-hidden="true" tabindex="-1"></a>            steps <span class="ot">=</span> <span class="fu">rbind</span>(steps, <span class="fu">t</span>(alpha <span class="sc">*</span> p_k))</span>
-<span id="cb3-43"><a href="det-opt.html#cb3-43" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-44"><a href="det-opt.html#cb3-44" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-45"><a href="det-opt.html#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (iter <span class="sc">&gt;=</span> max_iter) </span>
-<span id="cb3-46"><a href="det-opt.html#cb3-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">warning</span>(<span class="st">&quot;Reached maximum number of iterations without convergence.&quot;</span>)</span>
-<span id="cb3-47"><a href="det-opt.html#cb3-47" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">=</span> <span class="fu">list</span>(<span class="at">optimal =</span> X_latest, <span class="at">visited =</span> <span class="fu">tryCatch</span>(X, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>), <span class="at">steps =</span> <span class="fu">tryCatch</span>(steps, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>), <span class="at">X0 =</span> X0, <span class="at">method =</span> method)</span>
-<span id="cb3-48"><a href="det-opt.html#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
-<span id="cb3-49"><a href="det-opt.html#cb3-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="det-opt.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> (f, df, X0, <span class="at">step_size0 =</span> <span class="dv">1</span>, <span class="at">ddf =</span> <span class="cn">NULL</span>, <span class="at">method =</span> <span class="st">&quot;newton&quot;</span>, <span class="at">c =</span> <span class="fl">1e-04</span>, <span class="at">remember =</span> <span class="cn">TRUE</span>, <span class="at">tau =</span> <span class="fl">1e-05</span>, <span class="at">backtrack_cond =</span> <span class="st">&quot;arminjo&quot;</span>, <span class="at">max_iter =</span> <span class="dv">10000</span>) </span>
+<span id="cb4-2"><a href="det-opt.html#cb4-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-3"><a href="det-opt.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    X_latest <span class="ot">=</span> <span class="fu">matrix</span>(X0)</span>
+<span id="cb4-4"><a href="det-opt.html#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (remember) {</span>
+<span id="cb4-5"><a href="det-opt.html#cb4-5" aria-hidden="true" tabindex="-1"></a>        X <span class="ot">=</span> <span class="fu">matrix</span>(X0, <span class="at">ncol =</span> <span class="fu">length</span>(X0))</span>
+<span id="cb4-6"><a href="det-opt.html#cb4-6" aria-hidden="true" tabindex="-1"></a>        steps <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="fu">length</span>(X0))</span>
+<span id="cb4-7"><a href="det-opt.html#cb4-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-8"><a href="det-opt.html#cb4-8" aria-hidden="true" tabindex="-1"></a>    iter <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="det-opt.html#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (method <span class="sc">==</span> <span class="st">&quot;steepest&quot;</span>) {</span>
+<span id="cb4-10"><a href="det-opt.html#cb4-10" aria-hidden="true" tabindex="-1"></a>        B <span class="ot">=</span> <span class="cf">function</span>(X) {</span>
+<span id="cb4-11"><a href="det-opt.html#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">diag</span>(<span class="fu">length</span>(X))</span>
+<span id="cb4-12"><a href="det-opt.html#cb4-12" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-13"><a href="det-opt.html#cb4-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-14"><a href="det-opt.html#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (method <span class="sc">==</span> <span class="st">&quot;newton&quot;</span>) {</span>
+<span id="cb4-15"><a href="det-opt.html#cb4-15" aria-hidden="true" tabindex="-1"></a>        B <span class="ot">=</span> <span class="fu">tryCatch</span>(ddf, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb4-16"><a href="det-opt.html#cb4-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stop</span>(<span class="st">&quot;Hessian needs to be supplied for Newton&#39;s method.&quot;</span>)</span>
+<span id="cb4-17"><a href="det-opt.html#cb4-17" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb4-18"><a href="det-opt.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-19"><a href="det-opt.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (backtrack_cond <span class="sc">==</span> <span class="st">&quot;arminjo&quot;</span>) {</span>
+<span id="cb4-20"><a href="det-opt.html#cb4-20" aria-hidden="true" tabindex="-1"></a>        sufficient_decrease <span class="ot">=</span> <span class="cf">function</span>(alpha) {</span>
+<span id="cb4-21"><a href="det-opt.html#cb4-21" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(<span class="fu">f</span>(X_k <span class="sc">+</span> alpha <span class="sc">*</span> p_k) <span class="sc">&lt;=</span> <span class="fu">f</span>(X_k) <span class="sc">+</span> c <span class="sc">*</span> alpha <span class="sc">*</span> <span class="fu">t</span>(df_k) <span class="sc">%*%</span> p_k)</span>
+<span id="cb4-22"><a href="det-opt.html#cb4-22" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-23"><a href="det-opt.html#cb4-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-24"><a href="det-opt.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">is.na</span>(backtrack_cond)) {</span>
+<span id="cb4-25"><a href="det-opt.html#cb4-25" aria-hidden="true" tabindex="-1"></a>        sufficient_decrease <span class="ot">=</span> <span class="cf">function</span>(alpha) {</span>
+<span id="cb4-26"><a href="det-opt.html#cb4-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(<span class="fu">f</span>(X_k <span class="sc">+</span> alpha <span class="sc">*</span> p_k) <span class="sc">&lt;=</span> <span class="fu">f</span>(X_k))</span>
+<span id="cb4-27"><a href="det-opt.html#cb4-27" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-28"><a href="det-opt.html#cb4-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-29"><a href="det-opt.html#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="fu">any</span>(<span class="fu">abs</span>(<span class="fu">df</span>(X_latest) <span class="sc">-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(X_latest))) <span class="sc">&gt;</span> tau) <span class="sc">&amp;</span> iter <span class="sc">&lt;</span> max_iter) {</span>
+<span id="cb4-30"><a href="det-opt.html#cb4-30" aria-hidden="true" tabindex="-1"></a>        X_k <span class="ot">=</span> X_latest</span>
+<span id="cb4-31"><a href="det-opt.html#cb4-31" aria-hidden="true" tabindex="-1"></a>        alpha <span class="ot">=</span> step_size0</span>
+<span id="cb4-32"><a href="det-opt.html#cb4-32" aria-hidden="true" tabindex="-1"></a>        df_k <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">df</span>(X_latest))</span>
+<span id="cb4-33"><a href="det-opt.html#cb4-33" aria-hidden="true" tabindex="-1"></a>        B_k <span class="ot">=</span> <span class="fu">B</span>(X_latest)</span>
+<span id="cb4-34"><a href="det-opt.html#cb4-34" aria-hidden="true" tabindex="-1"></a>        p_k <span class="ot">=</span> <span class="fu">qr.solve</span>(<span class="sc">-</span>B_k, df_k)</span>
+<span id="cb4-35"><a href="det-opt.html#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> (<span class="sc">!</span><span class="fu">sufficient_decrease</span>(alpha)) {</span>
+<span id="cb4-36"><a href="det-opt.html#cb4-36" aria-hidden="true" tabindex="-1"></a>            alpha <span class="ot">=</span> alpha<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb4-37"><a href="det-opt.html#cb4-37" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-38"><a href="det-opt.html#cb4-38" aria-hidden="true" tabindex="-1"></a>        X_latest <span class="ot">=</span> X_latest <span class="sc">+</span> alpha <span class="sc">*</span> p_k</span>
+<span id="cb4-39"><a href="det-opt.html#cb4-39" aria-hidden="true" tabindex="-1"></a>        iter <span class="ot">=</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-40"><a href="det-opt.html#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (remember) {</span>
+<span id="cb4-41"><a href="det-opt.html#cb4-41" aria-hidden="true" tabindex="-1"></a>            X <span class="ot">=</span> <span class="fu">rbind</span>(X, <span class="fu">t</span>(X_latest))</span>
+<span id="cb4-42"><a href="det-opt.html#cb4-42" aria-hidden="true" tabindex="-1"></a>            steps <span class="ot">=</span> <span class="fu">rbind</span>(steps, <span class="fu">t</span>(alpha <span class="sc">*</span> p_k))</span>
+<span id="cb4-43"><a href="det-opt.html#cb4-43" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-44"><a href="det-opt.html#cb4-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-45"><a href="det-opt.html#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (iter <span class="sc">&gt;=</span> max_iter) </span>
+<span id="cb4-46"><a href="det-opt.html#cb4-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">warning</span>(<span class="st">&quot;Reached maximum number of iterations without convergence.&quot;</span>)</span>
+<span id="cb4-47"><a href="det-opt.html#cb4-47" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">=</span> <span class="fu">list</span>(<span class="at">optimal =</span> X_latest, <span class="at">visited =</span> <span class="fu">tryCatch</span>(X, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>), <span class="at">steps =</span> <span class="fu">tryCatch</span>(steps, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>), <span class="at">X0 =</span> X0, <span class="at">method =</span> method)</span>
+<span id="cb4-48"><a href="det-opt.html#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
+<span id="cb4-49"><a href="det-opt.html#cb4-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Similarly you can take a look at how the <code>gradient_desc</code> is applied in the underlying problem by unhiding the next code chunk.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="det-opt.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fromScratchR)</span>
-<span id="cb4-2"><a href="det-opt.html#cb4-2" aria-hidden="true" tabindex="-1"></a>init_guesses <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(X0)</span>
-<span id="cb4-3"><a href="det-opt.html#cb4-3" aria-hidden="true" tabindex="-1"></a>algos <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;steepest&quot;</span>,<span class="st">&quot;newton&quot;</span>)</span>
-<span id="cb4-4"><a href="det-opt.html#cb4-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">guess=</span>init_guesses,<span class="at">algo=</span>algos)</span>
-<span id="cb4-5"><a href="det-opt.html#cb4-5" aria-hidden="true" tabindex="-1"></a>X_star <span class="ot">=</span> <span class="fu">lapply</span>(</span>
-<span id="cb4-6"><a href="det-opt.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(grid),</span>
-<span id="cb4-7"><a href="det-opt.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(i) {</span>
-<span id="cb4-8"><a href="det-opt.html#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gradient_desc</span>(</span>
-<span id="cb4-9"><a href="det-opt.html#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">f=</span>f,<span class="at">df=</span>df,</span>
-<span id="cb4-10"><a href="det-opt.html#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">X0=</span>X0[grid[i,<span class="st">&quot;guess&quot;</span>],<span class="fu">c</span>(x1,x2)],</span>
-<span id="cb4-11"><a href="det-opt.html#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">method =</span> grid[i,<span class="st">&quot;algo&quot;</span>]</span>
-<span id="cb4-12"><a href="det-opt.html#cb4-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-13"><a href="det-opt.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-14"><a href="det-opt.html#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-15"><a href="det-opt.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy up</span></span>
-<span id="cb4-16"><a href="det-opt.html#cb4-16" aria-hidden="true" tabindex="-1"></a>X_star_dt <span class="ot">=</span> <span class="fu">rbindlist</span>(</span>
-<span id="cb4-17"><a href="det-opt.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(</span>
-<span id="cb4-18"><a href="det-opt.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(X_star), </span>
-<span id="cb4-19"><a href="det-opt.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(i) {</span>
-<span id="cb4-20"><a href="det-opt.html#cb4-20" aria-hidden="true" tabindex="-1"></a>      dt <span class="ot">=</span> <span class="fu">data.table</span>(X_star[[i]]<span class="sc">$</span>visited)</span>
-<span id="cb4-21"><a href="det-opt.html#cb4-21" aria-hidden="true" tabindex="-1"></a>      dt[,method<span class="sc">:</span><span class="er">=</span>X_star[[i]]<span class="sc">$</span>method]</span>
-<span id="cb4-22"><a href="det-opt.html#cb4-22" aria-hidden="true" tabindex="-1"></a>      dt[,(<span class="fu">c</span>(<span class="st">&quot;x0_1&quot;</span>,<span class="st">&quot;x0_2&quot;</span>))<span class="sc">:</span><span class="er">=</span>.(X_star[[i]]<span class="sc">$</span>X0[<span class="dv">1</span>],X_star[[i]]<span class="sc">$</span>X0[<span class="dv">2</span>])]</span>
-<span id="cb4-23"><a href="det-opt.html#cb4-23" aria-hidden="true" tabindex="-1"></a>      dt[,iteration<span class="sc">:</span><span class="er">=</span>.I<span class="dv">-1</span>]</span>
-<span id="cb4-24"><a href="det-opt.html#cb4-24" aria-hidden="true" tabindex="-1"></a>      dt[,y<span class="sc">:</span><span class="er">=</span><span class="fu">f</span>(<span class="fu">c</span>(V1,V2)),by<span class="ot">=</span>.(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dt))]</span>
-<span id="cb4-25"><a href="det-opt.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-26"><a href="det-opt.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-27"><a href="det-opt.html#cb4-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="det-opt.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fromScratchR)</span>
+<span id="cb5-2"><a href="det-opt.html#cb5-2" aria-hidden="true" tabindex="-1"></a>init_guesses <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(X0)</span>
+<span id="cb5-3"><a href="det-opt.html#cb5-3" aria-hidden="true" tabindex="-1"></a>algos <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;steepest&quot;</span>,<span class="st">&quot;newton&quot;</span>)</span>
+<span id="cb5-4"><a href="det-opt.html#cb5-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">guess=</span>init_guesses,<span class="at">algo=</span>algos)</span>
+<span id="cb5-5"><a href="det-opt.html#cb5-5" aria-hidden="true" tabindex="-1"></a>X_star <span class="ot">=</span> <span class="fu">lapply</span>(</span>
+<span id="cb5-6"><a href="det-opt.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(grid),</span>
+<span id="cb5-7"><a href="det-opt.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(i) {</span>
+<span id="cb5-8"><a href="det-opt.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gradient_desc</span>(</span>
+<span id="cb5-9"><a href="det-opt.html#cb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">f=</span>f,<span class="at">df=</span>df,</span>
+<span id="cb5-10"><a href="det-opt.html#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">X0=</span>X0[grid[i,<span class="st">&quot;guess&quot;</span>],<span class="fu">c</span>(x1,x2)],</span>
+<span id="cb5-11"><a href="det-opt.html#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">method =</span> grid[i,<span class="st">&quot;algo&quot;</span>]</span>
+<span id="cb5-12"><a href="det-opt.html#cb5-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-13"><a href="det-opt.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-14"><a href="det-opt.html#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-15"><a href="det-opt.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy up</span></span>
+<span id="cb5-16"><a href="det-opt.html#cb5-16" aria-hidden="true" tabindex="-1"></a>X_star_dt <span class="ot">=</span> <span class="fu">rbindlist</span>(</span>
+<span id="cb5-17"><a href="det-opt.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(</span>
+<span id="cb5-18"><a href="det-opt.html#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(X_star), </span>
+<span id="cb5-19"><a href="det-opt.html#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(i) {</span>
+<span id="cb5-20"><a href="det-opt.html#cb5-20" aria-hidden="true" tabindex="-1"></a>      dt <span class="ot">=</span> <span class="fu">data.table</span>(X_star[[i]]<span class="sc">$</span>visited)</span>
+<span id="cb5-21"><a href="det-opt.html#cb5-21" aria-hidden="true" tabindex="-1"></a>      dt[,method<span class="sc">:</span><span class="er">=</span>X_star[[i]]<span class="sc">$</span>method]</span>
+<span id="cb5-22"><a href="det-opt.html#cb5-22" aria-hidden="true" tabindex="-1"></a>      dt[,(<span class="fu">c</span>(<span class="st">&quot;x0_1&quot;</span>,<span class="st">&quot;x0_2&quot;</span>))<span class="sc">:</span><span class="er">=</span>.(X_star[[i]]<span class="sc">$</span>X0[<span class="dv">1</span>],X_star[[i]]<span class="sc">$</span>X0[<span class="dv">2</span>])]</span>
+<span id="cb5-23"><a href="det-opt.html#cb5-23" aria-hidden="true" tabindex="-1"></a>      dt[,iteration<span class="sc">:</span><span class="er">=</span>.I<span class="dv">-1</span>]</span>
+<span id="cb5-24"><a href="det-opt.html#cb5-24" aria-hidden="true" tabindex="-1"></a>      dt[,y<span class="sc">:</span><span class="er">=</span><span class="fu">f</span>(<span class="fu">c</span>(V1,V2)),by<span class="ot">=</span>.(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dt))]</span>
+<span id="cb5-25"><a href="det-opt.html#cb5-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-26"><a href="det-opt.html#cb5-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-27"><a href="det-opt.html#cb5-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="results" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Results</h3>
 <p>The below shows how the two algorithms converge to</p>
-<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
 <img src="www/p1.gif" alt="Good initial guess."  />
 <p class="caption">
 Figure 2.2: Good initial guess.
 </p>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
 <img src="www/p2.gif" alt="Poor initial guess."  />
 <p class="caption">
 Figure 2.3: Poor initial guess.
@@ -377,8 +417,8 @@ Figure 2.3: Poor initial guess.
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="optimal-subsampling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introductory-topics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
