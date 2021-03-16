@@ -1,5 +1,82 @@
 # Dimensionality reduction {#dim-red}
 
+Let $X_1,...,X_n\in\mathbb{R}^p$ be our high-dimensional data. We want to project the data onto a lower-dimensional space, that is we want $q<<p$ and $f:\mathbb{R}^p \mapsto \mathbb{R}^q$ such that $||f(X_i)-f(X_j)|| \approx ||X_i-X_j||$ -- the distance between any two points in the lower-dimensional space should be close to their corresponding distance in the original space. We can respecify the problem as
+
+$$
+\begin{aligned}
+&& \max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}-1\right|&\le \varepsilon\\
+\end{aligned}
+$$
+
+where $\varepsilon$ is some desired accuracy.
+
+## Random projections
+
+```{lemma, john-lin, name="Johnson-Lindestrauss"}
+Given $X_1,...,X_n\in\mathbb{R}^p$ there exists a (possibly linear) mapping $f:\mathbb{R}^p \mapsto \mathbb{R}^q$ such that 
+
+$$
+\max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||}{||X_i-X_j||}-1\right|\le \varepsilon
+$$
+
+whenever $q\ge \frac{8}{\varepsilon^2} \log n$.
+```
+
+Let $f(X)=WX$, $X\in\mathbb{R}^p$, $W$ $(q\times p)$ and for the elements of $W$: $w_{ij} \sim \mathcal{N}(0, \frac{1}{p})$ are idd. First note that
+
+$$
+\begin{aligned}
+&& \mathbb{E}||f(X)||^2&= \mathbb{E} ||W X||^2= \mathbb{E} \sum_{i=1}^{q} \left( \sum_{j=1}^{p} X_jW_{i,j}\right)^2\\
+&& &= \sum_{i=1}^{q}\mathbb{E}  \left( \sum_{j=1}^{p} X_jW_{i,j}\right)^2= \sum_{i=1}^{q} \frac{||X||^2}{q}\\
+\end{aligned}
+$$
+
+where the last equality follows from $\sum_{j=1}^{p} X_jW_{i,j} \sim \mathcal{N}(0, \frac{1}{q}\sum_{j=1}^{p} X_j^2 ) = \sim \mathcal{N}(0,\frac{||X||^2}{q})$. Then finally:
+
+$$
+\begin{aligned}
+&& \mathbb{E}||f(X)||^2&=||X||^2 \\
+\end{aligned}
+$$
+Now in particular for any $i,j\le n$
+
+$$
+\begin{aligned}
+&& \mathbb{E}||f(X_i)-f(X_j)||^2&= \mathbb{E}||W(X_i-X_j)||^2=||X_i-X_j||^2 \\
+\end{aligned}
+$$
+
+Now for the actual proof:
+
+```{proof}
+We want to show that 
+
+$$
+\begin{aligned}
+&& \max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}-1\right|&\le \varepsilon\\
+\end{aligned}
+$$
+
+with high probability. Note that we can rewrite
+
+$$
+\begin{aligned}
+&& \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}&= ||W \left( \frac{X_i-X_j}{||X_i-X_j||}\right)||^2 \\
+\end{aligned}
+$$
+
+where $||\frac{X_i-X_j}{||X_i-X_j||}||=1$. Denote $b=\frac{X_i-X_j}{||X_i-X_j||}$, then we have
+
+$$
+\begin{aligned}
+&& ||Wb||^2-1&=\sum_{i=1}^{q}  \left( \sum_{j=1}^{p} W_{i,j} b_j\right)^2 -1=\sum_{i=1}^{q} N_i^2-1\\
+\end{aligned}
+$$
+
+with $N_i=\sum_{j=1}^{p} W_{i,j} b \sim \mathcal{N}(0, \frac{1}{d})$
+```
+
+
 ## PCA
 
 One of the most straight-forward ways to reduce model dimensionality is principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix $X$ $(n \times p)$ can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the $p$ different features in $X$ related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.

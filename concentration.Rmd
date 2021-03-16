@@ -291,7 +291,9 @@ Let $v= \sum_{i=1}^{n} \mathbb{E}x_i^2$. If $x_1,...,x_n$ are independent and $x
 ```
 
 
-Finally, let us look at a common example, namely the binomial distribution. 
+## Examples
+
+Finally, let us at a few examples. Firstly, let us look at what bounds we get for the different concentration inequalities when applied to the binomial distribution:
 
 ```{example}
 Let $x_1,...,x_n$ be independent random variable with $x_i \sim \text{Bern}(p)$ and hence $\text{var}(x_i)=p(1-p)$. Then $B=\sum_{i=1}^{n}x_i \sim \text{Bin}(n,p)$ with $\mathbb{E}B=np$. Then we have 
@@ -304,6 +306,41 @@ e^{- \frac{t^2}{2p(1-p)+ \frac{2t}{3}}} && \text{(Bernstein)}\end{cases}
 \end{aligned}
 $$
 ```
+
+Another illustrative application of Chernoff's bounds emerges in the context of high-dimensional spaces. Consider the question of how many points we can choose on the $d$-dimensional unit ball, such that their pair-wise angles are (almost) orthogonal. 
+
+```{example}
+Let $X$ and $Y$ be two random, independent points on the surface of the unit ball. A random point $X$ can be generated as
+
+$$
+\begin{aligned}
+&& X&= \frac{1}{||N||}( N_1, ..., N_d) \\
+\end{aligned}
+$$
+where $N=(N_1, ..., N_d) \sim \mathcal{N}(\mathbf{0},\mathbf{I}_d)$. Analogously we can generate $Y$. If $X$ and $Y$ are orthogonal, then $\cos(\angle(X,Y))= \frac{ X^TY}{||X||||Y||}=0$. By construction, $||X||,||Y||=1$ and hence it suffices to come up with a bound for $X^TY$. Noting that $X^TY \approx \frac{1}{d} \sum_{i=1}^{d}N_i^{(X)}N_i^{(Y)}$ we have
+
+$$
+\begin{aligned}
+&& P(X^TY \ge \varepsilon)&\approx P(\frac{1}{d} \sum_{i=1}^{d}N_i^{(X)}N_i^{(Y)} \ge \varepsilon) \le \frac{ \mathbb{E} \left[ e^{\lambda N_i^{(X)}N_i^{(Y)}} \right]}{e^{\lambda \varepsilon d}}\\
+\end{aligned}
+$$
+It can be shown that for the moment-generating function of the inner product of two standard Gaussians we have $\mathbb{E} \left[ e^{\lambda N_i^{(X)}N_i^{(Y)}} \right]= \frac{1}{\sqrt{1-\lambda^2}}$ if $\lambda <1$. So $P(X^TY \ge \varepsilon) \le (1- \lambda^2)^{-\frac{d}{2}} e^{-\lambda\varepsilon d}$. For small values of $\lambda$ we further have $\log(1-\lambda^2)\approx-\lambda$ so $(1- \lambda^2)^{-\frac{d}{2}} \approx e^{ \frac{d \lambda^2}{2}}$. Then $P(X^TY \ge \varepsilon) \le e^{- \frac{d\varepsilon^2}{2}}$.
+
+Hence, if $X_1,...,X_n$ are iid random points on the surface of the unit ball, then:
+
+$$
+P(\max_{i,j}|X_i^TX_j| \ge \varepsilon) \le \sum_{i,j} P(|X_i^TX_j| \ge \varepsilon) \le \binom{n}{2} 2 e^{- \frac{d\varepsilon^2}{2}} \le n^2 2e^{-\frac{d\varepsilon^2}{2}}
+$$
+
+Now let $n\le e^{ \frac{d \varepsilon^2}{8}} \Leftrightarrow n^2 \le e^{ \frac{d \varepsilon^2}{4}}$. Then we have that 
+
+$$
+P(\max_{i,j}|X_i^TX_j| \ge \varepsilon) \le e^{ \frac{d \varepsilon^2}{4}} 2e^{-\frac{d\varepsilon^2}{2}} = 2 e^{-\frac{d \varepsilon^2}{4}}
+$$
+```
+
+Hence, if $d \ge \frac{`r -4*log(0.5)*2`}{\varepsilon^2}$ we can choose $n= e^{ \frac{d \varepsilon^2}{8}}$ points such that their pair-wise almost orthogonal.
+
 
 ## Appendix
 
