@@ -12,8 +12,11 @@ rmd_files: [
   "optimization.Rmd",
   "regression.Rmd",
   "classification.Rmd",
+  "empirical_risk.Rmd",
   "regularization.Rmd",
   "dimensionality.Rmd",
   "subsampling.Rmd",
-  "outliers.Rmd"
+  "outliers.Rmd",
+  "references.Rmd",
+  "appendix.Rmd"
 ]

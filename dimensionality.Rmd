@@ -1,10 +1,10 @@
 # Dimensionality reduction {#dim-red}
 
-Let $X_1,...,X_n\in\mathbb{R}^p$ be our high-dimensional data. We want to project the data onto a lower-dimensional space, that is we want $q<<p$ and $f:\mathbb{R}^p \mapsto \mathbb{R}^q$ such that $||f(X_i)-f(X_j)|| \approx ||X_i-X_j||$ -- the distance between any two points in the lower-dimensional space should be close to their corresponding distance in the original space. We can respecify the problem as
+Let $X_1,...,X_n\in\mathbb{R}^p$ be our high-dimensional data. We want to project the data onto a lower-dimensional space, that is we want $q<<p$ and $f:\mathbb{R}^p \mapsto \mathbb{R}^q$ such that $||f(X_k)-f(X_l)|| \approx ||X_k-X_l||$ -- the distance between any two points in the lower-dimensional space should be close to their corresponding distance in the original space. We can respecify the problem as
 
 $$
 \begin{aligned}
-&& \max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}-1\right|&\le \varepsilon\\
+&& \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right|&\le \varepsilon\\
 \end{aligned}
 $$
 
@@ -16,13 +16,13 @@ where $\varepsilon$ is some desired accuracy.
 Given $X_1,...,X_n\in\mathbb{R}^p$ there exists a (possibly linear) mapping $f:\mathbb{R}^p \mapsto \mathbb{R}^q$ such that 
 
 $$
-\max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||}{||X_i-X_j||}-1\right|\le \varepsilon
+\max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||}{||X_k-X_l||}-1\right|\le \varepsilon
 $$
 
 whenever $q\ge \frac{8}{\varepsilon^2} \log n$.
 ```
 
-Let $f(X)=WX$, $X\in\mathbb{R}^p$, $W$ $(q\times p)$ and for the elements of $W$: $w_{ij} \sim \mathcal{N}(0, \frac{1}{p})$ are idd. First note that
+Let $f(X)=WX$, $X\in\mathbb{R}^p$, $W$ $(q\times p)$ and for the elements of $W$: $w_{ij} \sim \mathcal{N}(0, \frac{1}{q})$ are idd. First note that
 
 $$
 \begin{aligned}
@@ -42,7 +42,7 @@ Now in particular for any $i,j\le n$
 
 $$
 \begin{aligned}
-&& \mathbb{E}||f(X_i)-f(X_j)||^2&= \mathbb{E}||W(X_i-X_j)||^2=||X_i-X_j||^2 \\
+&& \mathbb{E}||f(X_k)-f(X_l)||^2&= \mathbb{E}||W(X_k-X_l)||^2=||X_k-X_l||^2 \\
 \end{aligned}
 $$
 
@@ -53,7 +53,7 @@ We want to show that
 
 $$
 \begin{aligned}
-&& \max_{i,j\le n}\left| \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}-1\right|&\le \varepsilon\\
+&& \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right|&\le \varepsilon\\
 \end{aligned}
 $$
 
@@ -61,11 +61,11 @@ with high probability. Note that we can rewrite
 
 $$
 \begin{aligned}
-&& \frac{||f(X_i)-f(X_j)||^2}{||X_i-X_j||^2}&= ||W \left( \frac{X_i-X_j}{||X_i-X_j||}\right)||^2 \\
+&& \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}&= ||W \left( \frac{X_k-X_l}{||X_k-X_l||}\right)||^2 \\
 \end{aligned}
 $$
 
-where $||\frac{X_i-X_j}{||X_i-X_j||}||=1$. Denote $b=\frac{X_i-X_j}{||X_i-X_j||}$, then we have
+where $||\frac{X_k-X_l}{||X_k-X_l||}||=1$. Denote $b=\frac{X_k-X_l}{||X_k-X_l||}$, then we have
 
 $$
 \begin{aligned}
@@ -73,13 +73,68 @@ $$
 \end{aligned}
 $$
 
-with $N_i=\sum_{j=1}^{p} W_{i,j} b \sim \mathcal{N}(0, \frac{1}{d})$
+with $N_i=\sum_{j=1}^{p} W_{i,j} b_j \sim \mathcal{N}(0, \frac{1}{q})$ since $W_{i,j} \sim \mathcal{N}(0, \frac{1}{q})$ and $b$ is a unit vector. Note also that $\mathbb{E}N_i^2= \frac{1}{q} \Leftrightarrow \sum_{i=1}^{q}\mathbb{E}N_i^2=1$ and hence:
+
+$$
+\begin{aligned}
+&& ||Wb||^2-1&=\sum_{i=1}^{q} (N_i^2-\mathbb{E}N_i^2) \\
+\end{aligned}
+$$
+
+Now since $||Wb||^2-1$ is just a sum of squared random Gaussian variables we can apply Chernoff's bounds, which can be shown to yield:
+
+$$
+\begin{aligned}
+&& P(\left| ||Wb||^2-1 \right| \ge \varepsilon)&\le \frac{ \mathbb{E} e^{\lambda \sum_{i=1}^{q}
+(N_i^2- \frac{1}{q})}}{e^{\lambda \varepsilon}} \le 2 e^{- \frac{q \varepsilon^2}{4}
+}\\
+\end{aligned}
+$$
+The by the union bound we get 
+
+$$
+\begin{aligned}
+&& P(\max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right| \ge \varepsilon)&\le \binom{n}{2}2e^{- \frac{q \varepsilon^2}{4}
+} \le \frac{n^2}{2} 2e^{- \frac{q \varepsilon^2}{4}
+} \\
+\end{aligned}
+$$
+
+We can further show that this implies that with probability $>1-\delta$
+
+$$
+\begin{aligned}
+&& \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right| &\le \varepsilon\\
+\end{aligned}
+$$
+
+whenever $q \ge \frac{4 \log ( \frac{n^2}{2})}{\varepsilon^2}$.
+```
+
+This is quite amazing since the final result is independent of $p$. 
+
+```{r}
+n <- 100
+p <- 1000000
+delta <- 0.1
+eps <- 0.01
+q <- ceiling(4/(eps^2) * log(n^2/2*delta))
 ```
 
 
+Let $p=`r p`$ and $n=`r n`$. Then with probability $`r 1-delta`$ we have
+
+$$
+\begin{aligned}
+&& \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right| &\le `r eps` \\
+\end{aligned}
+$$
+
+whenever $q\ge`r q`$.
+
 ## PCA
 
-One of the most straight-forward ways to reduce model dimensionality is principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix $X$ $(n \times p)$ can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the $p$ different features in $X$ related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.
+Another common way to reduce model dimensionality is through principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix $X$ $(n \times p)$ can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the $p$ different features in $X$ related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.
 
 ### The maths behind PCA
 
@@ -342,8 +397,6 @@ knitr::kable(head(ranking,q))
 
 ### Fast, partial SVD
 
-
-
 ```{r}
 library(irlba)
 n_pc <- 5
@@ -352,7 +405,7 @@ ssvd <- ssvd(X, k=n_pc)
 
 
 ```{r}
-p <- 10000
+p <- 100
 n <- 50
 X <- matrix(rnorm(p*n),n) 
 library(microbenchmark)

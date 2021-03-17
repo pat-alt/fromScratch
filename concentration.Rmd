@@ -252,7 +252,7 @@ $$
 where $\mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]$ is the moment generating function of $X- \mathbb{E}X$.
 ```
 
-### Hoeffding's Inequality
+### Hoeffding's Inequality {#conc-hoeff}
 
 ```{lemma, hoeff-lem, name="Hoeffding's Lemma"}
 If $X$ is bounded by $[a,b]$, then $\mathbb{E} \left[ e^{\lambda(X- \mathbb{E}X)} \right]\le e^{ \frac{\lambda^2(b-a)}{8}}$.
@@ -291,7 +291,7 @@ Let $v= \sum_{i=1}^{n} \mathbb{E}x_i^2$. If $x_1,...,x_n$ are independent and $x
 ```
 
 
-## Examples
+## Examples {#conc-examples}
 
 Finally, let us at a few examples. Firstly, let us look at what bounds we get for the different concentration inequalities when applied to the binomial distribution:
 

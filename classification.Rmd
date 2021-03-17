@@ -1,6 +1,249 @@
 # Classification {#class}
 
-## Logisitic regression
+## Binary classification
+
+Given an observation $X\in \mathcal{X} \subseteq \mathbb{R}^d$, we want to assign a binary label (e.g $y\in\{0,1\}$) to it. A classifier is a function that maps from the feature space to the binary label: $g: \mathcal{X} \mapsto \{0,1\}$. An observation/label pair is modelled as a pair of random variables $(X,y)$. The joint distribution of the pair can be described by:
+
+$$
+\begin{aligned}
+&& \mu(A)&=P(X\in A) \\
+&& \eta(X)&=P(Y=1|X=x) \\
+&& 1-\eta(X)&=P(Y=0|X=x) \\
+\end{aligned}
+$$
+
+We further have
+
+$$
+\begin{aligned}
+&& q_0&=P(y=0) \\
+&& q_1&=P(y=1) \\
+\end{aligned}
+$$
+
+and the class-conditional distributions:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& P(X\in A|y=0)&, &P(X\in A |y=1) \\
+\end{aligned}
+(\#eq:class-cond)
+\end{equation}
+$$
+
+The quality of a classifier $g$ is measured by its risk:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g)&=P(g(X) \ne y) \\
+\end{aligned}
+(\#eq:risk)
+\end{equation}
+$$
+
+More generally we have a loss function $\ell: \{0,1\} \times \{0,1\} \mapsto \mathbb{R}$ and denote
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g)&=   \mathbb{E}\ell(g(X),y)\\
+\end{aligned}
+(\#eq:risk-loss)
+\end{equation}
+$$
+
+which is equivalent to (\@ref(eq:risk)) if we define $\ell(g(X),y)= \mathbb{1}_{g(X) \ne y}$. In the binary case we have
+
+$$
+\begin{aligned}
+&& R(g)&=P(g(X)\ne y)=P(g(X)=1,y=0)+P(g(X)=0,y=1) \\
+&& &=P(g(X)=1|y=0)q_0+P(g(X)=0|y=1)q_1 \\
+\end{aligned}
+$$
+
+```{theorem, bayes-class, name="Bayes classifier"}
+Let 
+
+$$
+\begin{aligned}
+&& g^*(X)&= \begin{cases}
+1 & \text{if }\eta(X) \ge \frac{1}{2}\\
+0 & \text{otherwise.}
+\end{cases} \\
+\end{aligned}
+$$
+
+then $g^*$ is optimal in the sense that for any classifier $g$
+
+$$
+\begin{aligned}
+&& R(g)&\ge R(g^*) \\
+\end{aligned}
+$$
+
+We call $g^*$ the Bayes classifier and $R(g^*)$ the Bayes risk.
+```
+
+```{proof}
+For any classifier $g: \mathcal{X} \mapsto \{0,1\}$ we have $R(g)=P(g(X)\ne y)$. Conditioning on $X=x$ we have
+
+$$
+\begin{aligned}
+&& P(g(X)\ne y|X=x)&=P(g(X)=1,y=0|X=x)+P(g(X)=0,y=1|X=x) \\
+&& &= \mathbb{1}_{g(x)=1}P(y=0|X=x) +\mathbb{1}_{g(x)=0}P(y=1|X=x) \\
+&& &= \mathbb{1}_{g(x)=1}(1-\eta(x)) +\mathbb{1}_{g(x)=0} \eta(x) \\
+\end{aligned}
+$$
+
+Now we want to show that $R(g)-R(g^*) \ge 0$. Conditioning as before
+
+$$
+\begin{aligned}
+&& R(g)-R(g^*)&=P(g(X)\ne y|X=x)-P(g^*(X)\ne y|X=x) \\
+&& &=\eta(x) (\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0}) + (1-\eta(x)) (\mathbb{1}_{g(x)=1}-\mathbb{1}_{g^*(x)=1}) \\
+&& &=\eta(x) (\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0}) + (\eta(x)-1) (\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0}) \\
+&& &= (2\eta(x)-1) (\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0}) \\
+\end{aligned}
+$$
+
+Now consider the case where $\eta(x)\ge \frac{1}{2}$, then $\mathbb{1}_{g^*(x)=0}=0$ and hence both $(2\eta(x)-1)\ge0$ and $(\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0})\ge0$. In the other possible case where $\eta(x)< \frac{1}{2}$ we can argue analogously to show that both $(2\eta(x)-1)<0$ and $(\mathbb{1}_{g(x)=0}-\mathbb{1}_{g^*(x)=0})<0$. Hence, taking expectations we have $R(g)-R(g^*) \ge 0$.
+```
+
+Above we conditioned on $X=x$ and in the end stated that *taking expectations* we have $R(g)-R(g^*) \ge 0$. More generally we denote
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g)&= \mathbb{E} \left[ \mathbb{1}_{g(X)=1}(1-\eta(X)) +\mathbb{1}_{g(X)=0} \eta(X) \right]\\
+\end{aligned}
+(\#eq:risk-exp)       
+\end{equation}
+$$
+
+and for the Bayes risk therefore:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R^*&=\mathbb{E} \left[ \mathbb{1}_{\eta(X)\ge \frac{1}{2}}(1-\eta(X)) +\mathbb{1}_{\eta(X)<0} \eta(X) \right] \\
+&& &= \mathbb{E} \min (\eta(X),1-\eta(X))\\
+\Rightarrow&& R^*&\in(0, \frac{1}{2}) \\
+\end{aligned}
+(\#eq:bayes-risk-exp)
+\end{equation}
+$$
+
+Of course, in practice $\eta(X)$ is unknown and instead estimated through supervised learning using training data $D_n=((X_1,y_1),...,(X_n,y_n))$. We denote a data-dependent classifier as 
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& g_n&=g_n(X,D_n)\in\{0,1\} \\
+\end{aligned}
+(\#eq:class-data)
+\end{equation}
+$$
+
+
+Our goal in classification is to find a classifier such that $\mathbb{E}R(g_n)-R^*$ is small.
+
+```{definition, name="Consistent classifier"}
+A classifier is consistent if $\lim_{n\rightarrow \infty} \mathbb{E}R(g_n)=R^*$
+```
+
+## Nearest Neighbour {#class-knn}
+
+Assume that $\mathcal{X}$ is a metric space.
+
+```{definition}
+A metric space $\mathcal{X}$ is equipped with a distance $d: \mathcal{X} \times \mathcal{X} \mapsto \mathbb{R}_+$ such that:
+
+$$
+\begin{aligned}
+&& d(x,y)&\ge0 &\forall x,y \in \mathcal{X} \\
+&& d(x,x)&=0 \\
+&& d(x,y)&>0 &\text{if }x\ne y  \\
+&& d(x,y)&=d(y,x) \\
+&& d(x,z)&\le d(x,y)+d(y,z) &\forall x,y,z \in \mathcal{X} \\
+\end{aligned}
+$$
+
+The last inequality is referred to as *triangle inequality*.
+```
+
+Nearest Neighbour rules are based on how far away points are from each other based on some metric distance. Classifiers based on such rules assign labels to points based on the labels their neighbours.
+
+```{definition, name="Nearest Neighbour"}
+Let $X\in\mathcal{X}$ and let $d(x,y)$ be the metric distance of $\mathcal{X}$. The the for the Nearest Neighbour of any point $X_i$ we have:
+
+$$
+\begin{aligned}
+&& X_{(1)}(X_i)&= \arg\min_{j\ne i}d(X_i,X_j) \\
+\end{aligned}
+$$
+
+In general we sort all data points in terms of their distance to any point $X$: $(X_{(1)}(X),...,X_{(n)}(X))$.
+```
+
+### 1NN
+
+```{definition, nn-class, name="1NN-classifier"}
+The $1NN-$ classifier assigns to $X$ the label of its neares neighboer: $g_n(X)=y_{(1)}(X)$. Its (empirical) probability of error can be denoted as $R(g_n)=P(y_{(1)}\ne y|D_n)= \mathbb{E} \left[P(y_{(1)}(X)\ne y|D_n)|D_n  \right]$. 
+```
+
+It can be shown that that the distance between any point and its nearest neighbour is typically on the order of $n^{-\frac{1}{d}}$. Hence for $n\rightarrow \infty$ we have that $d(X_{(1)}(X),X)\rightarrow0$. Consequently, for $n$ sufficiently large 
+
+$$
+\begin{aligned}
+&& X_{(1)}(X)&\approx X \\
+&& \eta(X_{(1)}(X))&\approx \eta(X) \\
+\end{aligned}
+$$
+Let $y \sim \text{Bern}(\eta)$, then
+
+$$
+\begin{aligned}
+&& P(y_{(1)}(X)\ne y)&=P(y_{(1)}(X)=1, y=0)+P(y_{(1)}(X)=0, y=1) \\
+&& &\approx \eta(1-\eta)+\eta(1-\eta)=2\eta(1-\eta) \\
+\end{aligned}
+$$
+```{theorem, nn}
+For all distributions of $(X,y)$: $\lim_{n\rightarrow \infty} \mathbb{E}R(g_n^{(\text{1NN})})=2 \mathbb{E} \left[ \eta(X)(1-\eta(X)) \right]\le2R^*(1-R^*)$
+```
+
+The inequality can be derived as follows. Recall that $R^*= \mathbb{E} \left[ \min(\eta,1-\eta) \right]$ and note that $\eta(1-\eta)\le\min(\eta(1-\eta))$ for $\eta\in[0,1]$. Hence, clearly $R^*\le R^{\text{1NN}}\le2R^*$. Let $Z=\min(\eta,1-\eta)$, then since $Z(1-Z)$ is concave we can apply Jensen's Inequality to derive the final result in \@ref(thm:1nn).
+
+### KNN
+
+```{definition, knn}
+Let $k$ be an odd positive integer. The KNN classifier take the majority vote among the labels of the $k$ nearest neighbours of $X$:
+  
+$$
+\begin{aligned}
+&& g_n&= \begin{cases}
+1  & \text{if } \sum_{i=1}^{k}y_{(i)}(X)> \frac{1}{2}
+\\
+0& \text{otherwise.}
+\end{cases} \\
+\end{aligned}
+$$
+```
+
+One can show that for the asymptotic risk of the KNN-classifier we have:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R^{(\text{KNN})}&=R^*+ \frac{1}{\sqrt{ke}}
+ \\
+\end{aligned}
+(\#eq:risk-knn)
+\end{equation}
+$$
+
+## Logisitic regression {#class-logit}
 
 To model the probability of $y=1$ we will use logistic regression:
 
@@ -41,6 +284,7 @@ In R this can be implemented from scratch as below. For the empirical exercises 
 
 ```{r class.source = "fold-show", code=fromScratchR::logit_irls, echo=TRUE, eval=FALSE}
 ```
+
 
 ## Appendix
 

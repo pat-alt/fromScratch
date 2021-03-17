@@ -1,0 +1,281 @@
+# Empirical risk minimization {#emp}
+
+## Excess risk and overfitting error {#emp-risks}
+
+Let $g:\mathcal{X}\mapsto\{0,1\}$ be a classifier. Given data $D_n=((X_1,y_1),...,(X_n,y_n))$ we can estimate $R(g)=P(g(X)\ne y)$ by the empirical mean $R_n(g)= \frac{1}{n} \sum_{i=1}^{n} \mathbb{1}_{g(X_i)\ne y_i}$. Then by Hoeffding's Inequality we have
+
+$$
+\begin{aligned}
+&& P(\left|R_n(g)-R(g)\right|\ge \varepsilon)&\le 2e^{-2n\varepsilon^2} \\
+\end{aligned}
+$$
+
+and equivalently with probability $\ge 1-\delta$:
+
+$$
+\begin{aligned}
+&& \left|R_n(g)-R(g)\right|&\le \sqrt{ \frac{\log( \frac{2}{\delta})}{2n}} \\
+\end{aligned}
+$$
+
+Suppose now that we have a set $N$ classifiers $\mathcal{C}=\{g^{(1)},...,g^{(n)}\}$. Now let $g_n$ denote the data-based classifier that minimizes the empirical risk $R_n(g^{(j)})$ among our $N$ classifiers. For its risk $R(g_n)=P(g_n(X)\ne y|D_n)$ we can establish two quantities of interest:
+
+```{definition, exc-risk, name="Excess risk"}
+The excess risk is defined as the difference between the true risk of our data-based classifier and the minimal true risk across all our classifiers:
+
+$$
+\begin{aligned}
+&& R(g_n)&-\min_{j=1,..,N}R(g^{(j)}) \\
+\end{aligned}
+$$
+```
+
+```{definition, overfitting, name="Overfitting error"}
+The overfitting error is defined as the difference between the true risk of our data-based classifier and the minimal true risk across all our classifiers:
+
+$$
+\begin{aligned}
+&& R(g_n)-\min_{j=1,..,N}R_n(g^{(j)})&=R(g_n)-R_n(g_n) \\
+\end{aligned}
+$$
+```
+
+We can further establish two basic inequalities. The first one is trivial:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g_n)-R_n(g_n)&\le \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)}) \right| && \text{(overfitting)} \\
+\end{aligned}
+(\#eq:overfitting-ineq)
+\end{equation}
+$$
+
+To derive the second one, note that we can rewrite the term in \@ref(def:exc-risk) as
+
+$$
+\begin{aligned}
+&& R(g_n)-\min_{j=1,..,N}R(g^{(j)})&=R(g_n)-R_n(g_n)+R_n(g_n)-\min_{j=1,..,N}R(g^{(j)}) \\
+\end{aligned}
+$$
+where $R(g_n)-R_n(g_n)$ just correspond to the overfitting error again. For the second term denote $\bar{g}=\arg\min_{j}R(g^{(j)})$ and note that 
+
+$$
+\begin{aligned}
+&& R_n(g_n)-\min_{j=1,..,N}R(g^{(j)})&\le R_n(\bar{g})-\min_{j=1,..,N}R(g^{(j)}) \\
+\end{aligned}
+$$
+
+since by definition $g_n$ minimizes the empirical risk and hence $R_n(g_n)\le R_n(\bar{g})$. Once again we can trivially establish that 
+
+$$
+\begin{aligned}
+&& R_n(\bar{g})-\min_{j=1,..,N}R(g^{(j)})&\le \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right|\\
+\end{aligned}
+$$
+
+which is the just the bound for the overfitting error already established in \@ref(eq:overfitting-ineq). Hence, we take everything together to arrive at the second basic inequality:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g_n)-\min_{j=1,..,N}R(g^{(j)})&\le 2\max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right| && \text{(excess risk)} \\
+\end{aligned}
+(\#eq:exc-risk-ineq)
+\end{equation}
+$$
+
+So both the excess risk and the overfitting error may be bounded in term of:
+
+$$
+\begin{aligned}
+&& \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right| \\
+\end{aligned}
+$$
+
+Now let us actually derive a bound. We have
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& P\left(\max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right|\ge\varepsilon\right)&=P\left(\bigcup_{j=1,...,N} \left\{ \left| R(g^{(j)})-R_n(g^{(j)})\right|\ge\varepsilon\right\}\right) \\
+&& &\le \sum_{j=1}^{N}P\left(\left| R(g^{(j)})-R_n(g^{(j)})\right|\ge\varepsilon\right) \\
+&& &\le 2Ne^{-2n\varepsilon^2} \\
+\end{aligned}
+(\#eq:risk-bound)
+\end{equation}
+$$
+
+where the first inequality follows from the union bound and the second one from Hoeffding's Inequality. Equivalently, we finally have that with probability $\ge 1-\delta$
+
+$$
+\begin{aligned}
+&& \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right|&\le \sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} \\
+\end{aligned}
+$$
+and hence the following bound:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g_n)-R_n(g_n)&\le\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} && \text{(overfitting)} \\
+\end{aligned}
+(\#eq:overfitting-bound)
+\end{equation}
+$$
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& R(g_n)-\min_{j=1,..,N}R(g^{(j)})&\le 2\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} && \text{(excess risk)} \\
+\end{aligned}
+(\#eq:exc-risk-bound)
+\end{equation}
+$$
+
+### Data splitting
+
+Let $\mathcal{C}=\{g_1^{(1)},...,g_n^{(N)}\}$ be a set of data-dependent classifiers depending on $D_n$ and suppose that an independent data set is available for testing $D'_m=((X'_1,y'_1),...,(X'_m,y'_m))$. Then we may estimate the true risk $R(g_n^{(j)})=P(g_n^{(j)}(X)\ne y|D_n)$ by the empirical risk (test error):
+
+$$
+\begin{equation}
+\begin{aligned}
+&& R'_m(g_n^{(j)})&= \frac{1}{m} \sum_{i=1}^{m} \mathbb{1}_{g_n^{(j)}(X'_i)\ne y'_i}\\
+\end{aligned}
+(\#eq:test-error)
+\end{equation}
+$$
+
+Then using the results from above, where have for the empirical risk minimizer $g_{n,m}=\arg\min_{j=1,...,N}R'_m(g_n^{(j)})$ that with probability $1-\delta$:
+
+$$
+\begin{aligned}
+&& R(g_{n,m})-R'_m(g_{n,m})&=\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2m}} && \text{(overfitting)} \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+&& R(g_{n,m})-\min_{j=1,..,N}R(g_n^{(j)})&\le 2\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2m}} && \text{(excess risk)} \\
+\end{aligned}
+$$
+
+### Leave-one-out cross-validation
+
+Instead of data-splitting (once) we can use leave-one-out cross-validation to get an estimate of the true risk of our data-based classifier. As before we have $D_n=((X_1,y_1),...,(X_n,y_n))$. Now let $D_{n,i}=((X_1,y_1),...,(X_{i-1},y_{i-1}),(X_{i+1},y_{i+1}),...,(X_n,y_n))$ denote the subsample that contains all observations except $i$. Then we can define:
+
+$$
+\begin{aligned}
+&& R_n^{(D)}(g_n)&= \frac{1}{n} \sum_{i=1}^{n} \mathbb{1}_{g_{n-1}(X_i,D_{n,i})\ne y_i} \\
+\end{aligned}
+$$
+
+Now since $g_{n-1}$ does not depend on $(X_i,y_i)$ we have that:
+
+$$
+\begin{aligned}
+&& \mathbb{E} \left[ R_n^{(D)}(g_n) \right]&= \mathbb{E} \left[ R(g_{n-1}) \right]\\
+\end{aligned}
+$$
+
+But since $\mathbb{E} \left[ R(g_{n-1}) \right]\ne\mathbb{E} \left[ R(g_{n}) \right]$ we introduce a small amount of bias. In general it is not easy to establish bounds for the leave-one-out estimator, but empirically it performs well.
+
+### Realizable case
+
+Let $\mathcal{C}=\{g^{(1)},...,g^{(N)}\}$ be non-data-dependent classifiers depending on $D_n$. Now assume one of the candidate classifier has zero risk, that is $\min_jR(g^{(j)})=0$. We refer to this as the realizable case. Note that this implies that $\min_jR_n(g^{(j)})=0$ and also that both the excess risk and overfitting error are equal to the true risk, $R(g_n)$. Hence, we would like to bound this quantity.
+
+$$
+\begin{aligned}
+&& P(R(g_n) \ge \varepsilon)&\le P \left( \exists j\in 1,...,N: R(g^{(j)})\ge \varepsilon; R_n(g^{(j)})=0 \right)\\
+&& &\le N P \left(R(g)\ge \varepsilon \ \& \ R_n(g)=0 \right)  \\
+&& &\le N(1-\varepsilon)^N \le N e^{-n\varepsilon} \\
+\end{aligned}
+$$
+
+where the second inequality follows from the union bound.
+
+## Rademacher averages
+
+In many interesting cases the class of classifiers $\mathcal{C}$ that we wish to consider contains infinitely many classifiers. A common example is the class of deep neural networks, that can be arbitrarily deep and wide. To control overfitting in such cases we try to bound:
+
+$$
+\begin{aligned}
+&& \max_{g\in\mathcal{C}}\left|R(g)-R_n(g)\right| \\
+\end{aligned}
+$$
+
+At this point we shall simplify notation a little bit. As before, let $X_1,...,X_n$ be iid $\in \mathcal{X}$. For a set $A\subset\mathcal{X}$ we denote 
+
+$$
+\begin{aligned}
+&& P(A)&=P(X\in A) && \text{(true probability)}\\
+&& P_n(A)&= \frac{1}{n} \sum_{i=1}^{n} \mathbb{1}_{X_i\in A} && \text{(empirical frequency)}\\
+\end{aligned}
+$$
+where $X\in A$ in the context of empirical risk minimization corresponds to the classifier committing error. Now let $\mathcal{A}$ be a class of subsets of $\mathcal{X}$. Our aim here is to understand
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \max_{A\in\mathcal{A}} |P_n(A)-P(A)| \\
+\end{aligned}
+(\#eq:overfitting-radem)
+\end{equation}
+$$
+
+which looks similar to the expression for overfitting defined earlier \@ref(def:overfitting).
+
+### Finite class of classifiers
+
+Suppose first that $\mathcal{A}$ is a finite class. Then in order to bound \@ref(eq:overfitting-radem) we can proceed in the same way as we did before for the overfitting error and excess risk (Equation \@ref(eq:risk-bound)), where we used Hoeffding's Inequality and the union bound. Here we have that with probability $\ge 1-\delta$:
+
+$$
+\begin{aligned}
+&& \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le \sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} \\
+\end{aligned}
+$$
+
+This bound applies for given $A$. Now let us go a step further and bound the expected value of \@ref(eq:overfitting-radem). To do so we use a little trick where we first take the exponential, in particular
+
+$$
+\begin{aligned}
+&& \exp\left\{\lambda \mathbb{E} \left[ \max_{A\in\mathcal{A}} (P_n(A)-P(A)) \right]\right\}&\le \mathbb{E} \left[ \exp \left\{ \lambda\max_{A\in\mathcal{A}} (P_n(A)-P(A))  \right\} \right] &&, & \lambda>0\\
+&& &=\mathbb{E} \left[ \max_{A\in\mathcal{A}} \left( \exp \left\{ \lambda (P_n(A)-P(A))  \right\}\right) \right] \\
+&& &\le \mathbb{E} \left[  \sum_{A\in\mathcal{A}}\exp \left\{ \lambda (P_n(A)-P(A))  \right\}\right]\\
+&& &= \sum_{A\in\mathcal{A}}\mathbb{E} \left[ \exp \left\{ \lambda (P_n(A)-P(A))  \right\}\right] \\
+\end{aligned}
+$$
+
+where the the first step is by Jensen's Inequality, the second step holds since $e^{\lambda x}$ is strictly increasing, the inequality in the third step is trivial and the final step is by linearity of expectations. Now note that $\mathbb{E} \left[ \exp \left\{ \lambda (P_n(A)-P(A))  \right\}\right]$ is just the moment generating function of the binomial distribution. As we saw in Chapter \@ref(conc-hoeff), we can use Hoeffding's Lemma to bound that quantity, in particular:
+
+$$
+\begin{aligned}
+&& \exp\left\{\lambda \mathbb{E} \left[ \max_{A\in\mathcal{A}} (P_n(A)-P(A)) \right]\right\}&\le \sum_{A\in\mathcal{A}}\mathbb{E} \left[ \exp \left\{ \lambda (P_n(A)-P(A))  \right\}\right]\\
+&& &\le \sum_{A\in\mathcal{A}} e^{ \frac{\lambda^2}{8n}}=Ne^{ \frac{\lambda^2}{8n}} \\
+\end{aligned}
+$$
+
+Finally, taking logarithms and dividing by $\lambda$, we get:
+
+$$
+\begin{aligned}
+&& \mathbb{E} \left[ \max_{A\in\mathcal{A}} (P_n(A)-P(A)) \right]&\le \frac{\log N}{\lambda}+ \frac{\lambda}{8n}
+\\
+\end{aligned}
+$$
+Taking the first-order condition with respect to $\lambda$ we get $\lambda^*=\sqrt{8n\log N}$ and hence we can finally establish:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)| &\le 2 \sqrt{ \frac{\log N}{2n}}=\sqrt{ \frac{2\log N}{n}} \\
+\end{aligned}
+(\#eq:bound-radem-exp)
+\end{equation}
+$$
+
+### Infinitely many classifiers
+
+As pointed out above, there are many interesting case in which the class $\mathcal{A}$ counts infinitely many classifiers. To establish a bound for such cases, we will use two symmetrization tricks: the first one involves the introduction of a 'ghost' sample; the second one involves so called Rademacher random variables. 
+
+Starting with the former, let $X'_1,...,X'_n$ be our 'ghost' sample of iid data following the same distribution as $X$.
