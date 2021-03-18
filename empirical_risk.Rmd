@@ -274,8 +274,255 @@ $$
 \end{equation}
 $$
 
+**Remark**: It can be further be shown that with probability $\ge1-\delta$
+
+$$
+\begin{equation} 
+\begin{aligned}
+&&  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|-\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}} \\
+\end{aligned}
+(\#eq:remark)
+\end{equation}
+$$
+
+
+
 ### Infinitely many classifiers
 
 As pointed out above, there are many interesting case in which the class $\mathcal{A}$ counts infinitely many classifiers. To establish a bound for such cases, we will use two symmetrization tricks: the first one involves the introduction of a 'ghost' sample; the second one involves so called Rademacher random variables. 
 
-Starting with the former, let $X'_1,...,X'_n$ be our 'ghost' sample of iid data following the same distribution as $X$.
+Starting with the former, let $X'_1,...,X'_n$ be our 'ghost' sample of iid data following the same distribution as $X$. Let $P_n'(A)$ be the empirical frequency of $X'\in A$ and let $\mathbb{E}'$ denote the expectation with respect to $X'$: in this context we mean $\mathbb{E}'\left[\cdot\right]= \mathbb{E} \left[ \cdot|X \right]$. Then note that
+
+$$
+\begin{aligned}
+&& \mathbb{E}'P'_n(A)&= \mathbb{E} \left[ P'_n(A)|X \right]= \mathbb{E} \left[P'_n(X)\right]=P(A)\\
+\end{aligned}
+$$
+since by definition of our 'ghost' sample $X'$ follows the same distribution as $X$. Similarly, we have
+
+$$
+\begin{aligned}
+&&  \mathbb{E}'P_n(A)&= \mathbb{E} \left[ P_n(A)|X \right]=P_n(A)\\
+\end{aligned}
+$$
+since $P_n$ is a data-dependent frequency fully determined by $X$. Once again we care about the expected maximum difference between the empirical frequency and true probability that $X\in A$ across all sets $A\in\mathcal{A}$, namely $\mathbb{E}\max_{A\in\mathcal{A}} (P_n(A)-P(A))$. We can use our ghost sample for the first symmetrization trick:
+
+$$
+\begin{aligned}
+&& \mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&= \mathbb{E} \left[ \max_{A\in\mathcal{A}} \mathbb{E}'(P_n(A)-P'_n(A)) \right]\\
+\end{aligned}
+$$
+
+Since the maximum is a convex function we can use Jensen's Inequality to proceed
+
+$$
+\begin{aligned}
+&& \mathbb{E}  \max_{A\in\mathcal{A}} (P_n(A)-P(A))&= \mathbb{E} \left[ \max_{A\in\mathcal{A}} \mathbb{E}'(P_n(A)-P'_n(A)) \right]\\
+&& &\le \mathbb{E}  \mathbb{E}' \left[ \max_{A\in\mathcal{A}} (P_n(A)-P'_n(A)) \right] \\
+&& &= \mathbb{E} \mathbb{E} \left[  \max_{A\in\mathcal{A}} (P_n(A)-P'_n(A))|X \right] \\
+&& &= \mathbb{E} \left[  \max_{A\in\mathcal{A}} (P_n(A)-P'_n(A))\right] \\
+&& &= \mathbb{E} \left[  \max_{A\in\mathcal{A}} \frac{1}{n}\sum_{i=1}^{n}( \mathbb{1}_{X_i\in A}-\mathbb{1}_{X_i'\in A})\right]
+\end{aligned}
+$$
+
+Now we have already managed to bound our quantity of interest purely in terms of empirical frequencies over finite sample (or expectations thereof). Next we will make use of our second symmetrization trick, which involves the introduction of iid Rademacher random variables $\sigma_i\in\{-1,1\}$ for $i=1,...,n$.
+
+```{definition, radem, name="Rademacher random variable"}
+Let $X$ be a Rademacher random variable. Then $X\in\{-1,1\}$ and in particular for its density we have:
+
+$$
+\begin{aligned}
+&& f(X)&= \begin{cases}
+\frac{1}{2}& \text{if } X=-1\\
+\frac{1}{2}& \text{if } X=+1\\
+0 & \text{otherwise.}
+\end{cases}\\
+\end{aligned}
+$$
+```
+
+Now the trick is to realize that since $X_i,X'_i$ come from the same distribution they are exchangeable and the following equality holds:
+
+$$
+\begin{aligned}
+&& \mathbb{E} \left[  \max_{A\in\mathcal{A}} \frac{1}{n}\sum_{i=1}^{n}( \mathbb{1}_{X_i\in A}-\mathbb{1}_{X_i'\in A})\right]&=\mathbb{E} \left[  \max_{A\in\mathcal{A}} \frac{1}{n}\sum_{i=1}^{n}\sigma_i( \mathbb{1}_{X_i\in A}-\mathbb{1}_{X_i'\in A})\right] \\
+\end{aligned}
+$$
+
+Then we have
+
+$$
+\begin{aligned}
+&& \mathbb{E}  \max_{A\in\mathcal{A}} (P_n(A)-P(A))&\le\mathbb{E} \left[  \max_{A\in\mathcal{A}} \frac{1}{n}\sum_{i=1}^{n}\sigma_i( \mathbb{1}_{X_i\in A}-\mathbb{1}_{X_i'\in A})\right] \\
+&& &=\mathbb{E} \left[  \max_{A\in\mathcal{A}} \left( \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A}-\frac{1}{n}\sum_{i=1}^{n}\sigma_i\mathbb{1}_{X_i'\in A})  \right)\right] \\
+&& &\le 2 \mathbb{E} \left[  \max_{A\in\mathcal{A}} \left( \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right)\right]  \\
+\end{aligned}
+$$
+
+where the last step follows from Jensen's Inequality. So what we end up with it that the quantity of interest can be bounded by twice the expected value of the maximum of a Rademacher average. But looking more closely at that expected, we note that it essentially boils down to the maximum covariance between noise ($\sigma_i$) and an random indicator variable. This expected value can therefore be expected to be quite small and hence we have a tight bound in expectation. Now let
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathcal{R}_n(\mathcal{A})&=\mathbb{E}_{\sigma} \max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right| \\
+\end{aligned}
+(\#eq:radem-avg)
+\end{equation}
+$$
+
+
+denote the conditional Rademacher average where $\mathbb{E}_{\sigma}\left[\cdot\right]= \mathbb{E} \left[ \cdot|X \right]$. The we can restate further:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&&\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le 2 \mathbb{E} \mathcal{R}_n(\mathcal{A})
+\end{aligned}
+(\#eq:radem-conc)
+\end{equation}
+$$
+
+It can further be shown that $\mathcal{R}_n(\mathcal{A})$ is concentrated around its expected value in the sense that with probability $\ge1-\delta$:
+
+$$
+\begin{aligned}
+&& |\mathcal{R}_n(\mathcal{A})- \mathbb{E}\mathcal{R}_n(\mathcal{A})|&\le \sqrt{ \frac{2 \log ( \frac{2}{\delta})}{n}} \\
+\end{aligned}
+$$
+
+We showed earlier (Equation \@ref(eq:remark)) that we have have with probability $\ge1- \frac{\delta}{2}$:
+
+$$
+\begin{aligned}
+&& \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)| + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}}  \\
+&& &\le 2 \mathbb{E} \mathcal{R}_n(\mathcal{A}) + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}}  \\
+\end{aligned}
+$$
+
+Combining this with \@ref(eq:radem-conc) we finally derive the following theorem: 
+
+```{theorem, rad-bound, name="Rademacher bound"}
+Regardless of the distribution of $X$ and the class $\mathcal{A}$, we have that with probability $\ge 1-\delta$:
+
+$$
+\begin{aligned}
+&& \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le2  \mathcal{R}_n(\mathcal{A}) + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}} +  \sqrt{ \frac{2 \log ( \frac{2}{\delta})}{n}} \\
+\end{aligned}
+$$
+  
+Since the last two terms are tiny, we may simplify to:
+
+$$
+\begin{aligned}
+&& \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le2  \mathcal{R}_n(\mathcal{A}) + \varepsilon \\
+\end{aligned}
+$$
+```
+
+What is remarkable about \@ref(thm:rad-bound) is the fact that it establishes a purely empirical bound for a distribution free quantity that depends on a possibly infinite class.
+
+```{example, name="Fundamental Theorem of Statistics"}
+Let $\mathcal{A}$ contain all sets of the form $[-\infty,a]$ for all $a \in \mathbb{R}$. Then:
+
+$$
+\begin{aligned}
+&& P(A)&=P(X\in (-\infty,a]))=P(X\le a)=F(a) && \text{(CDF)} \\
+&& P_n(A)&=F_n(a) &&\text{(empirical CDF)} \\
+\end{aligned}
+$$
+
+In light of the Rademacher bound we know that in order to prove that $\max_{a \in \mathbb{R}}|F_n(a)-F(a)|$ is small, it suffices to show that $\mathcal{R}_n(\mathcal{A})=\mathbb{E}_{\sigma} \max_{a \in \mathbb{R}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\le a} \right|$ is small. One can use Hoeffding's Lemma and the union bound to show that $\mathcal{R}_n(\mathcal{A})\le \sqrt{ \frac{2 \log(n+1)}{n}}$. Hence, with probability $1-\delta$
+
+$$
+\begin{aligned}
+&& \max_{a \in \mathbb{R}}|F_n(a)-F(a)|&\le \sqrt{ \frac{2 \log(n+1)}{n}} + \varepsilon  \\
+\end{aligned}
+$$
+```
+
+## Towards VC theory
+
+In general the Rademacher average in \@ref(eq:radem-avg) is the expectation of the maximum over finitely many averages of bounded independent variables. Relating this back to the original setup, this finite number of averages is nothing else but the finite number of sets in which our (fixed) points $X$ can be separated such that $X\in A$. So now the whole problem of understanding the deviations of empirical from true probabilities becomes a combinatorial question: in particular, how many subsets of $\mathcal{X}$ of class $\mathcal{A}$ are there that can be intersected with sets $\{X_1,...,X_n\}$?
+
+```{definition, shatter, name="Shatter coefficient"}
+Given a class $\mathcal{A}$ of subsets of $\mathcal{X}$ and points $X_1,...,X_n\in\mathcal{X}$, the shatter coefficient of $\mathcal{A}$ is
+
+$$
+\begin{aligned}
+&& S(X_1^n,\mathcal{A})&= \left|\{A\cup\{X_1,...,X_n\}:A\in\mathcal{A}\} \right| \\
+\end{aligned}
+$$
+
+where $X_1^n=(X_1,...,X_n)$. That is, $S(X_1^n,\mathcal{A})$ is the number of subsets of $\mathcal{X}$ of class $\mathcal{A}$ that can be intersected with sets $\{X_1,...,X_n\}$. In other words, $S(X_1^n,\mathcal{A})$ counts the number of times that our data points can be shattered with sets from family $\mathcal{A}$.
+```
+
+```{example}
+Let $\mathcal{A}=\{(-\infty,a]:a\in \mathbb{R}\}$. Then the number of times that $n$ points on the real line can be shattered is at most $n+1$ times, so $S(X_1^n,\mathcal{A})\le n+1$
+```
+
+The key observation with respect to the Rademacher Average \@ref(eq:radem-avg), is that $\max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right|$ is a maximum of at most $S(X_1^n,\mathcal{A})$ random variables, all of which are averages of zero-mean independent random variables taking values in $[-1,1]$. In other words, the Rademacher Average can be shattered at most $S(X_1^n,\mathcal{A})$ times. 
+
+By Hoeffding and the union bound we can show that:
+
+$$
+\begin{aligned}
+&& \mathcal{R}_n(\mathcal{A})&=\mathbb{E}_{\sigma} \max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right| \le \sqrt{ \frac{2 \log S(X_1^n,\mathcal{A})}{n}
+} \\
+\end{aligned}
+$$
+
+So as long as the shatter coefficient $S(X_1^n,\mathcal{A})$ is small (in particular smaller than exponential), then $\mathcal{R}_n$ will be small. Note that $S(X_1^n,\mathcal{A})$ still depends on the data $X_1^n$. Let us define $S_{\mathcal{A}}(n)=\max_{X_1,...,X_n}S(X_1^n,\mathcal{A})$, that is the worst case in terms of number of intersections. Then we can always define the slightly wider bound
+
+$$
+\begin{aligned}
+&& \mathcal{R}_n(\mathcal{A})&\le \sqrt{ \frac{2 \log S_{\mathcal{A}}(n)}{n}
+} \\
+\end{aligned}
+$$
+
+Then we can establish the following theorem:
+
+```{theorem, vc, name="Vapnik and Chervonenkis"}
+For any distribution and $\mathcal{A}$
+  
+$$
+\begin{aligned}
+&& \mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&\le 2 \sqrt{ \frac{2 \log S_{\mathcal{A}}(n)}{n}
+} \\
+\end{aligned}
+$$
+```
+
+```{example}
+```
+
+Let $\mathcal{X}\in \mathbb{R}$ and let $\mathcal{A}=\{[a,b]:a<b\}$, so $\mathcal{A}$ is just the set of intervals. The the shatter coefficient is simply $S_{\mathcal{A}}(n)=\binom{n+1}{2}= \frac{n(n+1)}{2}\le(n+1)^2$. In this case, by the VC Theorem we have 
+
+$$
+\begin{aligned}
+&& \mathbb{E}\max_{a,b\in \mathbb{R} \\ a<b} \left| P_n([a,b])-P([a,b]) \right|&\le2 \sqrt{ \frac{2 \log (n+1)^2}{n}
+} \\
+&& &\le4 \sqrt{ \frac{\log (n+1)}{n}
+}  \\ \\
+\end{aligned}
+$$
+
+Relating all of this back to empirical risk minimization in the context of classification, we simply have that $\mathcal{C}$ is the family of classifiers. Then, 
+
+$$
+\begin{aligned}
+&& \mathbb{E}  \max_{g\in\mathcal{C}} |R_n(g)-R(g)|&\le 2 \sqrt{ \frac{2 \log S_{\mathcal{C}}(n)}{n}
+} \\
+\end{aligned}
+$$
+
+
+
+
+
+
+
+
+
+
+

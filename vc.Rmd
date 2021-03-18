@@ -1,0 +1,40 @@
+# VC theory {#vc}
+
+In Chapter \@ref(emp) we defined the *shatter coefficient*  as the number of times we can intersect $\{X_1,...,X_n\}\in\mathcal{X}$ with subsets $A$ of $\mathcal{X}$ that belong to the family $\mathcal{A}$, in particular:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& S(X_1^n,\mathcal{A})&= \left|\{A\cup\{X_1,...,X_n\}:A\in\mathcal{A}\} \right| \\
+\end{aligned}
+(\#eq:shatter)
+\end{equation}
+$$
+
+We further defined:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& S_{\mathcal{A}}(n)&=\max_{X_1,...,X_n}S(X_1^n,\mathcal{A}) \\
+\end{aligned}
+(\#eq:max-shatter)
+\end{equation}
+$$
+
+Clearly, we have that $S(X_1^n,\mathcal{A})\le2^n$, where $2^n$ is simply the total number of subsets of $n$ points: each point can either be in a given subset or not. 
+
+```{definition}
+If $S(X_1^n,\mathcal{A})=2^n$, then we say that the class $\mathcal{A}$ shatters $\{X_1,...,X_n\}$.
+```
+
+Suppose the class $\mathcal{A}$ shatter the $n$ points. This means that for each possible subset, we can find a set in $\mathcal{A}$ that can be intersected with the subset. In the context of our initial problem $\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|$ and the VC theorem, this means we are in trouble: we expect that overfitting will occur.
+
+## VC dimension
+
+```{definition}
+Let $\mathcal{A}$ be a class if sets. The the VC dimension of $\mathcal{A}$ is the largest integer such that $S_{\mathcal{A}}(V)=2^V$. In other words, $V$ is the size of the largest set of points that can be shattered by $\mathcal{A}$. If $S_{\mathcal{A}}(n)=2^n$ for all $n$, then $V=\infty$ 
+```
+
+
+

@@ -13,6 +13,7 @@ rmd_files: [
   "regression.Rmd",
   "classification.Rmd",
   "empirical_risk.Rmd",
+  "vc.Rmd",
   "regularization.Rmd",
   "dimensionality.Rmd",
   "subsampling.Rmd",
