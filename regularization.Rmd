@@ -1,4 +1,4 @@
-# Regularization
+# Complexity regularization {#complex}
 
 ## Bias-variance tradeoff {#reg-bias}
 

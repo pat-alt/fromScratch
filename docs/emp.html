@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Empirical risk minimization | From Scratch</title>
+  <title>Chapter 4 Empirical risk minimization | From Scratch</title>
   <meta name="description" content="A collection of ideas, notes, exercises and code." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Empirical risk minimization | From Scratch" />
+  <meta property="og:title" content="Chapter 4 Empirical risk minimization | From Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Empirical risk minimization | From Scratch" />
+  <meta name="twitter:title" content="Chapter 4 Empirical risk minimization | From Scratch" />
   
   <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-18" />
+<meta name="date" content="2021-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
-<link rel="prev" href="class.html"/>
+<link rel="prev" href="det-opt.html"/>
 <link rel="next" href="vc.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -51,8 +51,87 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.16/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -111,48 +190,57 @@
 <li class="chapter" data-level="3.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>3.1.2</b> Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<li class="chapter" data-level="4" data-path="emp.html"><a href="emp.html"><i class="fa fa-check"></i><b>4</b> Empirical risk minimization</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>4.1</b> Ordinary least-squares</a></li>
-<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>4.2</b> Weighted least-squares</a></li>
-<li class="chapter" data-level="4.3" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>4.3</b> Appendix</a>
+<li class="chapter" data-level="4.1" data-path="emp.html"><a href="emp.html#emp-risks"><i class="fa fa-check"></i><b>4.1</b> Excess risk and overfitting error</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>4.3.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="4.1.1" data-path="emp.html"><a href="emp.html#data-splitting"><i class="fa fa-check"></i><b>4.1.1</b> Data splitting</a></li>
+<li class="chapter" data-level="4.1.2" data-path="emp.html"><a href="emp.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>4.1.2</b> Leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="emp.html"><a href="emp.html#realizable-case"><i class="fa fa-check"></i><b>4.1.3</b> Realizable case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="emp.html"><a href="emp.html#rademacher-averages"><i class="fa fa-check"></i><b>4.2</b> Rademacher averages</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="emp.html"><a href="emp.html#finite-class-of-classifiers"><i class="fa fa-check"></i><b>4.2.1</b> Finite class of classifiers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="emp.html"><a href="emp.html#infinitely-many-classifiers"><i class="fa fa-check"></i><b>4.2.2</b> Infinitely many classifiers</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="emp.html"><a href="emp.html#towards-vc-theory"><i class="fa fa-check"></i><b>4.3</b> Towards VC theory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vc.html"><a href="vc.html"><i class="fa fa-check"></i><b>5</b> VC theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="vc.html"><a href="vc.html#vc-dimension"><i class="fa fa-check"></i><b>5.1</b> VC dimension</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="vc.html"><a href="vc.html#feature-maps"><i class="fa fa-check"></i><b>5.1.1</b> Feature maps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="vc.html"><a href="vc.html#examples"><i class="fa fa-check"></i><b>5.1.2</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="vc.html"><a href="vc.html#stuctural-risk-minimization"><i class="fa fa-check"></i><b>5.2</b> Stuctural risk minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="class.html"><a href="class.html#binary-classification"><i class="fa fa-check"></i><b>6.1</b> Binary classification</a></li>
+<li class="chapter" data-level="6.2" data-path="class.html"><a href="class.html#class-knn"><i class="fa fa-check"></i><b>6.2</b> Nearest Neighbour</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="class.html"><a href="class.html#nn"><i class="fa fa-check"></i><b>6.2.1</b> 1NN</a></li>
+<li class="chapter" data-level="6.2.2" data-path="class.html"><a href="class.html#knn"><i class="fa fa-check"></i><b>6.2.2</b> KNN</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="class.html"><a href="class.html#linear-classification"><i class="fa fa-check"></i><b>6.3</b> Linear Classification</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="class.html"><a href="class.html#perceptron"><i class="fa fa-check"></i><b>6.3.1</b> Perceptron</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>5</b> Classification</a>
+<li class="chapter" data-level="7" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>7</b> Regression</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="class.html"><a href="class.html#binary-classification"><i class="fa fa-check"></i><b>5.1</b> Binary classification</a></li>
-<li class="chapter" data-level="5.2" data-path="class.html"><a href="class.html#class-knn"><i class="fa fa-check"></i><b>5.2</b> Nearest Neighbour</a>
+<li class="chapter" data-level="7.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>7.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="7.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>7.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.3" data-path="regr.html"><a href="regr.html#class-logit"><i class="fa fa-check"></i><b>7.3</b> Logisitic regression</a></li>
+<li class="chapter" data-level="7.4" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>7.4</b> Appendix</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="class.html"><a href="class.html#nn"><i class="fa fa-check"></i><b>5.2.1</b> 1NN</a></li>
-<li class="chapter" data-level="5.2.2" data-path="class.html"><a href="class.html#knn"><i class="fa fa-check"></i><b>5.2.2</b> KNN</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="class.html"><a href="class.html#class-logit"><i class="fa fa-check"></i><b>5.3</b> Logisitic regression</a></li>
-<li class="chapter" data-level="5.4" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>5.4</b> Appendix</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>5.4.1</b> Iterative reweighted least-squares</a></li>
+<li class="chapter" data-level="7.4.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>7.4.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.4.2" data-path="regr.html"><a href="regr.html#irls"><i class="fa fa-check"></i><b>7.4.2</b> Iterative reweighted least-squares</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="emp.html"><a href="emp.html"><i class="fa fa-check"></i><b>6</b> Empirical risk minimization</a>
+<li class="chapter" data-level="8" data-path="complex.html"><a href="complex.html"><i class="fa fa-check"></i><b>8</b> Complexity regularization</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="emp.html"><a href="emp.html#emp-risks"><i class="fa fa-check"></i><b>6.1</b> Excess risk and overfitting error</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="emp.html"><a href="emp.html#data-splitting"><i class="fa fa-check"></i><b>6.1.1</b> Data splitting</a></li>
-<li class="chapter" data-level="6.1.2" data-path="emp.html"><a href="emp.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>6.1.2</b> Leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="6.1.3" data-path="emp.html"><a href="emp.html#realizable-case"><i class="fa fa-check"></i><b>6.1.3</b> Realizable case</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="emp.html"><a href="emp.html#rademacher-averages"><i class="fa fa-check"></i><b>6.2</b> Rademacher averages</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="emp.html"><a href="emp.html#finite-class-of-classifiers"><i class="fa fa-check"></i><b>6.2.1</b> Finite class of classifiers</a></li>
-<li class="chapter" data-level="6.2.2" data-path="emp.html"><a href="emp.html#infinitely-many-classifiers"><i class="fa fa-check"></i><b>6.2.2</b> Infinitely many classifiers</a></li>
-<li class="chapter" data-level="6.2.3" data-path="emp.html"><a href="emp.html#towards-vc-theory"><i class="fa fa-check"></i><b>6.2.3</b> Towards VC theory</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="vc.html"><a href="vc.html"><i class="fa fa-check"></i><b>7</b> VC theory</a></li>
-<li class="chapter" data-level="8" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>8</b> Regularization</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>8.1</b> Bias-variance tradeoff</a></li>
+<li class="chapter" data-level="8.1" data-path="complex.html"><a href="complex.html#reg-bias"><i class="fa fa-check"></i><b>8.1</b> Bias-variance tradeoff</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>9</b> Dimensionality reduction</a>
 <ul>
@@ -228,10 +316,10 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="emp" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Empirical risk minimization</h1>
-<div id="emp-risks" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Excess risk and overfitting error</h2>
+<div id="emp" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Empirical risk minimization</h1>
+<div id="emp-risks" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Excess risk and overfitting error</h2>
 <p>Let <span class="math inline">\(g:\mathcal{X}\mapsto\{0,1\}\)</span> be a classifier. Given data <span class="math inline">\(D_n=((X_1,y_1),...,(X_n,y_n))\)</span> we can estimate <span class="math inline">\(R(g)=P(g(X)\ne y)\)</span> by the empirical mean <span class="math inline">\(R_n(g)= \frac{1}{n} \sum_{i=1}^{n} \mathbb{1}_{g(X_i)\ne y_i}\)</span>. Then by Hoeffding’s Inequality we have</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -245,34 +333,16 @@
 \end{aligned}
 \]</span></p>
 <p>Suppose now that we have a set <span class="math inline">\(N\)</span> classifiers <span class="math inline">\(\mathcal{C}=\{g^{(1)},...,g^{(n)}\}\)</span>. Now let <span class="math inline">\(g_n\)</span> denote the data-based classifier that minimizes the empirical risk <span class="math inline">\(R_n(g^{(j)})\)</span> among our <span class="math inline">\(N\)</span> classifiers. For its risk <span class="math inline">\(R(g_n)=P(g_n(X)\ne y|D_n)\)</span> we can establish two quantities of interest:</p>
-
-<div class="definition">
-<p><span id="def:exc-risk" class="definition"><strong>Definition 6.1  (Excess risk)  </strong></span>The excess risk is defined as the difference between the true risk of our data-based classifier and the minimal true risk across all our classifiers:</p>
-<span class="math display">\[
-\begin{aligned}
-&amp;&amp; R(g_n)&amp;-\min_{j=1,..,N}R(g^{(j)}) \\
-\end{aligned}
-\]</span>
-</div>
-
-<div class="definition">
-<p><span id="def:overfitting" class="definition"><strong>Definition 6.2  (Overfitting error)  </strong></span>The overfitting error is defined as the difference between the true risk of our data-based classifier and the minimal true risk across all our classifiers:</p>
-<span class="math display">\[
-\begin{aligned}
-&amp;&amp; R(g_n)-\min_{j=1,..,N}R_n(g^{(j)})&amp;=R(g_n)-R_n(g_n) \\
-\end{aligned}
-\]</span>
-</div>
 <p>We can further establish two basic inequalities. The first one is trivial:</p>
 <p><span class="math display" id="eq:overfitting-ineq">\[
 \begin{equation} 
 \begin{aligned}
 &amp;&amp; R(g_n)-R_n(g_n)&amp;\le \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)}) \right| &amp;&amp; \text{(overfitting)} \\
 \end{aligned}
-\tag{6.1}
+\tag{4.1}
 \end{equation}
 \]</span></p>
-<p>To derive the second one, note that we can rewrite the term in <a href="emp.html#def:exc-risk">6.1</a> as</p>
+<p>To derive the second one, note that we can rewrite the term in <a href="#def:exc-risk"><strong>??</strong></a> as</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;&amp; R(g_n)-\min_{j=1,..,N}R(g^{(j)})&amp;=R(g_n)-R_n(g_n)+R_n(g_n)-\min_{j=1,..,N}R(g^{(j)}) \\
@@ -290,13 +360,13 @@ where <span class="math inline">\(R(g_n)-R_n(g_n)\)</span> just correspond to th
 &amp;&amp; R_n(\bar{g})-\min_{j=1,..,N}R(g^{(j)})&amp;\le \max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right|\\
 \end{aligned}
 \]</span></p>
-<p>which is the just the bound for the overfitting error already established in <a href="emp.html#eq:overfitting-ineq">(6.1)</a>. Hence, we take everything together to arrive at the second basic inequality:</p>
+<p>which is the just the bound for the overfitting error already established in <a href="emp.html#eq:overfitting-ineq">(4.1)</a>. Hence, we take everything together to arrive at the second basic inequality:</p>
 <p><span class="math display" id="eq:exc-risk-ineq">\[
 \begin{equation} 
 \begin{aligned}
 &amp;&amp; R(g_n)-\min_{j=1,..,N}R(g^{(j)})&amp;\le 2\max_{j=1,...,N} \left| R(g^{(j)})-R_n(g^{(j)})\right| &amp;&amp; \text{(excess risk)} \\
 \end{aligned}
-\tag{6.2}
+\tag{4.2}
 \end{equation}
 \]</span></p>
 <p>So both the excess risk and the overfitting error may be bounded in term of:</p>
@@ -313,7 +383,7 @@ where <span class="math inline">\(R(g_n)-R_n(g_n)\)</span> just correspond to th
 &amp;&amp; &amp;\le \sum_{j=1}^{N}P\left(\left| R(g^{(j)})-R_n(g^{(j)})\right|\ge\varepsilon\right) \\
 &amp;&amp; &amp;\le 2Ne^{-2n\varepsilon^2} \\
 \end{aligned}
-\tag{6.3}
+\tag{4.3}
 \end{equation}
 \]</span></p>
 <p>where the first inequality follows from the union bound and the second one from Hoeffding’s Inequality. Equivalently, we finally have that with probability <span class="math inline">\(\ge 1-\delta\)</span></p>
@@ -328,7 +398,7 @@ and hence the following bound:</p>
 \begin{aligned}
 &amp;&amp; R(g_n)-R_n(g_n)&amp;\le\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} &amp;&amp; \text{(overfitting)} \\
 \end{aligned}
-\tag{6.4}
+\tag{4.4}
 \end{equation}
 \]</span></p>
 <p><span class="math display" id="eq:exc-risk-bound">\[
@@ -336,18 +406,18 @@ and hence the following bound:</p>
 \begin{aligned}
 &amp;&amp; R(g_n)-\min_{j=1,..,N}R(g^{(j)})&amp;\le 2\sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} &amp;&amp; \text{(excess risk)} \\
 \end{aligned}
-\tag{6.5}
+\tag{4.5}
 \end{equation}
 \]</span></p>
-<div id="data-splitting" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Data splitting</h3>
+<div id="data-splitting" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Data splitting</h3>
 <p>Let <span class="math inline">\(\mathcal{C}=\{g_1^{(1)},...,g_n^{(N)}\}\)</span> be a set of data-dependent classifiers depending on <span class="math inline">\(D_n\)</span> and suppose that an independent data set is available for testing <span class="math inline">\(D&#39;_m=((X&#39;_1,y&#39;_1),...,(X&#39;_m,y&#39;_m))\)</span>. Then we may estimate the true risk <span class="math inline">\(R(g_n^{(j)})=P(g_n^{(j)}(X)\ne y|D_n)\)</span> by the empirical risk (test error):</p>
 <p><span class="math display" id="eq:test-error">\[
 \begin{equation}
 \begin{aligned}
 &amp;&amp; R&#39;_m(g_n^{(j)})&amp;= \frac{1}{m} \sum_{i=1}^{m} \mathbb{1}_{g_n^{(j)}(X&#39;_i)\ne y&#39;_i}\\
 \end{aligned}
-\tag{6.6}
+\tag{4.6}
 \end{equation}
 \]</span></p>
 <p>Then using the results from above, where have for the empirical risk minimizer <span class="math inline">\(g_{n,m}=\arg\min_{j=1,...,N}R&#39;_m(g_n^{(j)})\)</span> that with probability <span class="math inline">\(1-\delta\)</span>:</p>
@@ -362,8 +432,8 @@ and hence the following bound:</p>
 \end{aligned}
 \]</span></p>
 </div>
-<div id="leave-one-out-cross-validation" class="section level3" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> Leave-one-out cross-validation</h3>
+<div id="leave-one-out-cross-validation" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Leave-one-out cross-validation</h3>
 <p>Instead of data-splitting (once) we can use leave-one-out cross-validation to get an estimate of the true risk of our data-based classifier. As before we have <span class="math inline">\(D_n=((X_1,y_1),...,(X_n,y_n))\)</span>. Now let <span class="math inline">\(D_{n,i}=((X_1,y_1),...,(X_{i-1},y_{i-1}),(X_{i+1},y_{i+1}),...,(X_n,y_n))\)</span> denote the subsample that contains all observations except <span class="math inline">\(i\)</span>. Then we can define:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -378,8 +448,8 @@ and hence the following bound:</p>
 \]</span></p>
 <p>But since <span class="math inline">\(\mathbb{E} \left[ R(g_{n-1}) \right]\ne\mathbb{E} \left[ R(g_{n}) \right]\)</span> we introduce a small amount of bias. In general it is not easy to establish bounds for the leave-one-out estimator, but empirically it performs well.</p>
 </div>
-<div id="realizable-case" class="section level3" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> Realizable case</h3>
+<div id="realizable-case" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Realizable case</h3>
 <p>Let <span class="math inline">\(\mathcal{C}=\{g^{(1)},...,g^{(N)}\}\)</span> be non-data-dependent classifiers depending on <span class="math inline">\(D_n\)</span>. Now assume one of the candidate classifier has zero risk, that is <span class="math inline">\(\min_jR(g^{(j)})=0\)</span>. We refer to this as the realizable case. Note that this implies that <span class="math inline">\(\min_jR_n(g^{(j)})=0\)</span> and also that both the excess risk and overfitting error are equal to the true risk, <span class="math inline">\(R(g_n)\)</span>. Hence, we would like to bound this quantity.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -391,8 +461,8 @@ and hence the following bound:</p>
 <p>where the second inequality follows from the union bound.</p>
 </div>
 </div>
-<div id="rademacher-averages" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Rademacher averages</h2>
+<div id="rademacher-averages" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Rademacher averages</h2>
 <p>In many interesting cases the class of classifiers <span class="math inline">\(\mathcal{C}\)</span> that we wish to consider contains infinitely many classifiers. A common example is the class of deep neural networks, that can be arbitrarily deep and wide. To control overfitting in such cases we try to bound:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -412,19 +482,19 @@ where <span class="math inline">\(X\in A\)</span> in the context of empirical ri
 \begin{aligned}
 &amp;&amp; \max_{A\in\mathcal{A}} |P_n(A)-P(A)| \\
 \end{aligned}
-\tag{6.7}
+\tag{4.7}
 \end{equation}
 \]</span></p>
-<p>which looks similar to the expression for overfitting defined earlier <a href="emp.html#def:overfitting">6.2</a>.</p>
-<div id="finite-class-of-classifiers" class="section level3" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Finite class of classifiers</h3>
-<p>Suppose first that <span class="math inline">\(\mathcal{A}\)</span> is a finite class. Then in order to bound <a href="emp.html#eq:overfitting-radem">(6.7)</a> we can proceed in the same way as we did before for the overfitting error and excess risk (Equation <a href="emp.html#eq:risk-bound">(6.3)</a>), where we used Hoeffding’s Inequality and the union bound. Here we have that with probability <span class="math inline">\(\ge 1-\delta\)</span>:</p>
+<p>which looks similar to the expression for overfitting defined earlier <a href="#def:overfitting"><strong>??</strong></a>.</p>
+<div id="finite-class-of-classifiers" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Finite class of classifiers</h3>
+<p>Suppose first that <span class="math inline">\(\mathcal{A}\)</span> is a finite class. Then in order to bound <a href="emp.html#eq:overfitting-radem">(4.7)</a> we can proceed in the same way as we did before for the overfitting error and excess risk (Equation <a href="emp.html#eq:risk-bound">(4.3)</a>), where we used Hoeffding’s Inequality and the union bound. Here we have that with probability <span class="math inline">\(\ge 1-\delta\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;&amp; \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le \sqrt{ \frac{\log ( \frac{2N}{\delta})}{2n}} \\
 \end{aligned}
 \]</span></p>
-<p>This bound applies for given <span class="math inline">\(A\)</span>. Now let us go a step further and bound the expected value of <a href="emp.html#eq:overfitting-radem">(6.7)</a>. To do so we use a little trick where we first take the exponential, in particular</p>
+<p>This bound applies for given <span class="math inline">\(A\)</span>. Now let us go a step further and bound the expected value of <a href="emp.html#eq:overfitting-radem">(4.7)</a>. To do so we use a little trick where we first take the exponential, in particular</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;&amp; \exp\left\{\lambda \mathbb{E} \left[ \max_{A\in\mathcal{A}} (P_n(A)-P(A)) \right]\right\}&amp;\le \mathbb{E} \left[ \exp \left\{ \lambda\max_{A\in\mathcal{A}} (P_n(A)-P(A))  \right\} \right] &amp;&amp;, &amp; \lambda&gt;0\\
@@ -453,7 +523,7 @@ Taking the first-order condition with respect to <span class="math inline">\(\la
 \begin{aligned}
 &amp;&amp; \mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)| &amp;\le 2 \sqrt{ \frac{\log N}{2n}}=\sqrt{ \frac{2\log N}{n}} \\
 \end{aligned}
-\tag{6.8}
+\tag{4.8}
 \end{equation}
 \]</span></p>
 <p><strong>Remark</strong>: It can be further be shown that with probability <span class="math inline">\(\ge1-\delta\)</span></p>
@@ -462,12 +532,12 @@ Taking the first-order condition with respect to <span class="math inline">\(\la
 \begin{aligned}
 &amp;&amp;  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|-\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}} \\
 \end{aligned}
-\tag{6.9}
+\tag{4.9}
 \end{equation}
 \]</span></p>
 </div>
-<div id="infinitely-many-classifiers" class="section level3" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Infinitely many classifiers</h3>
+<div id="infinitely-many-classifiers" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Infinitely many classifiers</h3>
 <p>As pointed out above, there are many interesting case in which the class <span class="math inline">\(\mathcal{A}\)</span> counts infinitely many classifiers. To establish a bound for such cases, we will use two symmetrization tricks: the first one involves the introduction of a ‘ghost’ sample; the second one involves so called Rademacher random variables.</p>
 <p>Starting with the former, let <span class="math inline">\(X&#39;_1,...,X&#39;_n\)</span> be our ‘ghost’ sample of iid data following the same distribution as <span class="math inline">\(X\)</span>. Let <span class="math inline">\(P_n&#39;(A)\)</span> be the empirical frequency of <span class="math inline">\(X&#39;\in A\)</span> and let <span class="math inline">\(\mathbb{E}&#39;\)</span> denote the expectation with respect to <span class="math inline">\(X&#39;\)</span>: in this context we mean <span class="math inline">\(\mathbb{E}&#39;\left[\cdot\right]= \mathbb{E} \left[ \cdot|X \right]\)</span>. Then note that</p>
 <p><span class="math display">\[
@@ -498,19 +568,6 @@ since <span class="math inline">\(P_n\)</span> is a data-dependent frequency ful
 \end{aligned}
 \]</span></p>
 <p>Now we have already managed to bound our quantity of interest purely in terms of empirical frequencies over finite sample (or expectations thereof). Next we will make use of our second symmetrization trick, which involves the introduction of iid Rademacher random variables <span class="math inline">\(\sigma_i\in\{-1,1\}\)</span> for <span class="math inline">\(i=1,...,n\)</span>.</p>
-
-<div class="definition">
-<p><span id="def:radem" class="definition"><strong>Definition 6.3  (Rademacher random variable)  </strong></span>Let <span class="math inline">\(X\)</span> be a Rademacher random variable. Then <span class="math inline">\(X\in\{-1,1\}\)</span> and in particular for its density we have:</p>
-<span class="math display">\[
-\begin{aligned}
-&amp;&amp; f(X)&amp;= \begin{cases}
-\frac{1}{2}&amp; \text{if } X=-1\\
-\frac{1}{2}&amp; \text{if } X=+1\\
-0 &amp; \text{otherwise.}
-\end{cases}\\
-\end{aligned}
-\]</span>
-</div>
 <p>Now the trick is to realize that since <span class="math inline">\(X_i,X&#39;_i\)</span> come from the same distribution they are exchangeable and the following equality holds:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -531,7 +588,7 @@ since <span class="math inline">\(P_n\)</span> is a data-dependent frequency ful
 \begin{aligned}
 &amp;&amp; \mathcal{R}_n(\mathcal{A})&amp;=\mathbb{E}_{\sigma} \max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right| \\
 \end{aligned}
-\tag{6.10}
+\tag{4.10}
 \end{equation}
 \]</span></p>
 <p>denote the conditional Rademacher average where <span class="math inline">\(\mathbb{E}_{\sigma}\left[\cdot\right]= \mathbb{E} \left[ \cdot|X \right]\)</span>. The we can restate further:</p>
@@ -540,7 +597,7 @@ since <span class="math inline">\(P_n\)</span> is a data-dependent frequency ful
 \begin{aligned}
 &amp;&amp;\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le 2 \mathbb{E} \mathcal{R}_n(\mathcal{A})
 \end{aligned}
-\tag{6.11}
+\tag{4.11}
 \end{equation}
 \]</span></p>
 <p>It can further be shown that <span class="math inline">\(\mathcal{R}_n(\mathcal{A})\)</span> is concentrated around its expected value in the sense that with probability <span class="math inline">\(\ge1-\delta\)</span>:</p>
@@ -549,65 +606,21 @@ since <span class="math inline">\(P_n\)</span> is a data-dependent frequency ful
 &amp;&amp; |\mathcal{R}_n(\mathcal{A})- \mathbb{E}\mathcal{R}_n(\mathcal{A})|&amp;\le \sqrt{ \frac{2 \log ( \frac{2}{\delta})}{n}} \\
 \end{aligned}
 \]</span></p>
-<p>We showed earlier (Equation <a href="emp.html#eq:remark">(6.9)</a>) that we have have with probability <span class="math inline">\(\ge1- \frac{\delta}{2}\)</span>:</p>
+<p>We showed earlier (Equation <a href="emp.html#eq:remark">(4.9)</a>) that we have have with probability <span class="math inline">\(\ge1- \frac{\delta}{2}\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;&amp; \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le\mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)| + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}}  \\
 &amp;&amp; &amp;\le 2 \mathbb{E} \mathcal{R}_n(\mathcal{A}) + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}}  \\
 \end{aligned}
 \]</span></p>
-<p>Combining this with <a href="emp.html#eq:radem-conc">(6.11)</a> we finally derive the following theorem:</p>
-
-<div class="theorem">
-<p><span id="thm:rad-bound" class="theorem"><strong>Theorem 6.1  (Rademacher bound)  </strong></span>Regardless of the distribution of <span class="math inline">\(X\)</span> and the class <span class="math inline">\(\mathcal{A}\)</span>, we have that with probability <span class="math inline">\(\ge 1-\delta\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp;&amp; \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le2  \mathcal{R}_n(\mathcal{A}) + \sqrt{ \frac{\log( \frac{4}{\delta})}{2n}} +  \sqrt{ \frac{2 \log ( \frac{2}{\delta})}{n}} \\
-\end{aligned}
-\]</span></p>
-<p>Since the last two terms are tiny, we may simplify to:</p>
-<span class="math display">\[
-\begin{aligned}
-&amp;&amp; \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le2  \mathcal{R}_n(\mathcal{A}) + \varepsilon \\
-\end{aligned}
-\]</span>
-</div>
-<p>What is remarkable about <a href="emp.html#thm:rad-bound">6.1</a> is the fact that it establishes a purely empirical bound for a distribution free quantity that depends on a possibly infinite class.</p>
-
-<div class="example">
-<p><span id="exm:unnamed-chunk-1" class="example"><strong>Example 6.1  (Fundamental Theorem of Statistics)  </strong></span>Let <span class="math inline">\(\mathcal{A}\)</span> contain all sets of the form <span class="math inline">\([-\infty,a]\)</span> for all <span class="math inline">\(a \in \mathbb{R}\)</span>. Then:</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp;&amp; P(A)&amp;=P(X\in (-\infty,a]))=P(X\le a)=F(a) &amp;&amp; \text{(CDF)} \\
-&amp;&amp; P_n(A)&amp;=F_n(a) &amp;&amp;\text{(empirical CDF)} \\
-\end{aligned}
-\]</span></p>
-<p>In light of the Rademacher bound we know that in order to prove that <span class="math inline">\(\max_{a \in \mathbb{R}}|F_n(a)-F(a)|\)</span> is small, it suffices to show that <span class="math inline">\(\mathcal{R}_n(\mathcal{A})=\mathbb{E}_{\sigma} \max_{a \in \mathbb{R}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\le a} \right|\)</span> is small. One can use Hoeffding’s Lemma and the union bound to show that <span class="math inline">\(\mathcal{R}_n(\mathcal{A})\le \sqrt{ \frac{2 \log(n+1)}{n}}\)</span>. Hence, with probability <span class="math inline">\(1-\delta\)</span></p>
-<span class="math display">\[
-\begin{aligned}
-&amp;&amp; \max_{a \in \mathbb{R}}|F_n(a)-F(a)|&amp;\le \sqrt{ \frac{2 \log(n+1)}{n}} + \varepsilon  \\
-\end{aligned}
-\]</span>
+<p>Combining this with <a href="emp.html#eq:radem-conc">(4.11)</a> we finally derive the following theorem:</p>
+<p>What is remarkable about <a href="#thm:rad-bound"><strong>??</strong></a> is the fact that it establishes a purely empirical bound for a distribution free quantity that depends on a possibly infinite class.</p>
 </div>
 </div>
-<div id="towards-vc-theory" class="section level3" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> Towards VC theory</h3>
-<p>In general the Rademacher average in <a href="emp.html#eq:radem-avg">(6.10)</a> is the expectation of the maximum over finitely many averages of bounded independent variables. Relating this back to the original setup, this finite number of averages is nothing else but the finite number of sets in which our (fixed) points <span class="math inline">\(X\)</span> can be separated such that <span class="math inline">\(X\in A\)</span>. So now the whole problem of understanding the deviations of empirical from true probabilities becomes a combinatorial question: in particular, how many subsets of <span class="math inline">\(\mathcal{X}\)</span> of class <span class="math inline">\(\mathcal{A}\)</span> are there that can be intersected with sets <span class="math inline">\(\{X_1,...,X_n\}\)</span>?</p>
-
-<div class="definition">
-<p><span id="def:shatter" class="definition"><strong>Definition 6.4  (Shatter coefficient)  </strong></span>Given a class <span class="math inline">\(\mathcal{A}\)</span> of subsets of <span class="math inline">\(\mathcal{X}\)</span> and points <span class="math inline">\(X_1,...,X_n\in\mathcal{X}\)</span>, the shatter coefficient of <span class="math inline">\(\mathcal{A}\)</span> is</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp;&amp; S(X_1^n,\mathcal{A})&amp;= \left|\{A\cup\{X_1,...,X_n\}:A\in\mathcal{A}\} \right| \\
-\end{aligned}
-\]</span></p>
-where <span class="math inline">\(X_1^n=(X_1,...,X_n)\)</span>. That is, <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> is the number of subsets of <span class="math inline">\(\mathcal{X}\)</span> of class <span class="math inline">\(\mathcal{A}\)</span> that can be intersected with sets <span class="math inline">\(\{X_1,...,X_n\}\)</span>. In other words, <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> counts the number of times that our data points can be shattered with sets from family <span class="math inline">\(\mathcal{A}\)</span>.
-</div>
-
-<div class="example">
-<span id="exm:unnamed-chunk-2" class="example"><strong>Example 6.2  </strong></span>Let <span class="math inline">\(\mathcal{A}=\{(-\infty,a]:a\in \mathbb{R}\}\)</span>. Then the number of times that <span class="math inline">\(n\)</span> points on the real line can be shattered is at most <span class="math inline">\(n+1\)</span> times, so <span class="math inline">\(S(X_1^n,\mathcal{A})\le n+1\)</span>
-</div>
-<p>The key observation with respect to the Rademacher Average @®ef(eq:radem-avg), is that <span class="math inline">\(\max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right|\)</span> is a maximum of at most <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> random variables, all of which are averages of zero-mean independent random variables taking values in <span class="math inline">\([-1,1]\)</span>. In other words, the Rademacher Average can be shattered at most <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> times.</p>
+<div id="towards-vc-theory" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Towards VC theory</h2>
+<p>In general the Rademacher average in <a href="emp.html#eq:radem-avg">(4.10)</a> is the expectation of the maximum over finitely many averages of bounded independent variables. Relating this back to the original setup, this finite number of averages is nothing else but the finite number of sets in which our (fixed) points <span class="math inline">\(X\)</span> can be separated such that <span class="math inline">\(X\in A\)</span>. So now the whole problem of understanding the deviations of empirical from true probabilities becomes a combinatorial question: in particular, how many subsets of <span class="math inline">\(\mathcal{X}\)</span> of class <span class="math inline">\(\mathcal{A}\)</span> are there that can be intersected with sets <span class="math inline">\(\{X_1,...,X_n\}\)</span>?</p>
+<p>The key observation with respect to the Rademacher Average <a href="emp.html#eq:radem-avg">(4.10)</a>, is that <span class="math inline">\(\max_{A\in\mathcal{A}} \left| \frac{1}{n}\sum_{i=1}^{n}\sigma_i \mathbb{1}_{X_i\in A} \right|\)</span> is a maximum of at most <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> random variables, all of which are averages of zero-mean independent random variables taking values in <span class="math inline">\([-1,1]\)</span>. In other words, the Rademacher Average can be shattered at most <span class="math inline">\(S(X_1^n,\mathcal{A})\)</span> times.</p>
 <p>By Hoeffding and the union bound we can show that:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -623,18 +636,23 @@ where <span class="math inline">\(X_1^n=(X_1,...,X_n)\)</span>. That is, <span c
 \end{aligned}
 \]</span></p>
 <p>Then we can establish the following theorem:</p>
-
-<div class="theorem">
-<p><span id="thm:vc" class="theorem"><strong>Theorem 6.2  (Vapnik and Chervonenkis)  </strong></span>For any distribution and <span class="math inline">\(\mathcal{A}\)</span></p>
-<span class="math display">\[
+<p>Let <span class="math inline">\(\mathcal{X}\in \mathbb{R}\)</span> and let <span class="math inline">\(\mathcal{A}=\{[a,b]:a&lt;b\}\)</span>, so <span class="math inline">\(\mathcal{A}\)</span> is just the set of intervals. The the shatter coefficient is simply <span class="math inline">\(S_{\mathcal{A}}(n)=\binom{n+1}{2}= \frac{n(n+1)}{2}\le(n+1)^2\)</span>. In this case, by the VC Theorem we have</p>
+<p><span class="math display">\[
 \begin{aligned}
-&amp;&amp; \mathbb{E}  \max_{A\in\mathcal{A}} |P_n(A)-P(A)|&amp;\le 2 \sqrt{ \frac{2 \log S_{\mathcal{A}}(n)}{n}
-} +\varepsilon \\
+&amp;&amp; \mathbb{E}\max_{a,b\in \mathbb{R} \\ a&lt;b} \left| P_n([a,b])-P([a,b]) \right|&amp;\le2 \sqrt{ \frac{2 \log (n+1)^2}{n}
+} \\
+&amp;&amp; &amp;\le4 \sqrt{ \frac{\log (n+1)}{n}
+}  \\ \\
 \end{aligned}
-\]</span>
-</div>
+\]</span></p>
+<p>Relating all of this back to empirical risk minimization in the context of classification, we simply have that <span class="math inline">\(\mathcal{C}\)</span> is the family of classifiers. Then,</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbb{E}  \max_{g\in\mathcal{C}} |R_n(g)-R(g)|&amp;\le 2 \sqrt{ \frac{2 \log S_{\mathcal{C}}(n)}{n}
+} \\
+\end{aligned}
+\]</span></p>
 
-</div>
 </div>
 </div>
             </section>
@@ -642,7 +660,7 @@ where <span class="math inline">\(X_1^n=(X_1,...,X_n)\)</span>. That is, <span c
           </div>
         </div>
       </div>
-<a href="class.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="det-opt.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="vc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

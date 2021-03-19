@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Classification | From Scratch</title>
+  <title>Chapter 6 Classification | From Scratch</title>
   <meta name="description" content="A collection of ideas, notes, exercises and code." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Classification | From Scratch" />
+  <meta property="og:title" content="Chapter 6 Classification | From Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Classification | From Scratch" />
+  <meta name="twitter:title" content="Chapter 6 Classification | From Scratch" />
   
   <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-18" />
+<meta name="date" content="2021-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
-<link rel="prev" href="regr.html"/>
-<link rel="next" href="emp.html"/>
+<link rel="prev" href="vc.html"/>
+<link rel="next" href="regr.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -190,47 +190,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>3.1.2</b> Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<li class="chapter" data-level="4" data-path="emp.html"><a href="emp.html"><i class="fa fa-check"></i><b>4</b> Empirical risk minimization</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>4.1</b> Ordinary least-squares</a></li>
-<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>4.2</b> Weighted least-squares</a></li>
-<li class="chapter" data-level="4.3" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>4.3</b> Appendix</a>
+<li class="chapter" data-level="4.1" data-path="emp.html"><a href="emp.html#emp-risks"><i class="fa fa-check"></i><b>4.1</b> Excess risk and overfitting error</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>4.3.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="4.1.1" data-path="emp.html"><a href="emp.html#data-splitting"><i class="fa fa-check"></i><b>4.1.1</b> Data splitting</a></li>
+<li class="chapter" data-level="4.1.2" data-path="emp.html"><a href="emp.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>4.1.2</b> Leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="emp.html"><a href="emp.html#realizable-case"><i class="fa fa-check"></i><b>4.1.3</b> Realizable case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="emp.html"><a href="emp.html#rademacher-averages"><i class="fa fa-check"></i><b>4.2</b> Rademacher averages</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="emp.html"><a href="emp.html#finite-class-of-classifiers"><i class="fa fa-check"></i><b>4.2.1</b> Finite class of classifiers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="emp.html"><a href="emp.html#infinitely-many-classifiers"><i class="fa fa-check"></i><b>4.2.2</b> Infinitely many classifiers</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="emp.html"><a href="emp.html#towards-vc-theory"><i class="fa fa-check"></i><b>4.3</b> Towards VC theory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vc.html"><a href="vc.html"><i class="fa fa-check"></i><b>5</b> VC theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="vc.html"><a href="vc.html#vc-dimension"><i class="fa fa-check"></i><b>5.1</b> VC dimension</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="vc.html"><a href="vc.html#feature-maps"><i class="fa fa-check"></i><b>5.1.1</b> Feature maps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="vc.html"><a href="vc.html#examples"><i class="fa fa-check"></i><b>5.1.2</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="vc.html"><a href="vc.html#stuctural-risk-minimization"><i class="fa fa-check"></i><b>5.2</b> Stuctural risk minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="class.html"><a href="class.html#binary-classification"><i class="fa fa-check"></i><b>6.1</b> Binary classification</a></li>
+<li class="chapter" data-level="6.2" data-path="class.html"><a href="class.html#class-knn"><i class="fa fa-check"></i><b>6.2</b> Nearest Neighbour</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="class.html"><a href="class.html#nn"><i class="fa fa-check"></i><b>6.2.1</b> 1NN</a></li>
+<li class="chapter" data-level="6.2.2" data-path="class.html"><a href="class.html#knn"><i class="fa fa-check"></i><b>6.2.2</b> KNN</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="class.html"><a href="class.html#linear-classification"><i class="fa fa-check"></i><b>6.3</b> Linear Classification</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="class.html"><a href="class.html#perceptron"><i class="fa fa-check"></i><b>6.3.1</b> Perceptron</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>5</b> Classification</a>
+<li class="chapter" data-level="7" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>7</b> Regression</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="class.html"><a href="class.html#binary-classification"><i class="fa fa-check"></i><b>5.1</b> Binary classification</a></li>
-<li class="chapter" data-level="5.2" data-path="class.html"><a href="class.html#class-knn"><i class="fa fa-check"></i><b>5.2</b> Nearest Neighbour</a>
+<li class="chapter" data-level="7.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>7.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="7.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>7.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.3" data-path="regr.html"><a href="regr.html#class-logit"><i class="fa fa-check"></i><b>7.3</b> Logisitic regression</a></li>
+<li class="chapter" data-level="7.4" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>7.4</b> Appendix</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="class.html"><a href="class.html#nn"><i class="fa fa-check"></i><b>5.2.1</b> 1NN</a></li>
-<li class="chapter" data-level="5.2.2" data-path="class.html"><a href="class.html#knn"><i class="fa fa-check"></i><b>5.2.2</b> KNN</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="class.html"><a href="class.html#class-logit"><i class="fa fa-check"></i><b>5.3</b> Logisitic regression</a></li>
-<li class="chapter" data-level="5.4" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>5.4</b> Appendix</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>5.4.1</b> Iterative reweighted least-squares</a></li>
+<li class="chapter" data-level="7.4.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>7.4.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.4.2" data-path="regr.html"><a href="regr.html#irls"><i class="fa fa-check"></i><b>7.4.2</b> Iterative reweighted least-squares</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="emp.html"><a href="emp.html"><i class="fa fa-check"></i><b>6</b> Empirical risk minimization</a>
+<li class="chapter" data-level="8" data-path="complex.html"><a href="complex.html"><i class="fa fa-check"></i><b>8</b> Complexity regularization</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="emp.html"><a href="emp.html#emp-risks"><i class="fa fa-check"></i><b>6.1</b> Excess risk and overfitting error</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="emp.html"><a href="emp.html#data-splitting"><i class="fa fa-check"></i><b>6.1.1</b> Data splitting</a></li>
-<li class="chapter" data-level="6.1.2" data-path="emp.html"><a href="emp.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>6.1.2</b> Leave-one-out cross-validation</a></li>
-<li class="chapter" data-level="6.1.3" data-path="emp.html"><a href="emp.html#realizable-case"><i class="fa fa-check"></i><b>6.1.3</b> Realizable case</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="emp.html"><a href="emp.html#rademacher-averages"><i class="fa fa-check"></i><b>6.2</b> Rademacher averages</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="emp.html"><a href="emp.html#finite-class-of-classifiers"><i class="fa fa-check"></i><b>6.2.1</b> Finite class of classifiers</a></li>
-<li class="chapter" data-level="6.2.2" data-path="emp.html"><a href="emp.html#infinitely-many-classifiers"><i class="fa fa-check"></i><b>6.2.2</b> Infinitely many classifiers</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="vc.html"><a href="vc.html"><i class="fa fa-check"></i><b>7</b> VC theory</a></li>
-<li class="chapter" data-level="8" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>8</b> Regularization</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>8.1</b> Bias-variance tradeoff</a></li>
+<li class="chapter" data-level="8.1" data-path="complex.html"><a href="complex.html#reg-bias"><i class="fa fa-check"></i><b>8.1</b> Bias-variance tradeoff</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>9</b> Dimensionality reduction</a>
 <ul>
@@ -306,10 +316,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="class" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Classification</h1>
-<div id="binary-classification" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Binary classification</h2>
+<div id="class" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Classification</h1>
+<div id="binary-classification" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Binary classification</h2>
 <p>Given an observation <span class="math inline">\(X\in \mathcal{X} \subseteq \mathbb{R}^d\)</span>, we want to assign a binary label (e.g <span class="math inline">\(y\in\{0,1\}\)</span>) to it. A classifier is a function that maps from the feature space to the binary label: <span class="math inline">\(g: \mathcal{X} \mapsto \{0,1\}\)</span>. An observation/label pair is modelled as a pair of random variables <span class="math inline">\((X,y)\)</span>. The joint distribution of the pair can be described by:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -331,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; P(X\in A|y=0)&amp;, &amp;P(X\in A |y=1) \\
 \end{aligned}
-\tag{5.1}
+\tag{6.1}
 \end{equation}
 \]</span></p>
 <p>The quality of a classifier <span class="math inline">\(g\)</span> is measured by its risk:</p>
@@ -340,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; R(g)&amp;=P(g(X) \ne y) \\
 \end{aligned}
-\tag{5.2}
+\tag{6.2}
 \end{equation}
 \]</span></p>
 <p>More generally we have a loss function <span class="math inline">\(\ell: \{0,1\} \times \{0,1\} \mapsto \mathbb{R}\)</span> and denote</p>
@@ -349,10 +359,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; R(g)&amp;=   \mathbb{E}\ell(g(X),y)\\
 \end{aligned}
-\tag{5.3}
+\tag{6.3}
 \end{equation}
 \]</span></p>
-<p>which is equivalent to (<a href="class.html#eq:risk">(5.2)</a>) if we define <span class="math inline">\(\ell(g(X),y)= \mathbb{1}_{g(X) \ne y}\)</span>. In the binary case we have</p>
+<p>which is equivalent to (<a href="class.html#eq:risk">(6.2)</a>) if we define <span class="math inline">\(\ell(g(X),y)= \mathbb{1}_{g(X) \ne y}\)</span>. In the binary case we have</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;&amp; R(g)&amp;=P(g(X)\ne y)=P(g(X)=1,y=0)+P(g(X)=0,y=1) \\
@@ -365,7 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; R(g)&amp;= \mathbb{E} \left[ \mathbb{1}_{g(X)=1}(1-\eta(X)) +\mathbb{1}_{g(X)=0} \eta(X) \right]\\
 \end{aligned}
-\tag{5.4}       
+\tag{6.4}       
 \end{equation}
 \]</span></p>
 <p>and for the Bayes risk therefore:</p>
@@ -376,7 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &amp;&amp; &amp;= \mathbb{E} \min (\eta(X),1-\eta(X))\\
 \Rightarrow&amp;&amp; R^*&amp;\in(0, \frac{1}{2}) \\
 \end{aligned}
-\tag{5.5}
+\tag{6.5}
 \end{equation}
 \]</span></p>
 <p>Of course, in practice <span class="math inline">\(\eta(X)\)</span> is unknown and instead estimated through supervised learning using training data <span class="math inline">\(D_n=((X_1,y_1),...,(X_n,y_n))\)</span>. We denote a data-dependent classifier as</p>
@@ -385,17 +395,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; g_n&amp;=g_n(X,D_n)\in\{0,1\} \\
 \end{aligned}
-\tag{5.6}
+\tag{6.6}
 \end{equation}
 \]</span></p>
 <p>Our goal in classification is to find a classifier such that <span class="math inline">\(\mathbb{E}R(g_n)-R^*\)</span> is small.</p>
 </div>
-<div id="class-knn" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Nearest Neighbour</h2>
+<div id="class-knn" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Nearest Neighbour</h2>
 <p>Assume that <span class="math inline">\(\mathcal{X}\)</span> is a metric space.</p>
 <p>Nearest Neighbour rules are based on how far away points are from each other based on some metric distance. Classifiers based on such rules assign labels to points based on the labels their neighbours.</p>
-<div id="nn" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> 1NN</h3>
+<div id="nn" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 1NN</h3>
 <p>It can be shown that that the distance between any point and its nearest neighbour is typically on the order of <span class="math inline">\(n^{-\frac{1}{d}}\)</span>. Hence for <span class="math inline">\(n\rightarrow \infty\)</span> we have that <span class="math inline">\(d(X_{(1)}(X),X)\rightarrow0\)</span>. Consequently, for <span class="math inline">\(n\)</span> sufficiently large</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -412,8 +422,8 @@ Let <span class="math inline">\(y \sim \text{Bern}(\eta)\)</span>, then</p>
 \]</span></p>
 <p>The inequality can be derived as follows. Recall that <span class="math inline">\(R^*= \mathbb{E} \left[ \min(\eta,1-\eta) \right]\)</span> and note that <span class="math inline">\(\eta(1-\eta)\le\min(\eta(1-\eta))\)</span> for <span class="math inline">\(\eta\in[0,1]\)</span>. Hence, clearly <span class="math inline">\(R^*\le R^{\text{1NN}}\le2R^*\)</span>. Let <span class="math inline">\(Z=\min(\eta,1-\eta)\)</span>, then since <span class="math inline">\(Z(1-Z)\)</span> is concave we can apply Jensen’s Inequality to derive the final result in <a href="#thm:1nn"><strong>??</strong></a>.</p>
 </div>
-<div id="knn" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> KNN</h3>
+<div id="knn" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> KNN</h3>
 <p>One can show that for the asymptotic risk of the KNN-classifier we have:</p>
 <p><span class="math display" id="eq:risk-knn">\[
 \begin{equation} 
@@ -421,77 +431,78 @@ Let <span class="math inline">\(y \sim \text{Bern}(\eta)\)</span>, then</p>
 &amp;&amp; R^{(\text{KNN})}&amp;=R^*+ \frac{1}{\sqrt{ke}}
  \\
 \end{aligned}
-\tag{5.7}
+\tag{6.7}
 \end{equation}
 \]</span></p>
 </div>
 </div>
-<div id="class-logit" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Logisitic regression</h2>
-<p>To model the probability of <span class="math inline">\(y=1\)</span> we will use logistic regression:</p>
-<p><span class="math display" id="eq:log-reg">\[
+<div id="linear-classification" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Linear Classification</h2>
+<div id="perceptron" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Perceptron</h3>
+<p>Assume that the data <span class="math inline">\(X\)</span> is linearly separable and the <span class="math inline">\(y\)</span> takes values in <span class="math inline">\(\{-1,+1\}\)</span>. A linear classifier <span class="math inline">\(\mathbf{w}^TX_i\)</span> makes a mistake on the <span class="math inline">\((X_i,y_i)\)</span> pair if</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; (\mathbf{w}^TX_i)y_i&amp;=&lt;0 \\
+\end{aligned}
+\]</span></p>
+<p>that is when the predicted and true label are of opposite sign. Let us therefore restate the definition in <a href="#def:gen-lin-class"><strong>??</strong></a></p>
+<p><span class="math display" id="eq:lin-class">\[
 \begin{equation} 
 \begin{aligned}
-&amp;&amp; \mathbf{p}&amp;= \frac{ \exp( \mathbf{X} \beta )}{1 + \exp(\mathbf{X} \beta)}
+&amp;&amp; g(X)&amp;= \begin{cases}
+1 &amp; \text{if } \mathbf{w}^TX\ge0\\
+-1&amp; \text{if } \mathbf{w}^TX&lt;0
+\end{cases}\\
+&amp;&amp; g(X)&amp;= \text{sign}(\mathbf{w}^TX) \\
 \end{aligned}
-\tag{5.8}
+\tag{6.8}
 \end{equation}
 \]</span></p>
-<p>Equation <a href="class.html#eq:log-reg">(5.8)</a> is not estimated directly but rather derived from linear predictions</p>
-<p><span class="math display" id="eq:lin-pred">\[
-\begin{equation} 
+<p>Note that here <span class="math inline">\(X\)</span> refers to a single observation of possibly many features, rather than a matrix <span class="math inline">\(\mathbf{X}\)</span> containing all observations. Clearly, if the data is linearly separable, then there exists a vector of coefficients <span class="math inline">\(\mathbf{w}_*\ne\mathbf{0}\)</span> such that</p>
+<p><span class="math display">\[
 \begin{aligned}
-\log \left( \frac{\mathbf{p}}{1-\mathbf{p}} \right)&amp;= \mathbf{X} \beta \\
+&amp;&amp; ({\mathbf{w}_*}^TX_i)y_i&amp;\ge0 &amp;&amp; \forall i \\
 \end{aligned}
-\tag{5.9}
-\end{equation}
 \]</span></p>
-<p>where <span class="math inline">\(\beta\)</span> can be estimated through iterative re-weighted least-squares (IRLS) which is a simple implementation of Newton’s method (see for example <span class="citation"><a href="references.html#ref-wasserman2013all" role="doc-biblioref">Wasserman</a> (<a href="references.html#ref-wasserman2013all" role="doc-biblioref">2013</a>)</span>; a complete derivation can also be found in the <a href="class.html#irls">appendix</a>):</p>
-<p><span class="math display" id="eq:irls">\[
-\begin{equation} 
+<p>that is for <span class="math inline">\(\mathbf{w}_*\)</span> the linear classifier commits no mistakes. It turns out that such a vector can be found in polynomial time.</p>
+<p>How well the perceptron algorithm works depends on how well-behaved the data is, in other words how easy it is to linearly separate the two classes. Formally, we would say that data is well-behaved in the context of linear separability if the margin of the linear classifier is large.</p>
+<p>The the following can be established for its time to convergence:</p>
+<p>By assumption there exists a vector <span class="math inline">\(\mathbf{w}_*\)</span> such that:</p>
+<p><span class="math display">\[
 \begin{aligned}
-&amp;&amp; \beta_{s+1}&amp;= \left( \mathbf{X}^T \mathbf{W} \mathbf{X} \right) \mathbf{X}^T \mathbf{W}z\\
-\text{where}&amp;&amp; z&amp;= \mathbf{X}\beta_{s} + \mathbf{W}^{-1} (\mathbf{y}-\mathbf{p}) \\
-&amp;&amp; \mathbf{W}&amp;= \text{diag}\{p_i(\beta_{s})(1-p_i(\beta_{s}))\}_{i=1}^n \\ 
+&amp;&amp; ({\mathbf{w}_*}^TX_i)y_i&amp;\ge0 &amp;&amp; \forall i \\
 \end{aligned}
-\tag{5.10}
-\end{equation}
 \]</span></p>
-<p>In R this can be implemented from scratch as below. For the empirical exercises we will rely on <code>glm([formula], family="binomial")</code> which scales much better to higher dimensional problems than my custom function and also implements weighted logit.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb7-1"><a href="class.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> (X, y, <span class="at">beta_0 =</span> <span class="cn">NULL</span>, <span class="at">tau =</span> <span class="fl">1e-09</span>, <span class="at">max_iter =</span> <span class="dv">10000</span>) </span>
-<span id="cb7-2"><a href="class.html#cb7-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb7-3"><a href="class.html#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(X[, <span class="dv">1</span>] <span class="sc">==</span> <span class="dv">1</span>)) {</span>
-<span id="cb7-4"><a href="class.html#cb7-4" aria-hidden="true" tabindex="-1"></a>        X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, X)</span>
-<span id="cb7-5"><a href="class.html#cb7-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb7-6"><a href="class.html#cb7-6" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
-<span id="cb7-7"><a href="class.html#cb7-7" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X)</span>
-<span id="cb7-8"><a href="class.html#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(beta_0)) {</span>
-<span id="cb7-9"><a href="class.html#cb7-9" aria-hidden="true" tabindex="-1"></a>        beta_latest <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, p))</span>
-<span id="cb7-10"><a href="class.html#cb7-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb7-11"><a href="class.html#cb7-11" aria-hidden="true" tabindex="-1"></a>    W <span class="ot">&lt;-</span> <span class="fu">diag</span>(n)</span>
-<span id="cb7-12"><a href="class.html#cb7-12" aria-hidden="true" tabindex="-1"></a>    can_still_improve <span class="ot">&lt;-</span> T</span>
-<span id="cb7-13"><a href="class.html#cb7-13" aria-hidden="true" tabindex="-1"></a>    iter <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb7-14"><a href="class.html#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (can_still_improve <span class="sc">&amp;</span> iter <span class="sc">&lt;</span> max_iter) {</span>
-<span id="cb7-15"><a href="class.html#cb7-15" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta_latest</span>
-<span id="cb7-16"><a href="class.html#cb7-16" aria-hidden="true" tabindex="-1"></a>        p_y <span class="ot">&lt;-</span> <span class="fu">exp</span>(y_hat)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(y_hat))</span>
-<span id="cb7-17"><a href="class.html#cb7-17" aria-hidden="true" tabindex="-1"></a>        df_latest <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(X, y <span class="sc">-</span> p_y)</span>
-<span id="cb7-18"><a href="class.html#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">diag</span>(W) <span class="ot">&lt;-</span> p_y <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_y)</span>
-<span id="cb7-19"><a href="class.html#cb7-19" aria-hidden="true" tabindex="-1"></a>        Z <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta_latest <span class="sc">+</span> <span class="fu">qr.solve</span>(W) <span class="sc">%*%</span> (y <span class="sc">-</span> p_y)</span>
-<span id="cb7-20"><a href="class.html#cb7-20" aria-hidden="true" tabindex="-1"></a>        beta_latest <span class="ot">&lt;-</span> <span class="fu">qr.solve</span>(<span class="fu">crossprod</span>(X, W <span class="sc">%*%</span> X), <span class="fu">crossprod</span>(X, W <span class="sc">%*%</span> Z))</span>
-<span id="cb7-21"><a href="class.html#cb7-21" aria-hidden="true" tabindex="-1"></a>        can_still_improve <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(df_latest)) <span class="sc">&gt;</span> tau</span>
-<span id="cb7-22"><a href="class.html#cb7-22" aria-hidden="true" tabindex="-1"></a>        iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb7-23"><a href="class.html#cb7-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb7-24"><a href="class.html#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">fitted =</span> p_y, <span class="at">coeff =</span> beta_latest))</span>
-<span id="cb7-25"><a href="class.html#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<div id="appendix" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Appendix</h2>
-<div id="irls" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> Iterative reweighted least-squares</h3>
-<div class="figure">
-<img src="www/irls.png" alt="" />
-<p class="caption">Iterative reweighted least-squares</p>
-</div>
+<p>Without loss of generality assume that <span class="math inline">\(||\mathbf{w}_*||=1\)</span>. Then we also have that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \gamma&amp;\le\min_i\left| \mathbf{w}_*^TX_i\right| \\
+\end{aligned}
+\]</span></p>
+<p>Then whenever an update is performed,</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbf{w}_*^T\mathbf{w}_t&amp;=\mathbf{w}_*^T\mathbf{w}_{t-1} + \mathbf{w}_*^TX_ty_t  \\
+&amp;&amp; &amp;\ge  \mathbf{w}_*^T\mathbf{w}_{t-1} + \gamma \\
+&amp;&amp; &amp;\ge t\gamma \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(t\)</span> is the number of updates. The first inequality follows from the fact that <span class="math inline">\(\mathbf{w}_*^TX_ty_t\)</span> is at least as big as the margin.</p>
+<p>On the other hand</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; ||\mathbf{w}_t||^2&amp;=||\mathbf{w}_{t-1}+X_ty_t||^2=||\mathbf{w}_{t-1}||^2 + ||X_t||^2+2y_t\mathbf{w}_{t-1}^TX_t \\
+&amp;&amp; &amp;\le ||\mathbf{w}_t||^2 + \rho^2 \le t\rho^2 \\
+\end{aligned}
+\]</span></p>
+<p>Then finally by the Cauchy-Schwartz inequality</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; 1 &amp;\ge \frac{\mathbf{w}_*^T\mathbf{w}_t}{||\mathbf{w}_*||}\ge \frac{t\gamma}{\rho \sqrt{t}}= \sqrt{t} \frac{\gamma}{\rho} \\
+&amp;&amp; t&amp;\le \left( \frac{\rho}{\gamma}  \right)\\
+\end{aligned}
+\]</span></p>
 
 </div>
 </div>
@@ -501,8 +512,8 @@ Let <span class="math inline">\(y \sim \text{Bern}(\eta)\)</span>, then</p>
           </div>
         </div>
       </div>
-<a href="regr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="emp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

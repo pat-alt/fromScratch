@@ -22,9 +22,55 @@ In R weighted this can be implemented as follows:
 ```{r class.source = "fold-show", code=fromScratchR::ols, echo=T, eval=F}
 ```
 
+## Logisitic regression {#class-logit}
+
+To model the probability of $y=1$ we will use logistic regression:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbf{p}&= \frac{ \exp( \mathbf{X} \beta )}{1 + \exp(\mathbf{X} \beta)}
+\end{aligned}
+(\#eq:log-reg)
+\end{equation}
+$$
+
+Equation \@ref(eq:log-reg) is not estimated directly but rather derived from linear predictions
+
+$$
+\begin{equation} 
+\begin{aligned}
+\log \left( \frac{\mathbf{p}}{1-\mathbf{p}} \right)&= \mathbf{X} \beta \\
+\end{aligned}
+(\#eq:lin-pred)
+\end{equation}
+$$
+
+where $\beta$ can be estimated through iterative re-weighted least-squares (IRLS) which is a simple implementation of Newton's method (see for example @wasserman2013all; a complete derivation can also be found in the [appendix](#irls)):
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \beta_{s+1}&= \left( \mathbf{X}^T \mathbf{W} \mathbf{X} \right) \mathbf{X}^T \mathbf{W}z\\
+\text{where}&& z&= \mathbf{X}\beta_{s} + \mathbf{W}^{-1} (\mathbf{y}-\mathbf{p}) \\
+&& \mathbf{W}&= \text{diag}\{p_i(\beta_{s})(1-p_i(\beta_{s}))\}_{i=1}^n \\ 
+\end{aligned}
+(\#eq:irls)
+\end{equation}
+$$
+
+In R this can be implemented from scratch as below. For the empirical exercises we will rely on `glm([formula], family="binomial")` which scales much better to higher dimensional problems than my custom function and also implements weighted logit.
+
+```{r class.source = "fold-show", code=fromScratchR::logit_irls, echo=TRUE, eval=FALSE}
+```
+
 
 ## Appendix
 
 ### Weighted least-squares {#app-wls}
 
 ![Weighted least-squares](www/wls.png)
+
+### Iterative reweighted least-squares {#irls}
+
+![Iterative reweighted least-squares](www/irls.png)

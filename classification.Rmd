@@ -243,51 +243,145 @@ $$
 \end{equation}
 $$
 
-## Logisitic regression {#class-logit}
+## Linear Classification
 
-To model the probability of $y=1$ we will use logistic regression:
+```{definition, gen-lin-class, name="Generalized linear classifier"}
+Let $\phi_1,...,\phi_k$ be feature mappings $\phi_i:\mathcal{X}\mapsto \mathbb{R}$ and let $\mathbf{w}\in \mathbb{R}^k$. The a generalized linear classifier is defined as:
 
 $$
-\begin{equation} 
 \begin{aligned}
-&& \mathbf{p}&= \frac{ \exp( \mathbf{X} \beta )}{1 + \exp(\mathbf{X} \beta)}
+&& g(x)&= \begin{cases}
+1 & \text{if } \sum_{j=1}^{k}w_j\phi_j(X)\ge0\\
+0& \text{otherwise.}
+\end{cases}\\
 \end{aligned}
-(\#eq:log-reg)
-\end{equation}
 $$
-
-Equation \@ref(eq:log-reg) is not estimated directly but rather derived from linear predictions
-
-$$
-\begin{equation} 
-\begin{aligned}
-\log \left( \frac{\mathbf{p}}{1-\mathbf{p}} \right)&= \mathbf{X} \beta \\
-\end{aligned}
-(\#eq:lin-pred)
-\end{equation}
-$$
-
-where $\beta$ can be estimated through iterative re-weighted least-squares (IRLS) which is a simple implementation of Newton's method (see for example @wasserman2013all; a complete derivation can also be found in the [appendix](#irls)):
-
-$$
-\begin{equation} 
-\begin{aligned}
-&& \beta_{s+1}&= \left( \mathbf{X}^T \mathbf{W} \mathbf{X} \right) \mathbf{X}^T \mathbf{W}z\\
-\text{where}&& z&= \mathbf{X}\beta_{s} + \mathbf{W}^{-1} (\mathbf{y}-\mathbf{p}) \\
-&& \mathbf{W}&= \text{diag}\{p_i(\beta_{s})(1-p_i(\beta_{s}))\}_{i=1}^n \\ 
-\end{aligned}
-(\#eq:irls)
-\end{equation}
-$$
-
-In R this can be implemented from scratch as below. For the empirical exercises we will rely on `glm([formula], family="binomial")` which scales much better to higher dimensional problems than my custom function and also implements weighted logit.
-
-```{r class.source = "fold-show", code=fromScratchR::logit_irls, echo=TRUE, eval=FALSE}
 ```
 
 
-## Appendix
+### Perceptron
 
-### Iterative reweighted least-squares {#irls}
+Assume that the data $X$ is linearly separable and the $y$ takes values in $\{-1,+1\}$. A linear classifier $\mathbf{w}^TX_i$ makes a mistake on the $(X_i,y_i)$ pair if 
 
-![Iterative reweighted least-squares](www/irls.png)
+$$
+\begin{aligned}
+&& (\mathbf{w}^TX_i)y_i&=<0 \\
+\end{aligned}
+$$
+
+that is when the predicted and true label are of opposite sign. Let us therefore restate the definition in \@ref(def:gen-lin-class)
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& g(X)&= \begin{cases}
+1 & \text{if } \mathbf{w}^TX\ge0\\
+-1& \text{if } \mathbf{w}^TX<0
+\end{cases}\\
+&& g(X)&= \text{sign}(\mathbf{w}^TX) \\
+\end{aligned}
+(\#eq:lin-class)
+\end{equation}
+$$
+
+Note that here $X$ refers to a single observation of possibly many features, rather than a matrix $\mathbf{X}$ containing all observations. Clearly, if the data is linearly separable, then there exists a vector of coefficients $\mathbf{w}_*\ne\mathbf{0}$ such that 
+
+$$
+\begin{aligned}
+&& ({\mathbf{w}_*}^TX_i)y_i&\ge0 && \forall i \\
+\end{aligned}
+$$
+
+that is for $\mathbf{w}_*$ the linear classifier commits no mistakes. It turns out that such a vector can be found in polynomial time.
+
+```{definition, perceptron, name="Perceptron algorithm"}
+The perceptron recursively takes a single data point $X_t$ (in arbitrary order) at each step $t$. Initialize with arbitrary $\mathbf{w}_0$, e.g. $\mathbf{w}_0=\mathbf{0}$.
+
+At each step $t$:
+
+- if $\text{sign}(\mathbf{w}_{t-1}^TX_t)=y_t$ then $\mathbf{w}_t=\mathbf{w}_{t-1}$
+- else $\mathbf{w}_t=\mathbf{w}_{t-1}+y_tX_t$
+
+and proceed like this until all points are rightly classified. If necessary cycle through the whole data set multiple times. Hence, the final classifier is simply
+
+$$
+\begin{aligned}
+&& \mathbf{\hat{w}}&=\mathbf{w}_0+ \sum_{t=1}^{T} \mathbb{1}_{y_t\ne\text{sign}(\mathbf{w}_{t-1}^TX_t)}y_tX_t
+\\
+\end{aligned}
+$$
+```
+
+How well the perceptron algorithm works depends on how well-behaved the data is, in other words how easy it is to linearly separate the two classes. Formally, we would say that data is well-behaved in the context of linear separability if the margin of the linear classifier is large.
+
+```{definition}
+The margin of a linear classifier $g(X)$ is simply 
+
+$$
+\begin{aligned}
+&& \gamma&\le \min_i\left| \frac{\mathbf{\hat{w}}^TX_i}{||\mathbf{\hat{w}}||}\right| \\
+\end{aligned}
+$$
+that is the distance of $X_t$ from the hyperplane $\mathbf{\hat{w}}^TX_i$.
+```
+
+The the following can be established for its time to convergence:
+
+```{theorem, name="Novinkov"}
+Let $\gamma$ be the margin of the classifier and let $\rho=\max_i||X_i||$. Then if the data is linearly separable, then the perceptron algorithm terminates after at most $\left(\frac{\rho}{\gamma}\right)^2$ updates.
+```
+
+```{proof}
+By assumption there exists a vector $\mathbf{w}_*$ such that:
+
+$$
+\begin{aligned}
+&& ({\mathbf{w}_*}^TX_i)y_i&\ge0 && \forall i \\
+\end{aligned}
+$$
+
+Without loss of generality assume that $||\mathbf{w}_*||=1$. Then we also have that:
+
+$$
+\begin{aligned}
+&& \gamma&\le\min_i\left| \mathbf{w}_*^TX_i\right| \\
+\end{aligned}
+$$
+
+Then whenever an update is performed,
+
+$$
+\begin{aligned}
+&& \mathbf{w}_*^T\mathbf{w}_t&=\mathbf{w}_*^T\mathbf{w}_{t-1} + \mathbf{w}_*^TX_ty_t  \\
+&& &\ge  \mathbf{w}_*^T\mathbf{w}_{t-1} + \gamma \\
+&& &\ge t\gamma \\
+\end{aligned}
+$$
+
+where $t$ is the number of updates. The first inequality follows from the fact that $\mathbf{w}_*^TX_ty_t$ is at least as big as the margin.
+
+On the other hand 
+
+$$
+\begin{aligned}
+&& ||\mathbf{w}_t||^2&=||\mathbf{w}_{t-1}+X_ty_t||^2=||\mathbf{w}_{t-1}||^2 + ||X_t||^2+2y_t\mathbf{w}_{t-1}^TX_t \\
+&& &\le ||\mathbf{w}_t||^2 + \rho^2 \le t\rho^2 \\
+\end{aligned}
+$$
+
+Then finally by the Cauchy-Schwartz inequality
+
+$$
+\begin{aligned}
+&& 1 &\ge \frac{\mathbf{w}_*^T\mathbf{w}_t}{||\mathbf{w}_*||}\ge \frac{t\gamma}{\rho \sqrt{t}}= \sqrt{t} \frac{\gamma}{\rho} \\
+&& t&\le \left( \frac{\rho}{\gamma}  \right)^2\\
+\end{aligned}
+$$
+```
+
+
+
+
+
+
+
