@@ -379,6 +379,219 @@ $$
 && t&\le \left( \frac{\rho}{\gamma}  \right)^2\\
 \end{aligned}
 $$
+  
+which concludes the proof.
 ```
+
+
+While the perceptron algorithm clearly has some desirable properties, it only works when the data truely is linearly separable (otherwise it simply does not converge). In cases where the data is not linearly separable, minimizing the empirical risk of a linear classifier is computationally hard. What we do to avoid that in practice is to "convexify" the problem.
+
+### Convex optimization
+
+If $f:\mathcal{X}\mapsto \mathbb{R}$ then we may define a classifier 
+
+$$
+\begin{aligned}
+&& g_f(X)&= \begin{cases}
+1 && \text{if }f(X)\ge0\\
+0 && \text{otherwise.}
+\end{cases}
+\\
+\end{aligned}
+$$
+
+with corresponding risk:
+
+$$
+\begin{aligned}
+&& R(f)&=R(g_f)=P(g_f(X)\ne y)=P(f(X)y<0)= \mathbb{E} \mathbb{1}_{f(X)y<0}\\
+\end{aligned}
+$$
+
+Given a class of real-valued functions $\mathcal{F}=\{f:\mathcal{X}\mapsto \mathbb{R}\}$, we obtain a corresponding class of classifiers $\mathcal{C}$
+
+```{example}
+Let $\mathcal{X}= \mathbb{R}^d$, $f(X)=\mathbf{w}^TX$, $||\mathbf{w}||=1$. Then
+
+$$
+\begin{aligned}
+&& \mathcal{F}&=\{\mathbf{w}^TX:\mathbf{w}\in \mathbb{R}^d, ||\mathbf{w}||=1\} \\
+\end{aligned}
+$$
+
+and $\mathcal{C}$ is jus tthe class of linear classifiers.
+```
+
+Now let $\phi: \mathbb{R} \mapsto \mathbb{R}_+$ be a non-negative cost function satisfying: $\phi \ge \mathbb{1}_{X\ge0}$. Typical example of $\phi$ include *Hinge* loss, exponential loss and logarithmic loss. We can define the corresponding cost functional as:
+
+$$
+\begin{aligned}
+&& A(f)&= \mathbb{E}\phi(-f(X)y)\\
+\end{aligned}
+$$
+
+Recall from above that $R(f)= \mathbb{E}\mathbb{1}_{-f(X)y}$ and hence clearly $A(f)\ge R(f)$. The corresponding empirical cost functional is 
+
+$$
+\begin{aligned}
+&& A_n(f)&= \frac{1}{n}\sum_{i=1}^{n} \phi(-f(X_i)y_i)\\
+\end{aligned}
+$$
+
+and again $A_n(f)\ge R_n(f)$.
+
+```{example}
+Let $f(X)=\mathbf{w}^TX$, then 
+
+$$
+\begin{aligned}
+&& A_n(f)&= \frac{1}{n}\sum_{i=1}^{n} \phi(-\mathbf{w}^TX_iy_i)\\
+\end{aligned}
+$$
+
+is convex in $\mathbf{w}$ if $\phi$ is convex.
+```
+
+It turns out that minimizing $A_n(f)$ is computationally feasible. Furthermore, the risk of such classifiers can be bounded as follows:
+
+```{theorem}
+Suppose that $f$ is chosen from $\mathcal{F}$ in some data-based manner (for example, by minimizing $A_n(f)$). Suppose that $\phi$ is such that 
+
+$$
+\begin{aligned}
+&& |\phi(X_1)-\phi(X_2)|&\le L |X_1-X_2| \\
+\end{aligned}
+$$
+ 
+for some $L>0$. Let $B$ be an upper bound for $\phi(-f(X)y)$. Then with probability $\ge 1-\delta$
+
+$$
+\begin{aligned}
+&& R(f_n)&\le A_n(f_n)+2L \mathcal{R}_n+B \sqrt{ \frac{2\log( \frac{1}{\delta})}{n}}\\
+\end{aligned}
+$$
+
+where $\mathcal{R_n}=\mathbb{E} \max_{f\in \mathcal{F}}\left| \frac{1}{n}\sum_{i=1}^{n} \sigma_if(X_i)\right|$ is a Rademacher Average.
+```
+
+```{proof}
+$$
+\begin{aligned}
+&& R(f_n)&\le A(f_n) \le A_n(f_n) + \max_{f\in\mathcal{F}} (A(f)-A_n(f)) \\
+&& &\le A_n(f_n) + 2\mathbb{E}\max_{f\in\mathcal{F}} (A(f)-A_n(f))+ B \sqrt{ \frac{2\log( \frac{1}{\delta})}{n}} \\
+&& &\le A_n(f_n) + 2\mathbb{E} \max_{f\in \mathcal{F}}\left| \frac{1}{n}\sum_{i=1}^{n} \sigma_i\phi(-f(X_i)y)\right|+ B \sqrt{ \frac{2\log( \frac{1}{\delta})}{n}} \\
+&& &\le A_n(f_n) + 2L\mathbb{E} \max_{f\in \mathcal{F}}\left| \frac{1}{n}\sum_{i=1}^{n} \sigma_if(X_i)\right|+ B \sqrt{ \frac{2\log( \frac{1}{\delta})}{n}} \\
+&& &\le A_n(f_n) + 2L \mathcal{R_n} + B \sqrt{ \frac{2\log( \frac{1}{\delta})}{n}}  \\
+\end{aligned}
+$$
+```
+
+
+```{example}
+Let $\mathcal{F}=\{f(x)=\mathbf{w}^TX:||\mathbf{w}||=1\}$. The the Rademacher Average of $\mathcal{F}$ is 
+
+$$
+\begin{aligned}
+&& \mathcal{R}_n&=\mathbb{E}_{\sigma} \max_{\mathbf{w}: ||\mathbf{w}||=1}\left| \frac{1}{n}\sum_{i=1}^{n} \mathbf{w}^TX_i\sigma_i\right|\\
+&& &=\mathbb{E}_{\sigma} \max_{\mathbf{w}: ||\mathbf{w}||=1}\left| \mathbf{w}^T \frac{1}{n}\sum_{i=1}^{n} X_i\sigma_i\right| \\
+&& &=\mathbb{E}_{\sigma} ||\frac{1}{n}\sum_{i=1}^{n} X_i\sigma_i|| \\
+&& &\le \sqrt{\mathbb{E}_{\sigma} ||\frac{1}{n}\sum_{i=1}^{n} X_i\sigma_i||^2} \\
+&& &= \frac{1}{n} \sqrt{||X_i||^2} \\
+&& &\le \frac{R}{\sqrt{n}}\\
+\end{aligned}
+$$
+
+as longs as $\max_i||X_i||\le R$. Applying the theorem we get 
+
+$$
+\begin{aligned}
+&& R(f_n)&\le A_n(f_n) + \frac{2LR}{\sqrt{n}}+c\\
+\end{aligned}
+$$
+where $c$ is a small constant and the Lipschitz bound $L$ depends on the choice of our loss function. 
+```
+
+#### Boosting and exponential surrogate loss
+
+Suppose that $\mathcal{C}$ is a class of "weak" classifiers: $\mathcal{C}$ is small or simple or the class of linear classifiers. ADABOOST assigns weights to training points which are updated recursively.
+
+```{definition, name="ADABOOST"}
+Initialize weights: $w_1(i)= \frac{1}{n}$ for all $i$. 
+
+For $t=1,...,n$ 
+
+- we find a base classifier in $\mathcal{C}$ by minimizing the weighted empirical risk $\varepsilon_t$:
+
+$$
+\begin{aligned}
+&& g_n^{(t)}&=\arg\min_{g\in\mathcal{C}} \sum_{i=1}^{n} w_t(i) \mathbb{1}_{g(X_i)\ne y_i}\\
+\end{aligned}
+$$
+
+- update weights:
+
+$$
+\begin{aligned}
+&& w_{t+1}(i)&= \begin{cases}
+w_t(i)e^{\alpha_t}&& \text{if } g_n^{(t)}\ne y_i\\
+w_t(i)e^{-\alpha_t} && \text{otherwise.}
+\end{cases}\\
+&& \alpha_t&= \frac{1}{2}\log \left( \frac{1-\varepsilon_t}{\varepsilon_t}\right)\\
+\end{aligned}
+$$
+Then the final classifier is 
+
+$$
+\begin{aligned}
+&& g_n(X)&=\text{sign}\left(\sum_t\alpha_tg_n^{(t)}(X)\right) \\
+\end{aligned}
+$$
+```
+
+
+It turns out that ADABOOST may be interpreted as a gradient descent optimization of 
+
+$$
+\begin{aligned}
+&& A_n(f)&= \frac{1}{n}\sum_{i=1}^{n} \phi(-f(X_i)y_i)\\
+\end{aligned}
+$$
+
+with exponential surrogate loss $\phi(X)=e^X$.
+
+Consider the following setup:
+
+$$
+\begin{aligned}
+&& f&:\mathcal{X}\mapsto \mathbb{R} \\
+&& y&\in\{-1,1\} \\
+&& \eta(X)&=P(y=1|X=x) \\
+&& 1-\eta(X)&=P(y=-1|X=x) \\
+\end{aligned}
+$$
+
+Let $\phi(X)=e^X$. The we have for the cost functional
+
+$$
+\begin{aligned}
+&& A(f)&= \mathbb{E} \left[ e^{-f(X)y}  \right]\\
+&& &= \mathbb{E} \left[\mathbb{E} \left[ e^{-f(X)y} |X \right]\right] \\
+&&&= \mathbb{E} \left[ e^{-f(X)}\eta(X) + e^{f(X)}(1-\eta(X)) \right] \\
+\end{aligned}
+$$
+For fixed $X$ we have $A(f)=e^{-f}\eta + e^{f}(1-\eta)$. Differentiating with respect to $f$ yields 
+
+$$
+\begin{aligned}
+&& f^*&= \frac{1}{2} \log \frac{\eta}{1-\eta}\\
+\end{aligned}
+$$
+
+
+```{example, name="GD with exponential surrogate loss."}
+```
+
+
+
 
 

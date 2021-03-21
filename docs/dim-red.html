@@ -24,7 +24,7 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-19" />
+<meta name="date" content="2021-03-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -385,7 +385,7 @@ Now in particular for any <span class="math inline">\(i,j\le n\)</span></p>
 <div id="an-intuitive-example" class="section level3" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> An intuitive example</h3>
 <p>PCA can be applied very well to highly correlated time series. Take for example US treasury yields of varying maturities over time: they are intrinsically linked to each other through the term-structure of interest rates. As we will see the first couple of principal components have a very intuitive interpretation when applied to yield curves.</p>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Let’s perform PCA through spectral decomposition in R and look at the output.</p>
 <table>
 <thead>
@@ -415,7 +415,7 @@ Now in particular for any <span class="math inline">\(i,j\le n\)</span></p>
 </tbody>
 </table>
 <p>Let’s compute the first three principal components and plot them over time. How can we make sense of this? It is not obvious and in many applications interpreting the components at face value is a difficult task. In this particular example it turns out that we can actually make sense of them.</p>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Let’s see what happens when we play with the components. (Shiny app not run in static HTML)</p>
 </div>
 </div>
@@ -559,31 +559,31 @@ This looks like singular-value decomposition with LASSO penality on <span class=
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">650</td>
-<td align="right">0.3031166</td>
+<td align="right">2</td>
+<td align="right">0.2665423</td>
 </tr>
 <tr class="even">
-<td align="right">715</td>
-<td align="right">0.1626434</td>
+<td align="right">225</td>
+<td align="right">0.1836013</td>
 </tr>
 <tr class="odd">
-<td align="right">682</td>
-<td align="right">0.0940425</td>
+<td align="right">241</td>
+<td align="right">0.0957684</td>
 </tr>
 <tr class="even">
-<td align="right">551</td>
-<td align="right">0.0893630</td>
+<td align="right">135</td>
+<td align="right">0.0896406</td>
 </tr>
 <tr class="odd">
-<td align="right">626</td>
-<td align="right">0.0850330</td>
+<td align="right">80</td>
+<td align="right">0.0772818</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="fast-partial-svd" class="section level3" number="9.4.2">
 <h3><span class="header-section-number">9.4.2</span> Fast, partial SVD</h3>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 </div>
 <div id="forward-search" class="section level2" number="9.5">
