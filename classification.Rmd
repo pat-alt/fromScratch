@@ -348,7 +348,7 @@ $$
 \end{aligned}
 $$
 
-Then whenever an update is performed,
+Now the clue is to look at the similarlity between $\mathbf{w}_*^T$ and $\mathbf{w}_t$. As the perceptron converges to the optimal solution, the angle between these two vectors approaches zero and equivalently their inner product grows. In particular, whenever an update is performed,
 
 $$
 \begin{aligned}
@@ -358,9 +358,9 @@ $$
 \end{aligned}
 $$
 
-where $t$ is the number of updates. The first inequality follows from the fact that $\mathbf{w}_*^TX_ty_t$ is at least as big as the margin.
+where $t$ is the number of updates. The first inequality follows from the fact that $\mathbf{w}_*^TX_ty_t$ is at least as big as the margin (we also know it is positive since the optimal vector of coefficients rightly classifies all points.). The second inequality simply reflects the fact that we update $t$ times and the inner product increases by at least $\gamma$.
 
-On the other hand 
+But the inner product can be huge simply because $\mathbf{w}_{t-1}$ grows. Now we will control for that. We have
 
 $$
 \begin{aligned}
@@ -368,6 +368,8 @@ $$
 && &\le ||\mathbf{w}_t||^2 + \rho^2 \le t\rho^2 \\
 \end{aligned}
 $$
+  
+where $2y_t\mathbf{w}_{t-1}^TX_t\le0$ since an update is performed. The the first inequality follows from $||X_t||^2+2y_t\mathbf{w}_{t-1}^TX_t\le\rho^2=(\max_i||X_i||)^2$. Analogously as we argued before, the second inequality simply reflects that we perform $t$ updates and at each step $t$ the squared norm of our vector of coefficients grows by at most $t\rho^2$.
 
 Then finally by the Cauchy-Schwartz inequality
 
@@ -378,10 +380,5 @@ $$
 \end{aligned}
 $$
 ```
-
-
-
-
-
 
 
