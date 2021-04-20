@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Dimensionality reduction | From Scratch</title>
+  <title>Chapter 9 Dimensionality reduction | From Scratch</title>
   <meta name="description" content="A collection of ideas, notes, exercises and code." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Dimensionality reduction | From Scratch" />
+  <meta property="og:title" content="Chapter 9 Dimensionality reduction | From Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/pat-alt/fromScratch.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Dimensionality reduction | From Scratch" />
+  <meta name="twitter:title" content="Chapter 9 Dimensionality reduction | From Scratch" />
   
   <meta name="twitter:description" content="A collection of ideas, notes, exercises and code." />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Patrick Altmeyer" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="www/icon.ico" type="image/x-icon" />
-<link rel="prev" href="regularization.html"/>
+<link rel="prev" href="complex.html"/>
 <link rel="next" href="subsample.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -156,85 +156,149 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session info</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="part"><span><b>I Part I</b></span></li>
 <li class="chapter" data-level="1" data-path="introductory-topics.html"><a href="introductory-topics.html"><i class="fa fa-check"></i><b>1</b> Introductory topics</a></li>
-<li class="chapter" data-level="2" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>2</b> Optimization</a>
+<li class="chapter" data-level="2" data-path="conc.html"><a href="conc.html"><i class="fa fa-check"></i><b>2</b> Concentration inequalities</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>2.1</b> Line search</a>
+<li class="chapter" data-level="2.1" data-path="conc.html"><a href="conc.html#conc-mean"><i class="fa fa-check"></i><b>2.1</b> Empirical mean</a></li>
+<li class="chapter" data-level="2.2" data-path="conc.html"><a href="conc.html#simple-non-asymptotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.2</b> Simple non-asymptotic concentration inequalities</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>2.1.1</b> Methodology</a></li>
-<li class="chapter" data-level="2.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>2.1.2</b> Results</a></li>
+<li class="chapter" data-level="2.2.1" data-path="conc.html"><a href="conc.html#conc-markov"><i class="fa fa-check"></i><b>2.2.1</b> Markov’s inequality</a></li>
+<li class="chapter" data-level="2.2.2" data-path="conc.html"><a href="conc.html#chebychevs-inequality"><i class="fa fa-check"></i><b>2.2.2</b> Chebychev’s inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="conc.html"><a href="conc.html#asympotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.3</b> Asympotic concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="conc.html"><a href="conc.html#central-limit-theorem"><i class="fa fa-check"></i><b>2.3.1</b> Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="conc.html"><a href="conc.html#exponential-non-asymptotic-concentration-inequalities"><i class="fa fa-check"></i><b>2.4</b> Exponential non-asymptotic concentration inequalities</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="conc.html"><a href="conc.html#chernoff-bounds"><i class="fa fa-check"></i><b>2.4.1</b> Chernoff bounds</a></li>
+<li class="chapter" data-level="2.4.2" data-path="conc.html"><a href="conc.html#conc-hoeff"><i class="fa fa-check"></i><b>2.4.2</b> Hoeffding’s Inequality</a></li>
+<li class="chapter" data-level="2.4.3" data-path="conc.html"><a href="conc.html#bernsteins-inequality"><i class="fa fa-check"></i><b>2.4.3</b> Bernstein’s inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="conc.html"><a href="conc.html#conc-examples"><i class="fa fa-check"></i><b>2.5</b> Examples</a></li>
+<li class="chapter" data-level="2.6" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>2.6</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="conc.html"><a href="conc.html#example-of-a-moment-generating-function"><i class="fa fa-check"></i><b>2.6.1</b> Example of a moment generating function</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>3</b> Regression</a>
+<li class="chapter" data-level="3" data-path="det-opt.html"><a href="det-opt.html"><i class="fa fa-check"></i><b>3</b> Optimization</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>3.1</b> Ordinary least-squares</a></li>
-<li class="chapter" data-level="3.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>3.2</b> Weighted least-squares</a></li>
-<li class="chapter" data-level="3.3" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>3.3</b> Appendix</a>
+<li class="chapter" data-level="3.1" data-path="det-opt.html"><a href="det-opt.html#line-search"><i class="fa fa-check"></i><b>3.1</b> Line search</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>3.3.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="3.1.1" data-path="det-opt.html"><a href="det-opt.html#methodology"><i class="fa fa-check"></i><b>3.1.1</b> Methodology</a></li>
+<li class="chapter" data-level="3.1.2" data-path="det-opt.html"><a href="det-opt.html#results"><i class="fa fa-check"></i><b>3.1.2</b> Results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<li class="chapter" data-level="4" data-path="emp.html"><a href="emp.html"><i class="fa fa-check"></i><b>4</b> Empirical risk minimization</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="class.html"><a href="class.html#logisitic-regression"><i class="fa fa-check"></i><b>4.1</b> Logisitic regression</a></li>
-<li class="chapter" data-level="4.2" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>4.2</b> Appendix</a>
+<li class="chapter" data-level="4.1" data-path="emp.html"><a href="emp.html#emp-risks"><i class="fa fa-check"></i><b>4.1</b> Excess risk and overfitting error</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="class.html"><a href="class.html#irls"><i class="fa fa-check"></i><b>4.2.1</b> Iterative reweighted least-squares</a></li>
+<li class="chapter" data-level="4.1.1" data-path="emp.html"><a href="emp.html#data-splitting"><i class="fa fa-check"></i><b>4.1.1</b> Data splitting</a></li>
+<li class="chapter" data-level="4.1.2" data-path="emp.html"><a href="emp.html#leave-one-out-cross-validation"><i class="fa fa-check"></i><b>4.1.2</b> Leave-one-out cross-validation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="emp.html"><a href="emp.html#realizable-case"><i class="fa fa-check"></i><b>4.1.3</b> Realizable case</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="emp.html"><a href="emp.html#rademacher-averages"><i class="fa fa-check"></i><b>4.2</b> Rademacher averages</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="emp.html"><a href="emp.html#finite-class-of-classifiers"><i class="fa fa-check"></i><b>4.2.1</b> Finite class of classifiers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="emp.html"><a href="emp.html#infinitely-many-classifiers"><i class="fa fa-check"></i><b>4.2.2</b> Infinitely many classifiers</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="emp.html"><a href="emp.html#towards-vc-theory"><i class="fa fa-check"></i><b>4.3</b> Towards VC theory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vc.html"><a href="vc.html"><i class="fa fa-check"></i><b>5</b> VC theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="vc.html"><a href="vc.html#vc-dimension"><i class="fa fa-check"></i><b>5.1</b> VC dimension</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="vc.html"><a href="vc.html#feature-maps"><i class="fa fa-check"></i><b>5.1.1</b> Feature maps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="vc.html"><a href="vc.html#examples"><i class="fa fa-check"></i><b>5.1.2</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="vc.html"><a href="vc.html#stuctural-risk-minimization"><i class="fa fa-check"></i><b>5.2</b> Stuctural risk minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="class.html"><a href="class.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="class.html"><a href="class.html#binary-classification"><i class="fa fa-check"></i><b>6.1</b> Binary classification</a></li>
+<li class="chapter" data-level="6.2" data-path="class.html"><a href="class.html#class-knn"><i class="fa fa-check"></i><b>6.2</b> Nearest Neighbour</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="class.html"><a href="class.html#nn"><i class="fa fa-check"></i><b>6.2.1</b> 1NN</a></li>
+<li class="chapter" data-level="6.2.2" data-path="class.html"><a href="class.html#knn"><i class="fa fa-check"></i><b>6.2.2</b> KNN</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="class.html"><a href="class.html#linear-classification"><i class="fa fa-check"></i><b>6.3</b> Linear Classification</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="class.html"><a href="class.html#perceptron"><i class="fa fa-check"></i><b>6.3.1</b> Perceptron</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>5</b> Regularization</a>
+<li class="chapter" data-level="7" data-path="regr.html"><a href="regr.html"><i class="fa fa-check"></i><b>7</b> Regression</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="regularization.html"><a href="regularization.html#reg-bias"><i class="fa fa-check"></i><b>5.1</b> Bias-variance tradeoff</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>6</b> Dimensionality reduction</a>
+<li class="chapter" data-level="7.1" data-path="regr.html"><a href="regr.html#regr-ols"><i class="fa fa-check"></i><b>7.1</b> Ordinary least-squares</a></li>
+<li class="chapter" data-level="7.2" data-path="regr.html"><a href="regr.html#regr-wls"><i class="fa fa-check"></i><b>7.2</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.3" data-path="regr.html"><a href="regr.html#class-logit"><i class="fa fa-check"></i><b>7.3</b> Logisitic regression</a></li>
+<li class="chapter" data-level="7.4" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>7.4</b> Appendix</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="dim-red.html"><a href="dim-red.html#pca"><i class="fa fa-check"></i><b>6.1</b> PCA</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="dim-red.html"><a href="dim-red.html#the-maths-behind-pca"><i class="fa fa-check"></i><b>6.1.1</b> The maths behind PCA</a></li>
-<li class="chapter" data-level="6.1.2" data-path="dim-red.html"><a href="dim-red.html#an-intuitive-example"><i class="fa fa-check"></i><b>6.1.2</b> An intuitive example</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="dim-red.html"><a href="dim-red.html#pca-for-feature-extraction"><i class="fa fa-check"></i><b>6.2</b> PCA for feature extraction</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="dim-red.html"><a href="dim-red.html#squared-elements-of-eigenvectors"><i class="fa fa-check"></i><b>6.2.1</b> Squared elements of eigenvectors</a></li>
-<li class="chapter" data-level="6.2.2" data-path="dim-red.html"><a href="dim-red.html#svd"><i class="fa fa-check"></i><b>6.2.2</b> SVD</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="dim-red.html"><a href="dim-red.html#high-dimensional-data"><i class="fa fa-check"></i><b>6.3</b> High-dimensional data</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="dim-red.html"><a href="dim-red.html#regularized-svd"><i class="fa fa-check"></i><b>6.3.1</b> Regularized SVD</a></li>
-<li class="chapter" data-level="6.3.2" data-path="dim-red.html"><a href="dim-red.html#fast-partial-svd"><i class="fa fa-check"></i><b>6.3.2</b> Fast, partial SVD</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="dim-red.html"><a href="dim-red.html#forward-search"><i class="fa fa-check"></i><b>6.4</b> Forward search</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="subsample.html"><a href="subsample.html"><i class="fa fa-check"></i><b>7</b> Subsampling</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="subsample.html"><a href="subsample.html#subsample-motivation"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
-<li class="chapter" data-level="7.2" data-path="subsample.html"><a href="subsample.html#subsample-methods"><i class="fa fa-check"></i><b>7.2</b> Subsampling methods</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="subsample.html"><a href="subsample.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>7.2.1</b> Uniform subsampling (UNIF)</a></li>
-<li class="chapter" data-level="7.2.2" data-path="subsample.html"><a href="subsample.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>7.2.2</b> Basic leveraging (BLEV)</a></li>
-<li class="chapter" data-level="7.2.3" data-path="subsample.html"><a href="subsample.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>7.2.3</b> Predictor-length sampling (PL)</a></li>
-<li class="chapter" data-level="7.2.4" data-path="subsample.html"><a href="subsample.html#comparison-of-methods"><i class="fa fa-check"></i><b>7.2.4</b> Comparison of methods</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="subsample.html"><a href="subsample.html#subsample-lin-reg"><i class="fa fa-check"></i><b>7.3</b> Linear regression model</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="subsample.html"><a href="subsample.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>7.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
-<li class="chapter" data-level="7.3.2" data-path="subsample.html"><a href="subsample.html#computational-performance"><i class="fa fa-check"></i><b>7.3.2</b> Computational performance</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="subsample.html"><a href="subsample.html#classification-problems"><i class="fa fa-check"></i><b>7.4</b> Classification problems</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="subsample.html"><a href="subsample.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>7.4.1</b> Optimal subsampling for classification problems</a></li>
-<li class="chapter" data-level="7.4.2" data-path="subsample.html"><a href="subsample.html#class-syn"><i class="fa fa-check"></i><b>7.4.2</b> Synthetic data</a></li>
-<li class="chapter" data-level="7.4.3" data-path="subsample.html"><a href="subsample.html#real-data-example"><i class="fa fa-check"></i><b>7.4.3</b> Real data example</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="subsample.html"><a href="subsample.html#concl"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
-<li class="chapter" data-level="7.6" data-path="regr.html"><a href="regr.html#appendix"><i class="fa fa-check"></i><b>7.6</b> Appendix</a>
-<ul>
-<li class="chapter" data-level="7.6.1" data-path="subsample.html"><a href="subsample.html#app-svd"><i class="fa fa-check"></i><b>7.6.1</b> From SVD to leverage scores</a></li>
-<li class="chapter" data-level="7.6.2" data-path="subsample.html"><a href="subsample.html#app-pl"><i class="fa fa-check"></i><b>7.6.2</b> From optimal to prediction-length subsampling</a></li>
-<li class="chapter" data-level="7.6.3" data-path="subsample.html"><a href="subsample.html#app-dens"><i class="fa fa-check"></i><b>7.6.3</b> Synthetic data</a></li>
-<li class="chapter" data-level="7.6.4" data-path="subsample.html"><a href="subsample.html#app-sin"><i class="fa fa-check"></i><b>7.6.4</b> Subsampling applied to sinusoidal function</a></li>
+<li class="chapter" data-level="7.4.1" data-path="regr.html"><a href="regr.html#app-wls"><i class="fa fa-check"></i><b>7.4.1</b> Weighted least-squares</a></li>
+<li class="chapter" data-level="7.4.2" data-path="regr.html"><a href="regr.html#irls"><i class="fa fa-check"></i><b>7.4.2</b> Iterative reweighted least-squares</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="complex.html"><a href="complex.html"><i class="fa fa-check"></i><b>8</b> Complexity regularization</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="complex.html"><a href="complex.html#reg-bias"><i class="fa fa-check"></i><b>8.1</b> Bias-variance tradeoff</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="dim-red.html"><a href="dim-red.html"><i class="fa fa-check"></i><b>9</b> Dimensionality reduction</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="dim-red.html"><a href="dim-red.html#random-projections"><i class="fa fa-check"></i><b>9.1</b> Random projections</a></li>
+<li class="chapter" data-level="9.2" data-path="dim-red.html"><a href="dim-red.html#pca"><i class="fa fa-check"></i><b>9.2</b> PCA</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="dim-red.html"><a href="dim-red.html#the-maths-behind-pca"><i class="fa fa-check"></i><b>9.2.1</b> The maths behind PCA</a></li>
+<li class="chapter" data-level="9.2.2" data-path="dim-red.html"><a href="dim-red.html#an-intuitive-example"><i class="fa fa-check"></i><b>9.2.2</b> An intuitive example</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="dim-red.html"><a href="dim-red.html#pca-for-feature-extraction"><i class="fa fa-check"></i><b>9.3</b> PCA for feature extraction</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="dim-red.html"><a href="dim-red.html#squared-elements-of-eigenvectors"><i class="fa fa-check"></i><b>9.3.1</b> Squared elements of eigenvectors</a></li>
+<li class="chapter" data-level="9.3.2" data-path="dim-red.html"><a href="dim-red.html#svd"><i class="fa fa-check"></i><b>9.3.2</b> SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="dim-red.html"><a href="dim-red.html#high-dimensional-data"><i class="fa fa-check"></i><b>9.4</b> High-dimensional data</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="dim-red.html"><a href="dim-red.html#regularized-svd"><i class="fa fa-check"></i><b>9.4.1</b> Regularized SVD</a></li>
+<li class="chapter" data-level="9.4.2" data-path="dim-red.html"><a href="dim-red.html#fast-partial-svd"><i class="fa fa-check"></i><b>9.4.2</b> Fast, partial SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="dim-red.html"><a href="dim-red.html#forward-search"><i class="fa fa-check"></i><b>9.5</b> Forward search</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="subsample.html"><a href="subsample.html"><i class="fa fa-check"></i><b>10</b> Subsampling</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="subsample.html"><a href="subsample.html#subsample-motivation"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="subsample.html"><a href="subsample.html#subsample-methods"><i class="fa fa-check"></i><b>10.2</b> Subsampling methods</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="subsample.html"><a href="subsample.html#uniform-subsampling-unif"><i class="fa fa-check"></i><b>10.2.1</b> Uniform subsampling (UNIF)</a></li>
+<li class="chapter" data-level="10.2.2" data-path="subsample.html"><a href="subsample.html#basic-leveraging-blev"><i class="fa fa-check"></i><b>10.2.2</b> Basic leveraging (BLEV)</a></li>
+<li class="chapter" data-level="10.2.3" data-path="subsample.html"><a href="subsample.html#predictor-length-sampling-pl"><i class="fa fa-check"></i><b>10.2.3</b> Predictor-length sampling (PL)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="subsample.html"><a href="subsample.html#comparison-of-methods"><i class="fa fa-check"></i><b>10.2.4</b> Comparison of methods</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="subsample.html"><a href="subsample.html#subsample-lin-reg"><i class="fa fa-check"></i><b>10.3</b> Linear regression model</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="subsample.html"><a href="subsample.html#a-review-of-zhu2015optimal"><i class="fa fa-check"></i><b>10.3.1</b> A review of <span class="citation"><span>Zhu et al.</span> (<span>2015</span>)</span></a></li>
+<li class="chapter" data-level="10.3.2" data-path="subsample.html"><a href="subsample.html#computational-performance"><i class="fa fa-check"></i><b>10.3.2</b> Computational performance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="subsample.html"><a href="subsample.html#classification-problems"><i class="fa fa-check"></i><b>10.4</b> Classification problems</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="subsample.html"><a href="subsample.html#optimal-subsampling-for-classification-problems"><i class="fa fa-check"></i><b>10.4.1</b> Optimal subsampling for classification problems</a></li>
+<li class="chapter" data-level="10.4.2" data-path="subsample.html"><a href="subsample.html#class-syn"><i class="fa fa-check"></i><b>10.4.2</b> Synthetic data</a></li>
+<li class="chapter" data-level="10.4.3" data-path="subsample.html"><a href="subsample.html#real-data-example"><i class="fa fa-check"></i><b>10.4.3</b> Real data example</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="subsample.html"><a href="subsample.html#concl"><i class="fa fa-check"></i><b>10.5</b> Conclusion</a></li>
+<li class="chapter" data-level="10.6" data-path="conc.html"><a href="conc.html#appendix"><i class="fa fa-check"></i><b>10.6</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="subsample.html"><a href="subsample.html#app-svd"><i class="fa fa-check"></i><b>10.6.1</b> From SVD to leverage scores</a></li>
+<li class="chapter" data-level="10.6.2" data-path="subsample.html"><a href="subsample.html#app-pl"><i class="fa fa-check"></i><b>10.6.2</b> From optimal to prediction-length subsampling</a></li>
+<li class="chapter" data-level="10.6.3" data-path="subsample.html"><a href="subsample.html#app-dens"><i class="fa fa-check"></i><b>10.6.3</b> Synthetic data</a></li>
+<li class="chapter" data-level="10.6.4" data-path="subsample.html"><a href="subsample.html#app-sin"><i class="fa fa-check"></i><b>10.6.4</b> Subsampling applied to sinusoidal function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="outl.html"><a href="outl.html"><i class="fa fa-check"></i><b>11</b> Outliers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="outl.html"><a href="outl.html#outl-trimmed"><i class="fa fa-check"></i><b>11.1</b> Trimmed mean estimator</a></li>
+<li class="chapter" data-level="11.2" data-path="outl.html"><a href="outl.html#outl-mom"><i class="fa fa-check"></i><b>11.2</b> Median-of-means estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
 </ul>
 
       </nav>
@@ -252,13 +316,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dim-red" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Dimensionality reduction</h1>
-<div id="pca" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> PCA</h2>
-<p>One of the most straight-forward ways to reduce model dimensionality is principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix <span class="math inline">\(X\)</span> <span class="math inline">\((n \times p)\)</span> can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the <span class="math inline">\(p\)</span> different features in <span class="math inline">\(X\)</span> related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.</p>
-<div id="the-maths-behind-pca" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> The maths behind PCA</h3>
+<div id="dim-red" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Dimensionality reduction</h1>
+<p>Let <span class="math inline">\(X_1,...,X_n\in\mathbb{R}^p\)</span> be our high-dimensional data. We want to project the data onto a lower-dimensional space, that is we want <span class="math inline">\(q&lt;&lt;p\)</span> and <span class="math inline">\(f:\mathbb{R}^p \mapsto \mathbb{R}^q\)</span> such that <span class="math inline">\(||f(X_k)-f(X_l)|| \approx ||X_k-X_l||\)</span> – the distance between any two points in the lower-dimensional space should be close to their corresponding distance in the original space. We can respecify the problem as</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right|&amp;\le \varepsilon\\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\varepsilon\)</span> is some desired accuracy.</p>
+<div id="random-projections" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Random projections</h2>
+<p>Let <span class="math inline">\(f(X)=WX\)</span>, <span class="math inline">\(X\in\mathbb{R}^p\)</span>, <span class="math inline">\(W\)</span> <span class="math inline">\((q\times p)\)</span> and for the elements of <span class="math inline">\(W\)</span>: <span class="math inline">\(w_{ij} \sim \mathcal{N}(0, \frac{1}{q})\)</span> are idd. First note that</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbb{E}||f(X)||^2&amp;= \mathbb{E} ||W X||^2= \mathbb{E} \sum_{i=1}^{q} \left( \sum_{j=1}^{p} X_jW_{i,j}\right)^2\\
+&amp;&amp; &amp;= \sum_{i=1}^{q}\mathbb{E}  \left( \sum_{j=1}^{p} X_jW_{i,j}\right)^2= \sum_{i=1}^{q} \frac{||X||^2}{q}\\
+\end{aligned}
+\]</span></p>
+<p>where the last equality follows from <span class="math inline">\(\sum_{j=1}^{p} X_jW_{i,j} \sim \mathcal{N}(0, \frac{1}{q}\sum_{j=1}^{p} X_j^2 ) = \sim \mathcal{N}(0,\frac{||X||^2}{q})\)</span>. Then finally:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbb{E}||f(X)||^2&amp;=||X||^2 \\
+\end{aligned}
+\]</span>
+Now in particular for any <span class="math inline">\(i,j\le n\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \mathbb{E}||f(X_k)-f(X_l)||^2&amp;= \mathbb{E}||W(X_k-X_l)||^2=||X_k-X_l||^2 \\
+\end{aligned}
+\]</span></p>
+<p>Now for the actual proof:</p>
+<p>This is quite amazing since the final result is independent of <span class="math inline">\(p\)</span>.</p>
+<p>Let <span class="math inline">\(p=10^{6}\)</span> and <span class="math inline">\(n=100\)</span>. Then with probability <span class="math inline">\(0.9\)</span> we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;&amp; \max_{k,l\le n}\left| \frac{||f(X_k)-f(X_l)||^2}{||X_k-X_l||^2}-1\right| &amp;\le 0.01 \\
+\end{aligned}
+\]</span></p>
+<p>whenever <span class="math inline">\(q\ge2.48585\times 10^{5}\)</span>.</p>
+</div>
+<div id="pca" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> PCA</h2>
+<p>Another common way to reduce model dimensionality is through principal component analysis (PCA). Very loosely defined principal components can be thought of as describing the main sources of variation in the data. While in theory any design matrix <span class="math inline">\(X\)</span> <span class="math inline">\((n \times p)\)</span> can be decomposed into its principal components, in practice PCA can be more or less useful for dimensionality reduction depending on how the <span class="math inline">\(p\)</span> different features in <span class="math inline">\(X\)</span> related to each other. We will see that in particular for highly correlated data PCA can be an extremely useful tool for dimensionality reduction.</p>
+<div id="the-maths-behind-pca" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> The maths behind PCA</h3>
 <p>PCA projects <span class="math inline">\(X\)</span> into a <span class="math inline">\(q\)</span>-dimensional space where <span class="math inline">\(q \le p\)</span>, such that the covariance matrix of the <span class="math inline">\(q\)</span>-dimensional projection is maximised. Intuitively, we want to find the linear combination of points in <span class="math inline">\(X\)</span> which explains the largest part of the variance in <span class="math inline">\(X\)</span>. Formally (in a very stylised fashion) this amounts to</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -280,10 +382,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Projecting into orthogonal subspace</p>
 </div>
 </div>
-<div id="an-intuitive-example" class="section level3" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> An intuitive example</h3>
+<div id="an-intuitive-example" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> An intuitive example</h3>
 <p>PCA can be applied very well to highly correlated time series. Take for example US treasury yields of varying maturities over time: they are intrinsically linked to each other through the term-structure of interest rates. As we will see the first couple of principal components have a very intuitive interpretation when applied to yield curves.</p>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Let’s perform PCA through spectral decomposition in R and look at the output.</p>
 <table>
 <thead>
@@ -313,14 +415,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Let’s compute the first three principal components and plot them over time. How can we make sense of this? It is not obvious and in many applications interpreting the components at face value is a difficult task. In this particular example it turns out that we can actually make sense of them.</p>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <p>Let’s see what happens when we play with the components. (Shiny app not run in static HTML)</p>
 </div>
 </div>
-<div id="pca-for-feature-extraction" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> PCA for feature extraction</h2>
-<div id="squared-elements-of-eigenvectors" class="section level3" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Squared elements of eigenvectors</h3>
+<div id="pca-for-feature-extraction" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> PCA for feature extraction</h2>
+<div id="squared-elements-of-eigenvectors" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Squared elements of eigenvectors</h3>
 <p>Consider again using the spectral decomposition of <span class="math inline">\(\Sigma=\mathbf{X}^T\mathbf{X}\)</span> to perform PCA:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -333,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \begin{aligned}
 &amp;&amp; \mathbf{r}&amp;=\mathbf{V}^2 \mathbf{s} \\
 \end{aligned}
-\tag{6.1}
+\tag{9.1}
 \end{equation}
 \]</span></p>
 <p>By construction elements in <span class="math inline">\(\mathbf{r}\)</span> sum up to one so they can be thought of as percentages describing the overall importance of individual features <em>in terms of explaining the overall variation in the design matrix</em>. This last point is important: PCA never even looks at the outcome variable that we are interested in modelling. Even features identified as <em>not important</em> by PCA may in fact be very important for the model, so the ranking is merely a guideline of sorts.</p>
@@ -369,8 +471,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="svd" class="section level3" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> SVD</h3>
+<div id="svd" class="section level3" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> SVD</h3>
 <p>Instead of using spectral decomposition we could use (compact) SVD for PCA. <em>Compact</em> SVD works decomposes any matrix <span class="math inline">\(X\)</span> <span class="math inline">\((n \times p)\)</span> as follows</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -418,12 +520,12 @@ where <span class="math inline">\(U^TU=I\)</span> by the fact that <span class="
 </table>
 </div>
 </div>
-<div id="high-dimensional-data" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> High-dimensional data</h2>
+<div id="high-dimensional-data" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> High-dimensional data</h2>
 <p>Now that we have developed a good intuition of PCA, it is time to face its shortfalls. While PCA can be used as tool to reduce dimensionality it is actually inconsistent for cases where <span class="math inline">\(p&gt;&gt;n\)</span>. Enter: <strong>regularized SVD</strong>.</p>
-<div id="regularized-svd" class="section level3" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Regularized SVD</h3>
-<p><span class="citation"><a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose a regularized version of SVD where the <span class="math inline">\(L_1\)</span>-norm eigenvectors <span class="math inline">\(\mathbf{v}_k\)</span> is penalized. In particular the authors propose a modified version of the following optimization problem:</p>
+<div id="regularized-svd" class="section level3" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Regularized SVD</h3>
+<p><span class="citation"><a href="references.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="references.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose a regularized version of SVD where the <span class="math inline">\(L_1\)</span>-norm eigenvectors <span class="math inline">\(\mathbf{v}_k\)</span> is penalized. In particular the authors propose a modified version of the following optimization problem:</p>
 <p><span class="math display" id="eq:scotlass">\[
 \begin{equation} 
 \begin{aligned}
@@ -431,10 +533,10 @@ where <span class="math inline">\(U^TU=I\)</span> by the fact that <span class="
 \text{s.t.} &amp;&amp; \mathbf{v}^T\mathbf{v}&amp;= \mathbf{1}  \\
 &amp;&amp; |\mathbf{v}|&amp; \le c \\
 \end{aligned}
-\tag{6.2}
+\tag{9.2}
 \end{equation}
 \]</span></p>
-<p>Note that this essentially looks like spectral decomposition with an added LASSO penality: consequently depending on the regularization parameter <span class="math inline">\(c\)</span> some elements of <span class="math inline">\(\mathbf{v}_k\)</span> will be shrinked to exactly zero and hence this form of penalized SVD is said yield sparse principal components. The optimization problem in <a href="dim-red.html#eq:scotlass">(6.2)</a> - originally proposed <span class="citation"><a href="subsample.html#ref-jolliffe2003modified" role="doc-biblioref">Jolliffe, Trendafilov, and Uddin</a> (<a href="subsample.html#ref-jolliffe2003modified" role="doc-biblioref">2003</a>)</span> - is non-convex and hence computationally hard. <span class="citation"><a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="subsample.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose to instead solve the following optimization problem:</p>
+<p>Note that this essentially looks like spectral decomposition with an added LASSO penality: consequently depending on the regularization parameter <span class="math inline">\(c\)</span> some elements of <span class="math inline">\(\mathbf{v}_k\)</span> will be shrinked to exactly zero and hence this form of penalized SVD is said yield sparse principal components. The optimization problem in <a href="dim-red.html#eq:scotlass">(9.2)</a> - originally proposed <span class="citation"><a href="references.html#ref-jolliffe2003modified" role="doc-biblioref">Jolliffe, Trendafilov, and Uddin</a> (<a href="references.html#ref-jolliffe2003modified" role="doc-biblioref">2003</a>)</span> - is non-convex and hence computationally hard. <span class="citation"><a href="references.html#ref-witten2009penalized" role="doc-biblioref">Witten, Tibshirani, and Hastie</a> (<a href="references.html#ref-witten2009penalized" role="doc-biblioref">2009</a>)</span> propose to instead solve the following optimization problem:</p>
 <p><span class="math display" id="eq:pmd">\[
 \begin{equation} 
 \begin{aligned}
@@ -443,7 +545,7 @@ where <span class="math inline">\(U^TU=I\)</span> by the fact that <span class="
 &amp;&amp; \mathbf{u}^T\mathbf{u}&amp;= \mathbf{1}  \\
 &amp;&amp; |\mathbf{v}|&amp; \le c_2 \\
 \end{aligned}
-\tag{6.3}
+\tag{9.3}
 \end{equation}
 \]</span>
 This looks like singular-value decomposition with LASSO penality on <span class="math inline">\(\mathbf{v}\)</span>. Discussing the implementation of their proposed algorithm could be interesting, but is beyond the scope of this. Fortunately the authors have build an R package that conveniently implements their algorithm.</p>
@@ -457,35 +559,35 @@ This looks like singular-value decomposition with LASSO penality on <span class=
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">890</td>
-<td align="right">0.4607228</td>
+<td align="right">2</td>
+<td align="right">0.2665423</td>
 </tr>
 <tr class="even">
-<td align="right">536</td>
-<td align="right">0.0802372</td>
+<td align="right">225</td>
+<td align="right">0.1836013</td>
 </tr>
 <tr class="odd">
-<td align="right">636</td>
-<td align="right">0.0559802</td>
+<td align="right">241</td>
+<td align="right">0.0957684</td>
 </tr>
 <tr class="even">
-<td align="right">331</td>
-<td align="right">0.0526303</td>
+<td align="right">135</td>
+<td align="right">0.0896406</td>
 </tr>
 <tr class="odd">
-<td align="right">586</td>
-<td align="right">0.0465075</td>
+<td align="right">80</td>
+<td align="right">0.0772818</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="fast-partial-svd" class="section level3" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Fast, partial SVD</h3>
-<p><img src="fromScratch_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div id="fast-partial-svd" class="section level3" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Fast, partial SVD</h3>
+<p><img src="fromScratch_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 </div>
-<div id="forward-search" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> Forward search</h2>
+<div id="forward-search" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Forward search</h2>
 <p>An interesting idea could be combine the above methods with <em>forward search</em>:</p>
 <div class="figure">
 <img src="www/forward_search.png" alt="" />
@@ -509,7 +611,7 @@ This looks like singular-value decomposition with LASSO penality on <span class=
           </div>
         </div>
       </div>
-<a href="regularization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="complex.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="subsample.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

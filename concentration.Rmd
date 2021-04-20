@@ -1,0 +1,349 @@
+# Concentration inequalities {#conc}
+
+In order to measure the quality of an estimator we generally aim to minimize the expected value of a loss function $\ell(x,y)$. Examples include:
+
+1. Mean squared error (MSE)
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \ell(x,y)=(x-y)^2 &\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = \mathbb{E} (x-y)^2\\
+\end{aligned}
+(\#eq:mse)
+\end{equation}
+$$
+
+2. Mean absolute error (MAE)
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \ell(x,y)=|x-y| &\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = \mathbb{E} |x-y|\\
+\end{aligned}
+(\#eq:mae)
+\end{equation}
+$$
+
+More generally it is often useful to write:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \ell(x,y)= \mathbb{1}_{|x-y|>\varepsilon} &\rightarrow \mathbb{E} \left[ \ell(x,y) \right] = P(|x-y|>\varepsilon)\\
+\end{aligned}
+(\#eq:prob-error)
+\end{equation}
+$$
+
+## Empirical mean {#conc-mean}
+
+Let $m$ denote the true value we want to estimate and $m_n$ the corresponding estimator. An obvious choice for $m_n$ is the empirical mean
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& m_n&= \frac{1}{n} \sum_{i=1}^{n} x_i\\
+\end{aligned}
+(\#eq:emp-mean)
+\end{equation}
+$$
+
+for which we have
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E} \left[  m_n\right]&= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i \right] = \frac{1}{n} \sum_{i=1}^{n} \mathbb{E} \left[x_i  \right]=m\\
+\end{aligned}
+(\#eq:emp-mean-unbiased)
+\end{equation}
+$$
+
+where the last equality follows from the law of large numbers. For the MSE of the empirical mean we have 
+
+$$
+\begin{aligned}
+&& \mathbb{E} \left[ m_n-m \right]^2 &= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i-m  \right]^2\\
+&& &= \mathbb{E} \left[ \frac{1}{n} \sum_{i=1}^{n} (x_i-m)  \right]^2\\
+&& &= \frac{1}{n^2}\mathbb{E} \left[  \sum_{i=1}^{n} x_i-m  \right]^2\\
+&& &= \frac{1}{n^2} n\text{var}(x_i)\\
+\end{aligned}
+$$
+
+and hence:
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& \mathbb{E} \left[ m_n-m \right]^2&= \frac{\sigma^2}{n}\\
+\end{aligned}
+(\#eq:emp-mean-mse)
+\end{equation}
+$$
+
+In other words, the size of the error is typically on the order of $\frac{\sigma}{\sqrt{n}}$: the error decreases at a rate of $\sqrt{n}$. Note that for the expected value of the mean absolute error we have $\mathbb{E} |m_n-m| \le \sqrt{\mathbb{E} \left[ m_n-m \right]^2} =\frac{\sigma}{\sqrt{n}}$ by the Schwartz inequality.
+
+What about $P(|x-y|>\varepsilon)$, the third measure of expected loss we defined in \@ref(eq:prob-error)?
+
+## Simple non-asymptotic concentration inequalities 
+
+### Markov's inequality {#conc-markov}
+
+```{theorem}
+If $X$ is a non-negative random variable, then $P(X \ge t) \le \frac{ \mathbb{E} \left[ X \right]}{t}$
+```
+
+```{proof}
+$$
+\begin{aligned}
+&& X&\ge t \mathbb{1}_{X\ge t} \\
+&& \mathbb{E}X&\ge t \mathbb{E} \left[  \mathbb{1}_{X\ge t} \right] \\
+&& \mathbb{E}X&\ge t P(X \ge t) \\
+\end{aligned}
+$$
+```
+
+### Chebychev's inequality
+
+```{theorem, cheby}
+For any random variable $X$, $t>0$: $P(|X- \mathbb{E}X| \ge t) \le \frac{ \text{var}(X)}{t^2}$.
+```
+
+```{proof}
+$$
+\begin{aligned}
+&& P(|X- \mathbb{E}X| \ge t)&=P(|X- \mathbb{E}X|^2 \ge t^2) \\
+\end{aligned}
+$$
+  
+Then by Markov's inequality:
+
+$$
+\begin{aligned}
+&& P(|X- \mathbb{E}X|^2 \ge t^2)&\le \frac{ \mathbb{E} \left[ X- \mathbb{E}X \right]^2}{t^2}= \frac{ \text{var}(X)}{t^2}\\
+\end{aligned}
+$$
+```
+
+Applying Chebychev to the empirical mean we can show:
+
+```{theorem, wll, name="Weak law of large numbers"}
+If $x_1,...,x_n$ are iid, then $P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|>\varepsilon)\le\frac{\sigma^2}{n\varepsilon^2}$.
+```
+
+```{proof}
+$$
+\begin{aligned}
+&& P(|m_n-m|>\varepsilon)&=P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|>\varepsilon) \\
+\end{aligned}
+$$
+
+and by Chebychev
+
+$$
+\begin{aligned}
+&& P(|\frac{1}{n} \sum_{i=1}^{n} x_i-m|>\varepsilon)&\le \frac{ \text{var}(\frac{1}{n} \sum_{i=1}^{n} x_i)}{\varepsilon^2} \\
+&& &= \frac{ \text{var}( \sum_{i=1}^{n} x_i)}{n^2\varepsilon^2} \\
+&& &= \frac{ \sum_{i=1}^{n}\text{var}( x_i)}{n^2\varepsilon^2} \\
+&& &=\frac{\sigma^2}{n\varepsilon^2} \\
+\end{aligned}
+$$
+```
+
+By \@ref(thm:wll) we have that with probability $1-\delta$: $|m_n-m|\le \frac{\sigma}{\sqrt{n\delta}}$. This can be shown as follows: if we want to guarantee that 
+
+$$
+\begin{aligned}
+&& P(|m_n-m|>\varepsilon)&\le \delta\\
+\end{aligned}
+$$
+
+then by \@ref(thm:wll) it suffices that:
+
+$$
+\begin{aligned}
+&& \frac{\sigma^2}{n\varepsilon^2}&\le \delta \\
+\end{aligned}
+$$
+This holds if:
+
+$$
+\begin{aligned}
+&& \frac{\sigma}{\sqrt{n\delta}}&\le \varepsilon\\
+\end{aligned}
+$$
+
+## Asympotic concentration inequalities
+
+### Central Limit Theorem
+
+By the Central Limit Theorem we have that
+
+$$
+\begin{aligned}
+&& P \left( \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^{n} x_i-m\right) \ge t \right)& \rightarrow P(z \ge t) \le 2 \exp(- \frac{t^2}{2\sigma^2}) \\
+\end{aligned}
+$$
+
+where $z \sim \mathcal{N}(0,\sigma^2)$. Letting $\varepsilon = \frac{t}{\sqrt{n}}$ we have that asymptotically
+
+$$
+\begin{aligned}
+&& P \left( \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^{n} x_i-m\right) \ge \varepsilon \right)& \le 2 \exp(- \frac{\varepsilon^2n}{2\sigma^2}) \\
+\end{aligned}
+$$
+
+which is a much tigher bound than for example Chebychev.
+
+## Exponential non-asymptotic concentration inequalities
+
+The motivation for deriving tight non-asymptotic concentration inequalities is that often we have $d >> n$. In those case we want to control the worst error across all estimators (here the $1,...,d$ empirical means). Hence our goal is to minimize 
+
+$$
+\begin{aligned}
+&& P( \max_j|m_{n,j}-m|\ge \varepsilon) \\
+\end{aligned}
+$$
+
+By the union bound we have 
+
+$$
+\begin{aligned}
+&& P( \max_j|m_{n,j}-m|\ge \varepsilon)&\le \sum_{j=1}^{d} P( |m_{n,j}-m|\ge \varepsilon)\\
+\end{aligned}
+$$
+
+and by Chebychev (\@ref(thm:cheby)):
+
+$$
+\begin{aligned}
+&& \sum_{j=1}^{d} P( |m_{n,j}-m|\ge \varepsilon)&\le d \frac{\sigma^2}{n\varepsilon^2}\\
+\end{aligned}
+$$
+
+Clearly, if $d>>n$ we are in trouble. Enter: Chernoff bounds.
+
+### Chernoff bounds
+
+```{theorem, chernoff, name="Chernoff bound"}
+For any $\lambda>0$: $P(X- \mathbb{E}X \ge t) \le \frac{ \mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]}{e^{\lambda t}}$ 
+```
+
+```{proof}
+By Markov's inequality we have that for any non-negative and increasing function $\psi(.)$ we have 
+
+$$
+\begin{aligned}
+&& P(\psi(X- \mathbb{E}X) \ge \psi(t)) &\le \frac{ \mathbb{E} \left[ \psi(X- \mathbb{E}X) \right]}{\psi(t)} \\
+\end{aligned}
+$$
+
+With Chernoff bounds we simply choose $\psi(X)=\exp(\lambda X)$, $\lambda >0$. Then 
+
+$$
+\begin{equation} 
+\begin{aligned}
+&& P(X- \mathbb{E}X \ge t) &\le \frac{ \mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]}{e^{\lambda t}} \\
+\end{aligned}
+(\#eq:chernoff)
+\end{equation}
+$$
+
+where $\mathbb{E} \left[ e^{\lambda (X- \mathbb{E}X)} \right]$ is the moment generating function of $X- \mathbb{E}X$.
+```
+
+### Hoeffding's Inequality {#conc-hoeff}
+
+```{lemma, hoeff-lem, name="Hoeffding's Lemma"}
+If $X$ is bounded by $[a,b]$, then $\mathbb{E} \left[ e^{\lambda(X- \mathbb{E}X)} \right]\le e^{ \frac{\lambda^2(b-a)}{8}}$.
+```
+
+Using Hoeffding's Lemma (\@ref(lem:hoeff-lem)) and Chernoff's bounds (\@ref(thm:chernoff)) we get Hoeffding's inequality:
+
+```{theorem, hoeff, name="Hoeffding's Inequality"}
+If $X$ is bounded by $[a,b]$, then $P(|X- \mathbb{E}X| \ge t)\le 2e^{-\frac{2n^2t^2}{ \sum_{i=1}^{n}(b_i-a_i)^2}}$.
+```
+
+```{proof}
+Consider the case where $[a,b]=[0,1]$. Recall that $m_n= \frac{1}{n} \sum_{i=1}^{n} x_i$. Then 
+
+$$P(m_n- m \ge t)=P(\frac{1}{n} \sum_{i=1}^{n} (x_i-m) \ge t)=P( \sum_{i=1}^{n} (x_i-m) \ge nt)$$
+
+and by Chernoff
+
+$$P( \sum_{i=1}^{n} (x_i-m) \ge nt) \le \frac{ \prod_{i=1}^n \mathbb{E} \left[ e^{\lambda (x_i-m)} \right]}{e^{\lambda nt}}$$
+  
+and finally by Hoeffding's lemma:
+  
+$$
+\frac{ \prod_{i=1}^n \mathbb{E} \left[ e^{\lambda (x_i-m)} \right]}{e^{\lambda nt}}\le \frac{ \prod_{i=1}^n e^{ \frac{\lambda^2}{8}}}{e^{\lambda nt}} = e^{n(\frac{\lambda^2}{8}-\lambda t)}
+$$
+  
+This is minimized at $\lambda^*=4t$ and hence:
+  
+$$P(m_n- m \ge t)\le e^{-2nt^2}$$
+```
+
+### Bernstein's inequality
+
+```{theorem}
+Let $v= \sum_{i=1}^{n} \mathbb{E}x_i^2$. If $x_1,...,x_n$ are independent and $x_i\le b$ for some $b\ge0$, then for $t>0$: $P(\sum_{i=1}^{n} x_i - \sum_{i=1}^{n} \mathbb{E}x_i \ge t) \le e^{- \frac{t^2}{2v+2b \frac{t}{2}}}$.
+```
+
+
+## Examples {#conc-examples}
+
+Finally, let us at a few examples. Firstly, let us look at what bounds we get for the different concentration inequalities when applied to the binomial distribution:
+
+```{example}
+Let $x_1,...,x_n$ be independent random variable with $x_i \sim \text{Bern}(p)$ and hence $\text{var}(x_i)=p(1-p)$. Then $B=\sum_{i=1}^{n}x_i \sim \text{Bin}(n,p)$ with $\mathbb{E}B=np$. Then we have 
+
+$$
+\begin{aligned}
+&&P(B - np \ge t) &\le \begin{cases} \frac{np(1-p)}{t^2} && \text{(Chebychev)}\\
+e^{-\frac{2t^2}{n}} && \text{(Hoeffding)}\\
+e^{- \frac{t^2}{2p(1-p)+ \frac{2t}{3}}} && \text{(Bernstein)}\end{cases}
+\end{aligned}
+$$
+```
+
+Another illustrative application of Chernoff's bounds emerges in the context of high-dimensional spaces. Consider the question of how many points we can choose on the $d$-dimensional unit ball, such that their pair-wise angles are (almost) orthogonal. 
+
+```{example}
+Let $X$ and $Y$ be two random, independent points on the surface of the unit ball. A random point $X$ can be generated as
+
+$$
+\begin{aligned}
+&& X&= \frac{1}{||N||}( N_1, ..., N_d) \\
+\end{aligned}
+$$
+where $N=(N_1, ..., N_d) \sim \mathcal{N}(\mathbf{0},\mathbf{I}_d)$. Analogously we can generate $Y$. If $X$ and $Y$ are orthogonal, then $\cos(\angle(X,Y))= \frac{ X^TY}{||X||||Y||}=0$. By construction, $||X||,||Y||=1$ and hence it suffices to come up with a bound for $X^TY$. Noting that $X^TY \approx \frac{1}{d} \sum_{i=1}^{d}N_i^{(X)}N_i^{(Y)}$ we have
+
+$$
+\begin{aligned}
+&& P(X^TY \ge \varepsilon)&\approx P(\frac{1}{d} \sum_{i=1}^{d}N_i^{(X)}N_i^{(Y)} \ge \varepsilon) \le \frac{ \mathbb{E} \left[ e^{\lambda N_i^{(X)}N_i^{(Y)}} \right]}{e^{\lambda \varepsilon d}}\\
+\end{aligned}
+$$
+It can be shown that for the moment-generating function of the inner product of two standard Gaussians we have $\mathbb{E} \left[ e^{\lambda N_i^{(X)}N_i^{(Y)}} \right]= \frac{1}{\sqrt{1-\lambda^2}}$ if $\lambda <1$. So $P(X^TY \ge \varepsilon) \le (1- \lambda^2)^{-\frac{d}{2}} e^{-\lambda\varepsilon d}$. For small values of $\lambda$ we further have $\log(1-\lambda^2)\approx-\lambda$ so $(1- \lambda^2)^{-\frac{d}{2}} \approx e^{ \frac{d \lambda^2}{2}}$. Then $P(X^TY \ge \varepsilon) \le e^{- \frac{d\varepsilon^2}{2}}$.
+
+Hence, if $X_1,...,X_n$ are iid random points on the surface of the unit ball, then:
+
+$$
+P(\max_{i,j}|X_i^TX_j| \ge \varepsilon) \le \sum_{i,j} P(|X_i^TX_j| \ge \varepsilon) \le \binom{n}{2} 2 e^{- \frac{d\varepsilon^2}{2}} \le n^2 2e^{-\frac{d\varepsilon^2}{2}}
+$$
+
+Now let $n\le e^{ \frac{d \varepsilon^2}{8}} \Leftrightarrow n^2 \le e^{ \frac{d \varepsilon^2}{4}}$. Then we have that 
+
+$$
+P(\max_{i,j}|X_i^TX_j| \ge \varepsilon) \le e^{ \frac{d \varepsilon^2}{4}} 2e^{-\frac{d\varepsilon^2}{2}} = 2 e^{-\frac{d \varepsilon^2}{4}}
+$$
+```
+
+Hence, if $d \ge \frac{`r -4*log(0.5)*2`}{\varepsilon^2}$ we can choose $n= e^{ \frac{d \varepsilon^2}{8}}$ points such that their pair-wise almost orthogonal.
+
+
+## Appendix
+
+### Example of a moment generating function
+
+![](www/example_mgf.png)
